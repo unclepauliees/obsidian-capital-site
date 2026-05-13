@@ -1074,6 +1074,70 @@ main { position: relative; z-index: 2; }
   .platform-card { min-height: 380px; }
   .corridor__map { height: 140px; }
 }
+
+/* ═══════════════════════════════════════════════════════════
+   HIGGSFIELD TIER 1 ASSETS — Video & Image Integration
+   ═══════════════════════════════════════════════════════════ */
+
+/* Asset 1 — Hero video background (Act 1) */
+.act1-video-bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 0;
+  opacity: 0.35;
+  pointer-events: none;
+}
+.act--1 .hero { position: relative; z-index: 1; }
+.act--1 .scroll-cue { z-index: 1; }
+
+/* Asset 2 — Transition texture strip (Act 2 / Act 3 boundary) */
+.texture-strip {
+  width: 100%;
+  height: 160px;
+  background-size: cover;
+  background-position: center 40%;
+  opacity: 0.5;
+}
+
+/* Asset 3 — Infrastructure figure (Act 3 closing visual) */
+.act3-infrastructure {
+  margin-top: var(--s-16);
+  width: 100%;
+  overflow: hidden;
+  max-height: 480px;
+}
+.act3-infrastructure img {
+  width: 100%;
+  height: 480px;
+  object-fit: cover;
+  opacity: 0.7;
+  display: block;
+}
+
+/* Asset 4 — Long-duration water loop (Act 6 engage CTA) */
+.engage { position: relative; overflow: hidden; }
+.engage-video-bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 0;
+  opacity: 0.15;
+  pointer-events: none;
+}
+.engage__eyebrow,
+.engage__headline,
+.engage__sub,
+.engage__cta { position: relative; z-index: 1; }
+
+@media (prefers-reduced-motion: reduce) {
+  .act1-video-bg,
+  .engage-video-bg { display: none; }
+}
 </style>
 </head>
 <body>
@@ -1161,6 +1225,11 @@ main { position: relative; z-index: 2; }
        ACT 01 — THE VOID
        ─────────────────────────────────────────────────────── -->
   <section class="act act--1" id="act1" data-act="01" data-act-title="The Void" aria-label="Act 1 — The Void">
+    <video class="act1-video-bg" autoplay muted loop playsinline
+           poster="assets/img/act1-hero-poster.jpg"
+           aria-hidden="true">
+      <source src="assets/video/act1-hero-obsidian-loop.mp4" type="video/mp4">
+    </video>
     <div class="hero">
       <p class="hero__eyebrow reveal" data-delay="0">Obsidian Capital Partners</p>
       <h1 class="hero__headline reveal" data-delay="1">We build companies.<br>We architect <em>capital.</em><br>We compound value.</h1>
@@ -1220,6 +1289,11 @@ main { position: relative; z-index: 2; }
     </div>
   </section>
 
+  <!-- ═══ TRANSITION TEXTURE — Act 2 / Act 3 boundary ═══ -->
+  <div class="texture-strip" aria-hidden="true"
+       style="background-image: url('assets/img/textures/transition-texture-machined-steel.jpg')">
+  </div>
+
   <!-- ───────────────────────────────────────────────────────
        ACT 03 — THE CAPITAL CHAIN (Five-stage progression)
        ─────────────────────────────────────────────────────── -->
@@ -1265,6 +1339,12 @@ main { position: relative; z-index: 2; }
           <div class="chain__meta"><span class="chain__meta-mark"></span>Gate Five</div>
         </li>
       </ol>
+
+      <figure class="act3-infrastructure" aria-hidden="true">
+        <img src="assets/img/act3-infrastructure-pipeline.jpg"
+             alt="" role="presentation"
+             loading="lazy" decoding="async">
+      </figure>
     </div>
   </section>
 
@@ -1461,6 +1541,11 @@ main { position: relative; z-index: 2; }
 
       <!-- Engage CTA -->
       <div class="engage reveal">
+        <video class="engage-video-bg" autoplay muted loop playsinline
+               poster="assets/img/act5-long-duration-poster.jpg"
+               aria-hidden="true">
+          <source src="assets/video/act5-long-duration-water-loop.mp4" type="video/mp4">
+        </video>
         <p class="engage__eyebrow">Engage</p>
         <h2 class="engage__headline">We <em>select.</em><br>We <em>shape.</em> We <em>compound.</em></h2>
         <p class="engage__sub">Inbound engagement is by introduction. If you are building a platform company in infrastructure or industrial systems and the framework above resonates, the door opens here.</p>
