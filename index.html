@@ -531,7 +531,7 @@ main { position: relative; z-index: 2; }
    ═══════════════════════════════════════════════════════════ */
 .act--2 .act__inner {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr 1fr 360px;
   gap: var(--s-12);
   align-items: start;
 }
@@ -568,6 +568,10 @@ main { position: relative; z-index: 2; }
 @media (max-width: 1024px) {
   .act--2 .act__inner { grid-template-columns: 1fr; gap: var(--s-8); }
 }
+.positioning-figure { margin: 0; position: relative; }
+.positioning-figure__video { width: 100%; aspect-ratio: 3 / 4; display: block; object-fit: cover; background: #0a0a0a; }
+.positioning-figure__caption { margin-top: var(--s-3); font-family: var(--font-sans); font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(245, 242, 238, 0.5); line-height: 1.4; }
+@media (max-width: 1024px) { .positioning-figure { max-width: 360px; margin: var(--s-8) 0 0; } }
 
 /* ═══════════════════════════════════════════════════════════
    ACT 03 — THE CAPITAL CHAIN (Five-stage framework)
@@ -1286,6 +1290,20 @@ main { position: relative; z-index: 2; }
         <p>We do not advise from a distance. We do not optimize for transaction volume. We select a small number of businesses where structural advantage is buildable, commit our capital and our time, and remain until the architecture we designed has been tested by the market.</p>
         <p>This is not a service offering. It is a building orientation — and the discipline to hold it.</p>
       </div>
+        <figure class="positioning-figure reveal">
+          <video
+            class="positioning-figure__video"
+            autoplay
+            loop
+            muted
+            playsinline
+            poster="assets/img/principal-operator-poster.jpg"
+            aria-label="Operator at the base of monumental industrial infrastructure"
+          >
+            <source src="assets/video/principal-operator-loop.mp4" type="video/mp4">
+          </video>
+          <figcaption class="positioning-figure__caption">The principal at scale with the work.</figcaption>
+        </figure>
     </div>
   </section>
 
