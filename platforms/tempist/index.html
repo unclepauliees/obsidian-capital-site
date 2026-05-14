@@ -25,6 +25,22 @@
       --font-headline: 'Space Grotesk', sans-serif;
       --font-body:     'IBM Plex Sans', sans-serif;
       --font-mono:     'IBM Plex Mono', monospace;
+
+      /* RGB channels for composable opacity */
+      --ops-bg-rgb:           10, 11, 14;
+      --classified-white-rgb: 232, 228, 220;
+
+      /* Spacing tokens */
+      --section-pad:        160px 48px;
+      --section-pad-mobile: 100px 24px;
+      --card-pad:           48px 40px;
+
+      /* Type-scale tokens */
+      --text-label:    10px;
+      --text-eyebrow:  11px;
+      --text-caption:  13px;
+      --text-body-sm:  14px;
+      --text-body:     18px;
     }
 
     /* ─── RESET + BASE ─────────────────────────────────────────── */
@@ -74,7 +90,7 @@
     }
     .watermark-row {
       font-family: var(--font-mono);
-      font-size: 11px;
+      font-size: var(--text-eyebrow);
       font-weight: 700;
       letter-spacing: 0.15em;
       color: var(--classified-white);
@@ -154,7 +170,7 @@
       display: inline-block;
       font-family: var(--font-mono);
       font-weight: 700;
-      font-size: 11px;
+      font-size: var(--text-eyebrow);
       letter-spacing: 0.2em;
       color: var(--threat-red);
       border: 1px solid var(--threat-red);
@@ -172,8 +188,9 @@
       z-index: 10;
       max-width: 1200px;
       margin: 0 auto;
-      padding: 160px 48px;
+      padding: var(--section-pad);
     }
+    .site-section__inner--snug { padding-bottom: 48px; }
 
     /* ─── PARALLAX LAYER ───────────────────────────────────────── */
     .parallax-layer {
@@ -197,7 +214,7 @@
     /* ─── MONO LABEL ───────────────────────────────────────────── */
     .mono-label {
       font-family: var(--font-mono);
-      font-size: 11px;
+      font-size: var(--text-eyebrow);
       font-weight: 400;
       letter-spacing: 0.15em;
       color: var(--steel-blue);
@@ -216,7 +233,7 @@
 
     /* ─── RESPONSIVE ───────────────────────────────────────────── */
     @media (max-width: 767px) {
-      .site-section__inner { padding: 100px 24px; }
+      .site-section__inner { padding: var(--section-pad-mobile); }
     }
 
     /* ─── HERO ─────────────────────────────────────────────────── */
@@ -351,7 +368,7 @@
 
     @media (max-width: 767px) {
       .hero__title     { font-size: clamp(40px, 10vw, 56px); }
-      .hero__boot-line { font-size: 11px; }
+      .hero__boot-line { font-size: var(--text-eyebrow); }
     }
 
     /* ─── SHARED SECTION TYPOGRAPHY ────────────────────────────── */
@@ -360,7 +377,7 @@
       align-items: center;
       gap: 14px;
       font-family: var(--font-mono);
-      font-size: 11px;
+      font-size: var(--text-eyebrow);
       font-weight: 400;
       letter-spacing: 0.2em;
       color: var(--steel-blue);
@@ -388,7 +405,7 @@
     .section-lede {
       font-family: var(--font-body);
       font-weight: 300;
-      font-size: 18px;
+      font-size: var(--text-body);
       line-height: 1.7;
       opacity: 0.6;
       max-width: 620px;
@@ -423,7 +440,7 @@
 
     .stat-card__label {
       font-family: var(--font-mono);
-      font-size: 11px;
+      font-size: var(--text-eyebrow);
       font-weight: 400;
       letter-spacing: 0.12em;
       color: var(--steel-blue);
@@ -449,7 +466,7 @@
 
     .ticker-item {
       font-family: var(--font-mono);
-      font-size: 11px;
+      font-size: var(--text-eyebrow);
       font-weight: 400;
       letter-spacing: 0.15em;
       color: var(--steel-blue);
@@ -479,19 +496,19 @@
 
     .cap-card {
       background: var(--ops-bg);
-      padding: 48px 40px;
-      transition: background 180ms linear, box-shadow 180ms linear;
+      padding: var(--card-pad);
+      transition: background 150ms linear, box-shadow 150ms linear;
     }
 
     .cap-card:hover {
       background: rgba(255,255,255,0.05);
-      box-shadow: inset 2px 0 0 rgba(232,228,220,0.12);
+      box-shadow: inset 2px 0 0 rgba(var(--classified-white-rgb), 0.12);
     }
 
     .cap-card__num {
       display: block;
       font-family: var(--font-mono);
-      font-size: 11px;
+      font-size: var(--text-eyebrow);
       font-weight: 400;
       letter-spacing: 0.15em;
       color: var(--steel-blue);
@@ -603,7 +620,7 @@
     .emp-center__label {
       display: block;
       font-family: var(--font-mono);
-      font-size: 10px;
+      font-size: var(--text-label);
       font-weight: 400;
       letter-spacing: 0.2em;
       color: var(--steel-blue);
@@ -622,7 +639,7 @@
     .emp-center__sub {
       display: block;
       font-family: var(--font-mono);
-      font-size: 10px;
+      font-size: var(--text-label);
       letter-spacing: 0.15em;
       color: var(--steel-blue);
       margin-top: 10px;
@@ -644,7 +661,7 @@
 
     .metric-item__label {
       font-family: var(--font-mono);
-      font-size: 10px;
+      font-size: var(--text-label);
       font-weight: 400;
       letter-spacing: 0.15em;
       color: var(--steel-blue);
@@ -674,7 +691,7 @@
     }
 
     .matrix-table thead th {
-      font-size: 11px;
+      font-size: var(--text-eyebrow);
       font-weight: 700;
       letter-spacing: 0.15em;
       color: var(--classified-white);
@@ -687,7 +704,7 @@
     .matrix-table thead th:first-child {
       color: var(--steel-blue);
       font-weight: 400;
-      font-size: 10px;
+      font-size: var(--text-label);
     }
 
     .matrix-table tbody tr {
@@ -706,7 +723,7 @@
     }
 
     .matrix-table td:first-child {
-      font-size: 10px;
+      font-size: var(--text-label);
       letter-spacing: 0.12em;
       color: var(--steel-blue);
       white-space: nowrap;
@@ -715,7 +732,7 @@
     .matrix-status {
       display: inline-block;
       font-family: var(--font-mono);
-      font-size: 10px;
+      font-size: var(--text-label);
       font-weight: 700;
       letter-spacing: 0.15em;
       padding: 3px 8px;
@@ -747,6 +764,7 @@
       line-height: 1.7;
       opacity: 0.6;
     }
+    .market-context__body + .market-context__body { margin-top: 16px; }
 
     .market-stack { display: flex; flex-direction: column; gap: 40px; }
 
@@ -759,7 +777,7 @@
 
     .market-bar__label {
       font-family: var(--font-mono);
-      font-size: 10px;
+      font-size: var(--text-label);
       letter-spacing: 0.15em;
       color: var(--steel-blue);
     }
@@ -784,12 +802,12 @@
     .market-bar.is-revealed .market-bar__fill { width: var(--fill); }
 
     .market-bar__fill--tam { background: var(--classified-white); }
-    .market-bar__fill--sam { background: rgba(232,228,220,0.55); }
-    .market-bar__fill--som { background: rgba(232,228,220,0.28); }
+    .market-bar__fill--sam { background: rgba(var(--classified-white-rgb), 0.55); }
+    .market-bar__fill--som { background: rgba(var(--classified-white-rgb), 0.28); }
 
     .market-bar__sub {
       font-family: var(--font-mono);
-      font-size: 10px;
+      font-size: var(--text-label);
       letter-spacing: 0.1em;
       color: var(--steel-blue);
       margin-top: 8px;
@@ -814,7 +832,7 @@
     }
 
     .comp-table thead th {
-      font-size: 11px;
+      font-size: var(--text-eyebrow);
       font-weight: 700;
       letter-spacing: 0.15em;
       text-align: left;
@@ -826,7 +844,7 @@
 
     .comp-table thead th:first-child {
       color: var(--steel-blue);
-      font-size: 10px;
+      font-size: var(--text-label);
       font-weight: 400;
     }
 
@@ -837,6 +855,7 @@
     }
 
     .comp-table thead th.col--other { color: var(--steel-blue); font-weight: 400; }
+    .comp-table__col-note { display: block; font-weight: 400; font-size: var(--text-label); opacity: 0.6; }
 
     .comp-table tbody tr {
       border-bottom: 1px solid rgba(255,255,255,0.05);
@@ -852,7 +871,7 @@
     }
 
     .comp-table td:first-child {
-      font-size: 10px;
+      font-size: var(--text-label);
       letter-spacing: 0.12em;
       color: var(--steel-blue);
       white-space: nowrap;
@@ -877,13 +896,13 @@
 
     .pipeline-tile {
       background: var(--ops-bg);
-      padding: 48px 40px;
-      transition: background 180ms linear, box-shadow 180ms linear;
+      padding: var(--card-pad);
+      transition: background 150ms linear, box-shadow 150ms linear;
     }
 
     .pipeline-tile:hover {
       background: rgba(255,255,255,0.05);
-      box-shadow: inset 2px 0 0 rgba(232,228,220,0.12);
+      box-shadow: inset 2px 0 0 rgba(var(--classified-white-rgb), 0.12);
     }
 
     .pipeline-tile .classification-stamp {
@@ -901,7 +920,7 @@
 
     .pipeline-tile__geo {
       font-family: var(--font-mono);
-      font-size: 11px;
+      font-size: var(--text-eyebrow);
       letter-spacing: 0.12em;
       color: var(--steel-blue);
       margin-bottom: 28px;
@@ -918,7 +937,7 @@
 
     .pipeline-tile__status {
       font-family: var(--font-mono);
-      font-size: 10px;
+      font-size: var(--text-label);
       letter-spacing: 0.15em;
       color: var(--steel-blue);
     }
@@ -932,7 +951,7 @@
 
     .compliance-badge {
       font-family: var(--font-mono);
-      font-size: 10px;
+      font-size: var(--text-label);
       font-weight: 700;
       letter-spacing: 0.15em;
       color: var(--classified-white);
@@ -964,7 +983,7 @@
 
     .raise-panel__title {
       font-family: var(--font-mono);
-      font-size: 11px;
+      font-size: var(--text-eyebrow);
       font-weight: 700;
       letter-spacing: 0.2em;
       color: var(--classified-white);
@@ -984,7 +1003,7 @@
 
     .raise-row__label {
       font-family: var(--font-mono);
-      font-size: 10px;
+      font-size: var(--text-label);
       letter-spacing: 0.12em;
       color: var(--steel-blue);
       white-space: nowrap;
@@ -1006,7 +1025,7 @@
     .raise-status {
       margin-top: 24px;
       font-family: var(--font-mono);
-      font-size: 10px;
+      font-size: var(--text-label);
       font-weight: 700;
       letter-spacing: 0.18em;
       color: var(--classified-white);
@@ -1025,7 +1044,7 @@
 
     .proceeds-bar__label {
       font-family: var(--font-mono);
-      font-size: 11px;
+      font-size: var(--text-eyebrow);
       letter-spacing: 0.12em;
       color: var(--classified-white);
       opacity: 0.8;
@@ -1053,7 +1072,7 @@
 
     .proceeds-bar__desc {
       font-family: var(--font-mono);
-      font-size: 10px;
+      font-size: var(--text-label);
       letter-spacing: 0.1em;
       color: var(--steel-blue);
       margin-top: 8px;
@@ -1062,7 +1081,7 @@
 
     .proceeds-eyebrow {
       font-family: var(--font-mono);
-      font-size: 11px;
+      font-size: var(--text-eyebrow);
       font-weight: 400;
       letter-spacing: 0.2em;
       color: var(--steel-blue);
@@ -1088,7 +1107,7 @@
     }
 
     .site-nav.is-scrolled {
-      background: rgba(10,11,14,0.96);
+      background: rgba(var(--ops-bg-rgb), 0.96);
       border-bottom-color: rgba(255,255,255,0.06);
     }
 
@@ -1118,7 +1137,7 @@
 
     .site-nav__links a {
       font-family: var(--font-mono);
-      font-size: 10px;
+      font-size: var(--text-label);
       font-weight: 400;
       letter-spacing: 0.15em;
       color: var(--steel-blue);
@@ -1183,7 +1202,7 @@
 
     .leader-block__cred {
       font-family: var(--font-mono);
-      font-size: 10px;
+      font-size: var(--text-label);
       letter-spacing: 0.12em;
       color: var(--steel-blue);
     }
@@ -1191,6 +1210,7 @@
     .leader-block__cred-sep { color: rgba(74,85,104,0.35); font-family: var(--font-mono); }
 
     .advisor-header { margin-bottom: 24px; }
+    .advisor-header .section-eyebrow { margin-bottom: 0; }
 
     .advisor-grid {
       display: grid;
@@ -1202,12 +1222,12 @@
     .advisor-card {
       background: var(--ops-bg);
       padding: 40px 32px;
-      transition: background 180ms linear, box-shadow 180ms linear;
+      transition: background 150ms linear, box-shadow 150ms linear;
     }
 
     .advisor-card:hover {
       background: rgba(255,255,255,0.05);
-      box-shadow: inset 2px 0 0 rgba(232,228,220,0.12);
+      box-shadow: inset 2px 0 0 rgba(var(--classified-white-rgb), 0.12);
     }
 
     .advisor-card__name {
@@ -1220,7 +1240,7 @@
 
     .advisor-card__title {
       font-family: var(--font-mono);
-      font-size: 10px;
+      font-size: var(--text-label);
       font-weight: 400;
       letter-spacing: 0.1em;
       color: var(--steel-blue);
@@ -1243,7 +1263,7 @@
     .form-label {
       display: block;
       font-family: var(--font-mono);
-      font-size: 10px;
+      font-size: var(--text-label);
       font-weight: 400;
       letter-spacing: 0.2em;
       color: var(--steel-blue);
@@ -1272,7 +1292,7 @@
       background: rgba(255,255,255,0.05);
       outline: none;
     }
-    .form-input::placeholder { color: rgba(232,228,220,0.2); font-family: var(--font-mono); }
+    .form-input::placeholder { color: rgba(var(--classified-white-rgb), 0.2); font-family: var(--font-mono); }
     .form-textarea { resize: vertical; min-height: 120px; }
 
     .form-submit {
@@ -1364,7 +1384,7 @@
 
     .site-footer__meta {
       font-family: var(--font-mono);
-      font-size: 10px;
+      font-size: var(--text-label);
       font-weight: 400;
       letter-spacing: 0.08em;
       color: var(--steel-blue);
@@ -1441,7 +1461,7 @@
   <section class="site-section" id="section-threat" data-section="1">
     <div class="grid-overlay" aria-hidden="true"></div>
 
-    <div class="site-section__inner" style="padding-bottom:48px;">
+    <div class="site-section__inner site-section__inner--snug">
       <span class="section-eyebrow reveal">01 // THREAT ASSESSMENT</span>
       <h2 class="section-headline reveal reveal--fade">Legacy doctrine was not designed for swarm-configured autonomous threats.</h2>
       <p class="section-lede reveal reveal--fade">The operational environment changed. Low-cost, mass-deployed UAV swarms now represent the primary aerial threat vector in active theaters. Response systems built for single-aircraft intercept are structurally inadequate.</p>
@@ -1649,7 +1669,7 @@
         <div class="reveal reveal--fade">
           <h3 class="market-context__title">Why now.</h3>
           <p class="market-context__body">Drone proliferation in active conflict zones triggered emergency procurement protocols in 14 NATO and partner nations since 2022. Existing platforms cannot meet the sovereign-grade, zero-cloud, swarm-response requirements now written into new procurement standards.</p>
-          <p class="market-context__body" style="margin-top:16px;">TEMPIST is the only platform already certified to the standards currently being written.</p>
+          <p class="market-context__body">TEMPIST is the only platform already certified to the standards currently being written.</p>
         </div>
 
         <div class="market-stack">
@@ -1707,8 +1727,8 @@
             <tr>
               <th scope="col"></th>
               <th scope="col" class="col--tempist">TEMPIST</th>
-              <th scope="col" class="col--other">LEGACY<br><span style="font-weight:400;font-size:10px;opacity:0.6;">Established defense prime</span></th>
-              <th scope="col" class="col--other">EMERGING<br><span style="font-weight:400;font-size:10px;opacity:0.6;">Commercially-backed platforms</span></th>
+              <th scope="col" class="col--other">LEGACY<br><span class="comp-table__col-note">Established defense prime</span></th>
+              <th scope="col" class="col--other">EMERGING<br><span class="comp-table__col-note">Commercially-backed platforms</span></th>
             </tr>
           </thead>
           <tbody>
@@ -1920,7 +1940,7 @@
       </div>
 
       <div class="advisor-header reveal">
-        <span class="section-eyebrow" style="margin-bottom:0;">ADVISORY BOARD</span>
+        <span class="section-eyebrow">ADVISORY BOARD</span>
       </div>
       <div class="advisor-grid">
         <div class="advisor-card bracket-frame--passive reveal reveal--fade">
