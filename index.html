@@ -477,31 +477,6 @@ main { position: relative; z-index: 2; }
   width: 4px; height: 4px; background: var(--color-gold); display: inline-block;
 }
 
-/* Obsidian mark — SVG fracture, Section 2.1 */
-.hero__mark {
-  position: absolute;
-  right: var(--grid-margin);
-  top: 50%;
-  transform: translateY(-50%);
-  width: 280px; height: 280px;
-  opacity: 0.85;
-  pointer-events: none;
-}
-.hero__mark svg { width: 100%; height: 100%; }
-.hero__mark .fracture {
-  stroke: var(--color-gold);
-  stroke-width: 0.5;
-  fill: none;
-  opacity: 0.4;
-}
-.hero__mark .shard {
-  fill: var(--color-obsidian);
-  stroke: var(--color-gold);
-  stroke-width: 0.5;
-  filter: drop-shadow(0 0 24px rgba(184,150,90,0.15));
-}
-@media (max-width: 1024px) { .hero__mark { width: 200px; height: 200px; opacity: 0.5; } }
-@media (max-width: 767px) { .hero__mark { display: none; } }
 
 /* Scroll cue */
 .scroll-cue {
@@ -1245,26 +1220,6 @@ main { position: relative; z-index: 2; }
         <span>Kingdom of Saudi Arabia</span>
         <span>·</span>
         <span>Est. 2024</span>
-      </div>
-
-      <!-- Obsidian fracture mark — SVG, Section 2.1 -->
-      <div class="hero__mark reveal" data-delay="4" aria-hidden="true">
-        <svg viewBox="0 0 280 280" xmlns="http://www.w3.org/2000/svg">
-          <!-- Irregular heptagon, fractured at 23° -->
-          <defs>
-            <linearGradient id="shardGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" stop-color="#1a1a1a"/>
-              <stop offset="100%" stop-color="#050505"/>
-            </linearGradient>
-          </defs>
-          <!-- Main heptagon shard -->
-          <polygon class="shard" points="140,30 220,75 245,170 195,235 95,245 50,180 40,90" fill="url(#shardGrad)"/>
-          <!-- Internal fracture line at ~23° from vertical -->
-          <line class="fracture" x1="120" y1="40" x2="180" y2="240"/>
-          <line class="fracture" x1="60" y1="120" x2="240" y2="160" stroke-dasharray="2 4" opacity="0.3"/>
-          <!-- Subtle gold highlight on edge -->
-          <polyline class="fracture" points="140,30 220,75 245,170" stroke-width="1" opacity="0.6"/>
-        </svg>
       </div>
     </div>
 
