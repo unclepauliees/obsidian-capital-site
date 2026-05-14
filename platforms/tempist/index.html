@@ -25,6 +25,24 @@
       --font-headline: 'Space Grotesk', sans-serif;
       --font-body:     'IBM Plex Sans', sans-serif;
       --font-mono:     'IBM Plex Mono', monospace;
+
+      /* RGB channels for composable opacity */
+      --ops-bg-rgb:           10, 11, 14;
+      --classified-white-rgb: 232, 228, 220;
+      --steel-blue-rgb:       74, 85, 104;
+
+      /* Spacing tokens */
+      --section-pad:        160px 48px;
+      --section-pad-mobile: 100px 24px;
+      --card-pad:           48px 40px;
+
+      /* Type-scale tokens */
+      --text-label:    10px;
+      --text-eyebrow:  11px;
+      --text-caption:  13px;
+      --text-body-sm:  14px;
+      --text-body:     18px;
+      --text-mono-ui:  12px;
     }
 
     /* ─── RESET + BASE ─────────────────────────────────────────── */
@@ -74,7 +92,7 @@
     }
     .watermark-row {
       font-family: var(--font-mono);
-      font-size: 11px;
+      font-size: var(--text-eyebrow);
       font-weight: 700;
       letter-spacing: 0.15em;
       color: var(--classified-white);
@@ -154,7 +172,7 @@
       display: inline-block;
       font-family: var(--font-mono);
       font-weight: 700;
-      font-size: 11px;
+      font-size: var(--text-eyebrow);
       letter-spacing: 0.2em;
       color: var(--threat-red);
       border: 1px solid var(--threat-red);
@@ -172,8 +190,9 @@
       z-index: 10;
       max-width: 1200px;
       margin: 0 auto;
-      padding: 160px 48px;
+      padding: var(--section-pad);
     }
+    .site-section__inner--snug { padding-bottom: 48px; }
 
     /* ─── PARALLAX LAYER ───────────────────────────────────────── */
     .parallax-layer {
@@ -197,7 +216,7 @@
     /* ─── MONO LABEL ───────────────────────────────────────────── */
     .mono-label {
       font-family: var(--font-mono);
-      font-size: 11px;
+      font-size: var(--text-eyebrow);
       font-weight: 400;
       letter-spacing: 0.15em;
       color: var(--steel-blue);
@@ -216,7 +235,7 @@
 
     /* ─── RESPONSIVE ───────────────────────────────────────────── */
     @media (max-width: 767px) {
-      .site-section__inner { padding: 100px 24px; }
+      .site-section__inner { padding: var(--section-pad-mobile); }
     }
 
     /* ─── HERO ─────────────────────────────────────────────────── */
@@ -259,7 +278,7 @@
 
     .hero__boot-line {
       font-family: var(--font-mono);
-      font-size: 13px;
+      font-size: var(--text-caption);
       font-weight: 400;
       color: var(--classified-white);
       opacity: 0.7;
@@ -298,7 +317,7 @@
     .hero__tagline {
       font-family: var(--font-mono);
       font-weight: 700;
-      font-size: 14px;
+      font-size: var(--text-body-sm);
       letter-spacing: 0.25em;
       opacity: 0.9;
     }
@@ -306,7 +325,7 @@
     .hero__descriptor {
       font-family: var(--font-body);
       font-weight: 300;
-      font-size: 18px;
+      font-size: var(--text-body);
       line-height: 1.5;
       max-width: 540px;
       margin-top: 32px;
@@ -351,7 +370,7 @@
 
     @media (max-width: 767px) {
       .hero__title     { font-size: clamp(40px, 10vw, 56px); }
-      .hero__boot-line { font-size: 11px; }
+      .hero__boot-line { font-size: var(--text-eyebrow); }
     }
 
     /* ─── SHARED SECTION TYPOGRAPHY ────────────────────────────── */
@@ -360,7 +379,7 @@
       align-items: center;
       gap: 14px;
       font-family: var(--font-mono);
-      font-size: 11px;
+      font-size: var(--text-eyebrow);
       font-weight: 400;
       letter-spacing: 0.2em;
       color: var(--steel-blue);
@@ -388,7 +407,7 @@
     .section-lede {
       font-family: var(--font-body);
       font-weight: 300;
-      font-size: 18px;
+      font-size: var(--text-body);
       line-height: 1.7;
       opacity: 0.6;
       max-width: 620px;
@@ -423,7 +442,7 @@
 
     .stat-card__label {
       font-family: var(--font-mono);
-      font-size: 11px;
+      font-size: var(--text-eyebrow);
       font-weight: 400;
       letter-spacing: 0.12em;
       color: var(--steel-blue);
@@ -449,7 +468,7 @@
 
     .ticker-item {
       font-family: var(--font-mono);
-      font-size: 11px;
+      font-size: var(--text-eyebrow);
       font-weight: 400;
       letter-spacing: 0.15em;
       color: var(--steel-blue);
@@ -479,19 +498,19 @@
 
     .cap-card {
       background: var(--ops-bg);
-      padding: 48px 40px;
-      transition: background 180ms linear, box-shadow 180ms linear;
+      padding: var(--card-pad);
+      transition: background 150ms linear, box-shadow 150ms linear;
     }
 
     .cap-card:hover {
       background: rgba(255,255,255,0.05);
-      box-shadow: inset 2px 0 0 rgba(232,228,220,0.12);
+      box-shadow: inset 2px 0 0 rgba(var(--classified-white-rgb), 0.12);
     }
 
     .cap-card__num {
       display: block;
       font-family: var(--font-mono);
-      font-size: 11px;
+      font-size: var(--text-eyebrow);
       font-weight: 400;
       letter-spacing: 0.15em;
       color: var(--steel-blue);
@@ -501,7 +520,7 @@
     .cap-card__title {
       font-family: var(--font-headline);
       font-weight: 700;
-      font-size: 18px;
+      font-size: var(--text-body);
       letter-spacing: 0.02em;
       line-height: 1.2;
       margin-bottom: 16px;
@@ -510,7 +529,7 @@
     .cap-card__body {
       font-family: var(--font-body);
       font-weight: 300;
-      font-size: 14px;
+      font-size: var(--text-body-sm);
       line-height: 1.65;
       opacity: 0.55;
     }
@@ -603,7 +622,7 @@
     .emp-center__label {
       display: block;
       font-family: var(--font-mono);
-      font-size: 10px;
+      font-size: var(--text-label);
       font-weight: 400;
       letter-spacing: 0.2em;
       color: var(--steel-blue);
@@ -622,7 +641,7 @@
     .emp-center__sub {
       display: block;
       font-family: var(--font-mono);
-      font-size: 10px;
+      font-size: var(--text-label);
       letter-spacing: 0.15em;
       color: var(--steel-blue);
       margin-top: 10px;
@@ -644,7 +663,7 @@
 
     .metric-item__label {
       font-family: var(--font-mono);
-      font-size: 10px;
+      font-size: var(--text-label);
       font-weight: 400;
       letter-spacing: 0.15em;
       color: var(--steel-blue);
@@ -674,7 +693,7 @@
     }
 
     .matrix-table thead th {
-      font-size: 11px;
+      font-size: var(--text-eyebrow);
       font-weight: 700;
       letter-spacing: 0.15em;
       color: var(--classified-white);
@@ -687,7 +706,7 @@
     .matrix-table thead th:first-child {
       color: var(--steel-blue);
       font-weight: 400;
-      font-size: 10px;
+      font-size: var(--text-label);
     }
 
     .matrix-table tbody tr {
@@ -698,7 +717,7 @@
     .matrix-table tbody tr:hover { background: rgba(255,255,255,0.05); }
 
     .matrix-table td {
-      font-size: 12px;
+      font-size: var(--text-mono-ui);
       font-weight: 400;
       color: var(--classified-white);
       padding: 18px 24px;
@@ -706,7 +725,7 @@
     }
 
     .matrix-table td:first-child {
-      font-size: 10px;
+      font-size: var(--text-label);
       letter-spacing: 0.12em;
       color: var(--steel-blue);
       white-space: nowrap;
@@ -715,7 +734,7 @@
     .matrix-status {
       display: inline-block;
       font-family: var(--font-mono);
-      font-size: 10px;
+      font-size: var(--text-label);
       font-weight: 700;
       letter-spacing: 0.15em;
       padding: 3px 8px;
@@ -723,7 +742,7 @@
 
     .matrix-status--active     { color: var(--classified-white); border: 1px solid rgba(255,255,255,0.25); }
     .matrix-status--theater    { color: var(--threat-red);        border: 1px solid var(--threat-red); }
-    .matrix-status--classified { color: var(--steel-blue);        border: 1px solid rgba(74,85,104,0.4); }
+    .matrix-status--classified { color: var(--steel-blue);        border: 1px solid rgba(var(--steel-blue-rgb), 0.4); }
 
     /* ─── MARKET — TAM/SAM/SOM ──────────────────────────────────── */
     .market-layout {
@@ -747,6 +766,7 @@
       line-height: 1.7;
       opacity: 0.6;
     }
+    .market-context__body + .market-context__body { margin-top: 16px; }
 
     .market-stack { display: flex; flex-direction: column; gap: 40px; }
 
@@ -759,7 +779,7 @@
 
     .market-bar__label {
       font-family: var(--font-mono);
-      font-size: 10px;
+      font-size: var(--text-label);
       letter-spacing: 0.15em;
       color: var(--steel-blue);
     }
@@ -784,12 +804,12 @@
     .market-bar.is-revealed .market-bar__fill { width: var(--fill); }
 
     .market-bar__fill--tam { background: var(--classified-white); }
-    .market-bar__fill--sam { background: rgba(232,228,220,0.55); }
-    .market-bar__fill--som { background: rgba(232,228,220,0.28); }
+    .market-bar__fill--sam { background: rgba(var(--classified-white-rgb), 0.55); }
+    .market-bar__fill--som { background: rgba(var(--classified-white-rgb), 0.28); }
 
     .market-bar__sub {
       font-family: var(--font-mono);
-      font-size: 10px;
+      font-size: var(--text-label);
       letter-spacing: 0.1em;
       color: var(--steel-blue);
       margin-top: 8px;
@@ -801,7 +821,7 @@
     }
 
     /* ─── MOAT — COMPETITIVE TABLE ───────────────────────────────── */
-    .comp-table-wrap {
+    .comp-table__wrap {
       overflow-x: auto;
       -webkit-overflow-scrolling: touch;
     }
@@ -814,7 +834,7 @@
     }
 
     .comp-table thead th {
-      font-size: 11px;
+      font-size: var(--text-eyebrow);
       font-weight: 700;
       letter-spacing: 0.15em;
       text-align: left;
@@ -826,7 +846,7 @@
 
     .comp-table thead th:first-child {
       color: var(--steel-blue);
-      font-size: 10px;
+      font-size: var(--text-label);
       font-weight: 400;
     }
 
@@ -837,6 +857,7 @@
     }
 
     .comp-table thead th.col--other { color: var(--steel-blue); font-weight: 400; }
+    .comp-table__col-note { display: block; font-weight: 400; font-size: var(--text-label); opacity: 0.6; }
 
     .comp-table tbody tr {
       border-bottom: 1px solid rgba(255,255,255,0.05);
@@ -846,13 +867,13 @@
     .comp-table tbody tr:hover { background: rgba(255,255,255,0.04); }
 
     .comp-table td {
-      font-size: 12px;
+      font-size: var(--text-mono-ui);
       padding: 16px 24px;
       vertical-align: middle;
     }
 
     .comp-table td:first-child {
-      font-size: 10px;
+      font-size: var(--text-label);
       letter-spacing: 0.12em;
       color: var(--steel-blue);
       white-space: nowrap;
@@ -875,23 +896,23 @@
       margin-bottom: 40px;
     }
 
-    .pipeline-tile {
+    .pipeline-card {
       background: var(--ops-bg);
-      padding: 48px 40px;
-      transition: background 180ms linear, box-shadow 180ms linear;
+      padding: var(--card-pad);
+      transition: background 150ms linear, box-shadow 150ms linear;
     }
 
-    .pipeline-tile:hover {
+    .pipeline-card:hover {
       background: rgba(255,255,255,0.05);
-      box-shadow: inset 2px 0 0 rgba(232,228,220,0.12);
+      box-shadow: inset 2px 0 0 rgba(var(--classified-white-rgb), 0.12);
     }
 
-    .pipeline-tile .classification-stamp {
+    .pipeline-card .classification-stamp {
       display: block;
       margin-bottom: 24px;
     }
 
-    .pipeline-tile__name {
+    .pipeline-card__name {
       font-family: var(--font-headline);
       font-weight: 700;
       font-size: 20px;
@@ -899,16 +920,16 @@
       margin-bottom: 8px;
     }
 
-    .pipeline-tile__geo {
+    .pipeline-card__geo {
       font-family: var(--font-mono);
-      font-size: 11px;
+      font-size: var(--text-eyebrow);
       letter-spacing: 0.12em;
       color: var(--steel-blue);
       margin-bottom: 28px;
       line-height: 1.5;
     }
 
-    .pipeline-tile__value {
+    .pipeline-card__value {
       font-family: var(--font-headline);
       font-weight: 700;
       font-size: 36px;
@@ -916,9 +937,9 @@
       margin-bottom: 10px;
     }
 
-    .pipeline-tile__status {
+    .pipeline-card__status {
       font-family: var(--font-mono);
-      font-size: 10px;
+      font-size: var(--text-label);
       letter-spacing: 0.15em;
       color: var(--steel-blue);
     }
@@ -932,7 +953,7 @@
 
     .compliance-badge {
       font-family: var(--font-mono);
-      font-size: 10px;
+      font-size: var(--text-label);
       font-weight: 700;
       letter-spacing: 0.15em;
       color: var(--classified-white);
@@ -964,7 +985,7 @@
 
     .raise-panel__title {
       font-family: var(--font-mono);
-      font-size: 11px;
+      font-size: var(--text-eyebrow);
       font-weight: 700;
       letter-spacing: 0.2em;
       color: var(--classified-white);
@@ -984,7 +1005,7 @@
 
     .raise-row__label {
       font-family: var(--font-mono);
-      font-size: 10px;
+      font-size: var(--text-label);
       letter-spacing: 0.12em;
       color: var(--steel-blue);
       white-space: nowrap;
@@ -1006,7 +1027,7 @@
     .raise-status {
       margin-top: 24px;
       font-family: var(--font-mono);
-      font-size: 10px;
+      font-size: var(--text-label);
       font-weight: 700;
       letter-spacing: 0.18em;
       color: var(--classified-white);
@@ -1025,7 +1046,7 @@
 
     .proceeds-bar__label {
       font-family: var(--font-mono);
-      font-size: 11px;
+      font-size: var(--text-eyebrow);
       letter-spacing: 0.12em;
       color: var(--classified-white);
       opacity: 0.8;
@@ -1053,7 +1074,7 @@
 
     .proceeds-bar__desc {
       font-family: var(--font-mono);
-      font-size: 10px;
+      font-size: var(--text-label);
       letter-spacing: 0.1em;
       color: var(--steel-blue);
       margin-top: 8px;
@@ -1062,7 +1083,7 @@
 
     .proceeds-eyebrow {
       font-family: var(--font-mono);
-      font-size: 11px;
+      font-size: var(--text-eyebrow);
       font-weight: 400;
       letter-spacing: 0.2em;
       color: var(--steel-blue);
@@ -1088,7 +1109,7 @@
     }
 
     .site-nav.is-scrolled {
-      background: rgba(10,11,14,0.96);
+      background: rgba(var(--ops-bg-rgb), 0.96);
       border-bottom-color: rgba(255,255,255,0.06);
     }
 
@@ -1105,7 +1126,7 @@
     .site-nav__wordmark {
       font-family: var(--font-headline);
       font-weight: 700;
-      font-size: 13px;
+      font-size: var(--text-caption);
       letter-spacing: 0.1em;
       color: var(--classified-white);
     }
@@ -1118,7 +1139,7 @@
 
     .site-nav__links a {
       font-family: var(--font-mono);
-      font-size: 10px;
+      font-size: var(--text-label);
       font-weight: 400;
       letter-spacing: 0.15em;
       color: var(--steel-blue);
@@ -1156,7 +1177,7 @@
 
     .leader-block__title {
       font-family: var(--font-mono);
-      font-size: 12px;
+      font-size: var(--text-mono-ui);
       font-weight: 400;
       letter-spacing: 0.15em;
       color: var(--steel-blue);
@@ -1183,14 +1204,15 @@
 
     .leader-block__cred {
       font-family: var(--font-mono);
-      font-size: 10px;
+      font-size: var(--text-label);
       letter-spacing: 0.12em;
       color: var(--steel-blue);
     }
 
-    .leader-block__cred-sep { color: rgba(74,85,104,0.35); font-family: var(--font-mono); }
+    .leader-block__cred-sep { color: rgba(var(--steel-blue-rgb), 0.35); font-family: var(--font-mono); }
 
     .advisor-header { margin-bottom: 24px; }
+    .advisor-header .section-eyebrow { margin-bottom: 0; }
 
     .advisor-grid {
       display: grid;
@@ -1202,12 +1224,12 @@
     .advisor-card {
       background: var(--ops-bg);
       padding: 40px 32px;
-      transition: background 180ms linear, box-shadow 180ms linear;
+      transition: background 150ms linear, box-shadow 150ms linear;
     }
 
     .advisor-card:hover {
       background: rgba(255,255,255,0.05);
-      box-shadow: inset 2px 0 0 rgba(232,228,220,0.12);
+      box-shadow: inset 2px 0 0 rgba(var(--classified-white-rgb), 0.12);
     }
 
     .advisor-card__name {
@@ -1220,7 +1242,7 @@
 
     .advisor-card__title {
       font-family: var(--font-mono);
-      font-size: 10px;
+      font-size: var(--text-label);
       font-weight: 400;
       letter-spacing: 0.1em;
       color: var(--steel-blue);
@@ -1243,7 +1265,7 @@
     .form-label {
       display: block;
       font-family: var(--font-mono);
-      font-size: 10px;
+      font-size: var(--text-label);
       font-weight: 400;
       letter-spacing: 0.2em;
       color: var(--steel-blue);
@@ -1257,7 +1279,7 @@
       border: 1px solid rgba(255,255,255,0.1);
       color: var(--classified-white);
       font-family: var(--font-mono);
-      font-size: 13px;
+      font-size: var(--text-caption);
       font-weight: 400;
       padding: 14px 16px;
       outline: none;
@@ -1272,13 +1294,13 @@
       background: rgba(255,255,255,0.05);
       outline: none;
     }
-    .form-input::placeholder { color: rgba(232,228,220,0.2); font-family: var(--font-mono); }
+    .form-input::placeholder { color: rgba(var(--classified-white-rgb), 0.2); font-family: var(--font-mono); }
     .form-textarea { resize: vertical; min-height: 120px; }
 
     .form-submit {
       display: inline-block;
       font-family: var(--font-mono);
-      font-size: 12px;
+      font-size: var(--text-mono-ui);
       font-weight: 700;
       letter-spacing: 0.2em;
       color: var(--classified-white);
@@ -1312,7 +1334,7 @@
     .contact-meta__text {
       font-family: var(--font-body);
       font-weight: 300;
-      font-size: 14px;
+      font-size: var(--text-body-sm);
       line-height: 1.65;
       opacity: 0.6;
       margin-top: 12px;
@@ -1352,7 +1374,7 @@
     .site-footer__tagline {
       font-family: var(--font-mono);
       font-weight: 700;
-      font-size: 13px;
+      font-size: var(--text-caption);
       letter-spacing: 0.25em;
       opacity: 0.55;
     }
@@ -1364,7 +1386,7 @@
 
     .site-footer__meta {
       font-family: var(--font-mono);
-      font-size: 10px;
+      font-size: var(--text-label);
       font-weight: 400;
       letter-spacing: 0.08em;
       color: var(--steel-blue);
@@ -1441,7 +1463,7 @@
   <section class="site-section" id="section-threat" data-section="1">
     <div class="grid-overlay" aria-hidden="true"></div>
 
-    <div class="site-section__inner" style="padding-bottom:48px;">
+    <div class="site-section__inner site-section__inner--snug">
       <span class="section-eyebrow reveal">01 // THREAT ASSESSMENT</span>
       <h2 class="section-headline reveal reveal--fade">Legacy doctrine was not designed for swarm-configured autonomous threats.</h2>
       <p class="section-lede reveal reveal--fade">The operational environment changed. Low-cost, mass-deployed UAV swarms now represent the primary aerial threat vector in active theaters. Response systems built for single-aircraft intercept are structurally inadequate.</p>
@@ -1507,32 +1529,32 @@
       <p class="section-lede reveal reveal--fade">TEMPIST deploys coordinated interceptor swarms that engage, track, and neutralize threat UAVs without human-in-loop latency. Every unit operates on onboard doctrine — no cloud, no connection, no delay.</p>
 
       <div class="cap-grid">
-        <div class="cap-card bracket-frame--passive reveal reveal--fade">
+        <div class="cap-card bracket-frame--passive reveal reveal--fade" role="article">
           <span class="cap-card__num">CAP.01</span>
           <h3 class="cap-card__title">AUTONOMOUS DECISION</h3>
           <p class="cap-card__body">Onboard intercept doctrine. No operator in the loop. No cloud dependency. No latency penalty from external authorization chains.</p>
         </div>
-        <div class="cap-card bracket-frame--passive reveal reveal--fade">
+        <div class="cap-card bracket-frame--passive reveal reveal--fade" role="article">
           <span class="cap-card__num">CAP.02</span>
           <h3 class="cap-card__title">SWARM DEPLOYMENT</h3>
           <p class="cap-card__body">Coordinated multi-unit intercept formations. 847 nodes networked. Real-time mesh synchronization across contested RF environments.</p>
         </div>
-        <div class="cap-card bracket-frame--passive reveal reveal--fade">
+        <div class="cap-card bracket-frame--passive reveal reveal--fade" role="article">
           <span class="cap-card__num">CAP.03</span>
           <h3 class="cap-card__title">SUB-SECOND RESPONSE</h3>
           <p class="cap-card__body">0.3-second intercept sequence from detection to engagement authority. Combat-proven response time in active theater deployments.</p>
         </div>
-        <div class="cap-card bracket-frame--passive reveal reveal--fade">
+        <div class="cap-card bracket-frame--passive reveal reveal--fade" role="article">
           <span class="cap-card__num">CAP.04</span>
           <h3 class="cap-card__title">SOVEREIGN OPERATION</h3>
           <p class="cap-card__body">Air-gapped architecture. Fully operable inside contested electromagnetic environments. Zero external infrastructure dependency.</p>
         </div>
-        <div class="cap-card bracket-frame--passive reveal reveal--fade">
+        <div class="cap-card bracket-frame--passive reveal reveal--fade" role="article">
           <span class="cap-card__num">CAP.05</span>
           <h3 class="cap-card__title">MULTI-VECTOR THREAT</h3>
           <p class="cap-card__body">Fixed-wing, rotary, and hybrid UAV profiles. Simultaneous multi-axis engagement. Threat classification in under 80ms.</p>
         </div>
-        <div class="cap-card bracket-frame--passive reveal reveal--fade">
+        <div class="cap-card bracket-frame--passive reveal reveal--fade" role="article">
           <span class="cap-card__num">CAP.06</span>
           <h3 class="cap-card__title">IN-THEATER SUSTAINMENT</h3>
           <p class="cap-card__body">Forward-deployable. Organic maintenance cycle. No contractor dependency on the line. Sustained operational tempo without logistics overhead.</p>
@@ -1649,7 +1671,7 @@
         <div class="reveal reveal--fade">
           <h3 class="market-context__title">Why now.</h3>
           <p class="market-context__body">Drone proliferation in active conflict zones triggered emergency procurement protocols in 14 NATO and partner nations since 2022. Existing platforms cannot meet the sovereign-grade, zero-cloud, swarm-response requirements now written into new procurement standards.</p>
-          <p class="market-context__body" style="margin-top:16px;">TEMPIST is the only platform already certified to the standards currently being written.</p>
+          <p class="market-context__body">TEMPIST is the only platform already certified to the standards currently being written.</p>
         </div>
 
         <div class="market-stack">
@@ -1701,14 +1723,14 @@
       <h2 class="section-headline reveal reveal--fade">A lead built in theater. Not in a lab.</h2>
       <p class="section-lede reveal reveal--fade">TEMPIST's competitive advantages are structural. They come from 3,000+ live intercept events, classified sovereign certifications, and doctrine IP developed under operational conditions. These cannot be replicated in a test environment.</p>
 
-      <div class="comp-table-wrap reveal reveal--fade">
+      <div class="comp-table__wrap reveal reveal--fade">
         <table class="comp-table" aria-label="Competitive comparison">
           <thead>
             <tr>
               <th scope="col"></th>
               <th scope="col" class="col--tempist">TEMPIST</th>
-              <th scope="col" class="col--other">LEGACY<br><span style="font-weight:400;font-size:10px;opacity:0.6;">Established defense prime</span></th>
-              <th scope="col" class="col--other">EMERGING<br><span style="font-weight:400;font-size:10px;opacity:0.6;">Commercially-backed platforms</span></th>
+              <th scope="col" class="col--other">LEGACY<br><span class="comp-table__col-note">Established defense prime</span></th>
+              <th scope="col" class="col--other">EMERGING<br><span class="comp-table__col-note">Commercially-backed platforms</span></th>
             </tr>
           </thead>
           <tbody>
@@ -1776,33 +1798,33 @@
       <p class="section-lede reveal reveal--fade">Three disclosed engagements. One classified. All initiated through sovereign procurement channels — no broker intermediation, no commercial pitch process. Counterpart-initiated.</p>
 
       <div class="pipeline-grid">
-        <div class="pipeline-tile bracket-frame--passive reveal reveal--fade">
+        <div class="pipeline-card bracket-frame--passive reveal reveal--fade" role="article">
           <span class="classification-stamp">RESTRICTED</span>
-          <h3 class="pipeline-tile__name">NATO MEMBER NATION</h3>
-          <p class="pipeline-tile__geo">Eastern European theater<br>Direct sovereign procurement</p>
-          <div class="pipeline-tile__value">$18M</div>
-          <div class="pipeline-tile__status">LOI SIGNED · Q2 2026</div>
+          <h3 class="pipeline-card__name">NATO MEMBER NATION</h3>
+          <p class="pipeline-card__geo">Eastern European theater<br>Direct sovereign procurement</p>
+          <div class="pipeline-card__value">$18M</div>
+          <div class="pipeline-card__status">LOI SIGNED · Q2 2026</div>
         </div>
-        <div class="pipeline-tile bracket-frame--passive reveal reveal--fade">
+        <div class="pipeline-card bracket-frame--passive reveal reveal--fade" role="article">
           <span class="classification-stamp">RESTRICTED</span>
-          <h3 class="pipeline-tile__name">GULF STATE SOVEREIGN</h3>
-          <p class="pipeline-tile__geo">Strategic air defense<br>Multi-platform deployment</p>
-          <div class="pipeline-tile__value">$42M</div>
-          <div class="pipeline-tile__status">NDA EXECUTED · NEGOTIATION ACTIVE</div>
+          <h3 class="pipeline-card__name">GULF STATE SOVEREIGN</h3>
+          <p class="pipeline-card__geo">Strategic air defense<br>Multi-platform deployment</p>
+          <div class="pipeline-card__value">$42M</div>
+          <div class="pipeline-card__status">NDA EXECUTED · NEGOTIATION ACTIVE</div>
         </div>
-        <div class="pipeline-tile bracket-frame--passive reveal reveal--fade">
+        <div class="pipeline-card bracket-frame--passive reveal reveal--fade" role="article">
           <span class="classification-stamp">RESTRICTED</span>
-          <h3 class="pipeline-tile__name">NORTHERN EUROPEAN PARTNER</h3>
-          <p class="pipeline-tile__geo">NATO-adjacent evaluation<br>Sovereign procurement track</p>
-          <div class="pipeline-tile__value">$12M</div>
-          <div class="pipeline-tile__status">PLATFORM EVALUATION · IN PROGRESS</div>
+          <h3 class="pipeline-card__name">NORTHERN EUROPEAN PARTNER</h3>
+          <p class="pipeline-card__geo">NATO-adjacent evaluation<br>Sovereign procurement track</p>
+          <div class="pipeline-card__value">$12M</div>
+          <div class="pipeline-card__status">PLATFORM EVALUATION · IN PROGRESS</div>
         </div>
-        <div class="pipeline-tile bracket-frame--passive reveal reveal--fade">
+        <div class="pipeline-card bracket-frame--passive reveal reveal--fade" role="article">
           <span class="classification-stamp">CONTROLLED</span>
-          <h3 class="pipeline-tile__name">SOVEREIGN STATE</h3>
-          <p class="pipeline-tile__geo">Undisclosed<br>Access restricted</p>
-          <div class="pipeline-tile__value">$— —M</div>
-          <div class="pipeline-tile__status">UNDER NEGOTIATION · ACTIVE</div>
+          <h3 class="pipeline-card__name">SOVEREIGN STATE</h3>
+          <p class="pipeline-card__geo">Undisclosed<br>Access restricted</p>
+          <div class="pipeline-card__value">$— —M</div>
+          <div class="pipeline-card__status">UNDER NEGOTIATION · ACTIVE</div>
         </div>
       </div>
 
@@ -1920,22 +1942,22 @@
       </div>
 
       <div class="advisor-header reveal">
-        <span class="section-eyebrow" style="margin-bottom:0;">ADVISORY BOARD</span>
+        <span class="section-eyebrow">ADVISORY BOARD</span>
       </div>
       <div class="advisor-grid">
-        <div class="advisor-card bracket-frame--passive reveal reveal--fade">
+        <div class="advisor-card bracket-frame--passive reveal reveal--fade" role="article">
           <h3 class="advisor-card__name">Lt. Gen. (Ret.) Richard Harmon</h3>
           <p class="advisor-card__title">Former Deputy SACEUR<br>NATO Allied Command Europe</p>
         </div>
-        <div class="advisor-card bracket-frame--passive reveal reveal--fade">
+        <div class="advisor-card bracket-frame--passive reveal reveal--fade" role="article">
           <h3 class="advisor-card__name">Dr. Sarah Chen</h3>
           <p class="advisor-card__title">Former Technical Director<br>DARPA Tactical Technology Office</p>
         </div>
-        <div class="advisor-card bracket-frame--passive reveal reveal--fade">
+        <div class="advisor-card bracket-frame--passive reveal reveal--fade" role="article">
           <h3 class="advisor-card__name">James Okafor</h3>
           <p class="advisor-card__title">Former Chief Procurement Officer<br>U.S. Department of Defense</p>
         </div>
-        <div class="advisor-card bracket-frame--passive reveal reveal--fade">
+        <div class="advisor-card bracket-frame--passive reveal reveal--fade" role="article">
           <h3 class="advisor-card__name">Col. (Ret.) Viktor Naumov</h3>
           <p class="advisor-card__title">Former Head of Air Defense Systems<br>Polish Armed Forces</p>
         </div>
