@@ -65,11 +65,11 @@ document.getElementById('gateForm').addEventListener('submit', async (e) => {
     return;
   }
 
-  const isValid = code.toUpperCase() === 'DEMO-COMMONGROUND-2026';
+  const isValid = code === '1911';
 
   if (isValid) {
     try { sessionStorage.setItem('cg-access-' + TEMP_PLATFORM, '1'); } catch (e) {}
-    window.location.href = 'portfolio.html';
+    window.location.href = 'index.html';
   } else {
     input.classList.add('is-error');
     errorEl.textContent = 'Invalid code';

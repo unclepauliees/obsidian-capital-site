@@ -77,12 +77,11 @@ document.getElementById('gateForm').addEventListener('submit', async (e) => {
   // TEMP: bypassable client-side check — replace with /api/auth endpoint
   // For now, simply demonstrate the UX flow.
   // In production: POST { platform, code } to server, get signed cookie, redirect.
-  const isValid = code.toUpperCase() === 'DEMO-HYDRONEX-2026';
+  const isValid = code === '888';
 
   if (isValid) {
-    // TEMP: set short-lived session marker. In production: server sets HTTP-only cookie.
     try { sessionStorage.setItem('cg-access-' + TEMP_PLATFORM, '1'); } catch (e) {}
-    window.location.href = 'portfolio.html';
+    window.location.href = 'index.html';
   } else {
     input.classList.add('is-error');
     errorEl.textContent = 'Invalid code';
