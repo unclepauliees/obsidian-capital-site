@@ -1120,6 +1120,13 @@
       font-size: var(--text-caption);
       letter-spacing: 0.1em;
       color: var(--classified-white);
+      display: flex;
+      align-items: center;
+    }
+    .site-nav__logo {
+      height: 28px;
+      width: auto;
+      display: block;
     }
 
     .site-nav__links {
@@ -1398,7 +1405,9 @@
 <!-- FIXED NAV -->
 <nav class="site-nav" id="site-nav" aria-label="Primary navigation">
   <div class="site-nav__inner">
-    <a href="#section-hero" class="site-nav__wordmark" aria-label="TEMPIST SYSTEMS INC. — top">TEMPIST</a>
+    <a href="#section-hero" class="site-nav__wordmark" aria-label="TEMPIST SYSTEMS INC. — top">
+      <img src="logo.png" alt="TEMPIST SYSTEMS INC." class="site-nav__logo">
+    </a>
     <div class="site-nav__links">
       <a href="#section-threat">THREAT</a>
       <a href="#section-solution">DOCTRINE</a>
