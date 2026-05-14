@@ -551,6 +551,8 @@ main { position: relative; z-index: 2; }
 /* ═══════════════════════════════════════════════════════════
    ACT 03 — THE CAPITAL CHAIN (Five-stage framework)
    ═══════════════════════════════════════════════════════════ */
+.act--3 { padding-bottom: 0; }
+.act--4 { padding-top: var(--s-8); }
 .act--3 .chain-intro {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -939,8 +941,10 @@ main { position: relative; z-index: 2; }
 
 /* Engage / Contact gate */
 .engage {
-  border-top: 1px solid var(--color-rule-dark);
-  padding-top: var(--s-12);
+  position: relative;
+  left: calc(-1 * var(--grid-margin));
+  width: calc(100% + 2 * var(--grid-margin));
+  padding: var(--s-24) var(--grid-margin);
   text-align: center;
 }
 .engage__eyebrow {
@@ -1084,13 +1088,16 @@ main { position: relative; z-index: 2; }
 /* Asset 3 — Infrastructure figure (Act 3 closing visual) */
 .act3-infrastructure {
   margin-top: var(--s-16);
-  width: 100%;
+  width: 100vw;
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
   overflow: hidden;
-  max-height: 480px;
+  height: 100vh;
 }
 .act3-infrastructure img {
   width: 100%;
-  height: 480px;
+  height: 100%;
   object-fit: cover;
   opacity: 0.7;
   display: block;
