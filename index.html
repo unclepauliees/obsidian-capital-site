@@ -457,6 +457,42 @@ main { position: relative; z-index: 2; }
   font-style: italic;
   color: var(--color-gold-light);
 }
+
+/* ── Cycling headline ── */
+.hero__we {
+  display: block;
+}
+.hero__cycle-wrap {
+  display: block;
+  position: relative;
+  height: 1.05em;
+  overflow: hidden;
+}
+.hero__cycle-word {
+  position: absolute;
+  left: 0;
+  opacity: 0;
+  color: var(--color-gold-light);
+  font-style: italic;
+  transform: translateY(0.8em);
+  transition: opacity 0.55s cubic-bezier(0.34, 1.56, 0.64, 1),
+              transform 0.55s cubic-bezier(0.34, 1.56, 0.64, 1);
+  white-space: nowrap;
+}
+.hero__cycle-word em {
+  font-style: italic;
+  color: var(--color-gold-light);
+}
+.hero__cycle-word.is-active {
+  opacity: 1;
+  transform: translateY(0);
+}
+.hero__cycle-word.is-exit {
+  opacity: 0;
+  transform: translateY(-0.8em);
+  transition: opacity 0.35s ease-in,
+              transform 0.35s ease-in;
+}
 .hero__sub {
   font-size: var(--text-body-lg);
   font-weight: 300;
@@ -1218,7 +1254,14 @@ main { position: relative; z-index: 2; }
     </video>
     <div class="hero">
       <p class="hero__eyebrow reveal" data-delay="0">Obsidian Capital Partners</p>
-      <h1 class="hero__headline reveal" data-delay="1">We build companies.<br>We architect <em>capital.</em><br>We compound value.</h1>
+      <h1 class="hero__headline reveal" data-delay="1">
+        <span class="hero__we">We</span>
+        <span class="hero__cycle-wrap">
+          <span class="hero__cycle-word">Build Companies.</span>
+          <span class="hero__cycle-word">Architect <em>Capital.</em></span>
+          <span class="hero__cycle-word">Compound Value.</span>
+        </span>
+      </h1>
       <p class="hero__sub reveal" data-delay="2">An institutional M&amp;A and growth capital platform taking principal positions in infrastructure and industrial platform companies. We structure capital. We build management capacity. We stay.</p>
       <div class="hero__meta reveal" data-delay="3">
         <span class="hero__meta-dot"></span>
@@ -1696,6 +1739,22 @@ main { position: relative; z-index: 2; }
     });
   }, { rootMargin: '-10% 0px -10% 0px', threshold: 0.05 });
   els.forEach(el => io.observe(el));
+})();
+
+/* ── Hero phrase cycle ── */
+(function() {
+  var words = document.querySelectorAll('.hero__cycle-word');
+  if (!words.length) return;
+  var current = 0;
+  words[current].classList.add('is-active');
+  setInterval(function() {
+    var prev = current;
+    current = (current + 1) % words.length;
+    words[prev].classList.remove('is-active');
+    words[prev].classList.add('is-exit');
+    setTimeout(function() { words[prev].classList.remove('is-exit'); }, 400);
+    words[current].classList.add('is-active');
+  }, 2400);
 })();
 </script>
 
