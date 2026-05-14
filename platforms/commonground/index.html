@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script>if(sessionStorage.getItem('cg-access-commonground')!=='1')window.location.replace('access.html');</script>
 <title>Commonground — An Obsidian Capital Partners Platform Company</title>
 <meta name="description" content="Commonground delivers telemedicine infrastructure for the Kingdom of Saudi Arabia under Vision 2030 frameworks. A platform company of Obsidian Capital Partners.">
 
@@ -16,17 +17,6 @@
 <link rel="stylesheet" href="../_shared.css">
 </head>
 <body>
-<div id="ocp-gate" style="position:fixed;inset:0;z-index:9999;background:#080808;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:20px;font-family:'Montserrat',sans-serif;">
-  <p style="color:#B8965A;font-size:10px;letter-spacing:0.25em;text-transform:uppercase;margin:0;">Obsidian Capital Partners</p>
-  <p style="color:#F0EDE8;font-size:12px;letter-spacing:0.2em;text-transform:uppercase;margin:0;">Restricted Access</p>
-  <div style="width:1px;height:28px;background:rgba(184,150,90,0.35);"></div>
-  <p id="ocp-gate-error" style="color:#E63946;font-size:10px;letter-spacing:0.12em;text-transform:uppercase;min-height:14px;margin:0;"></p>
-  <div style="display:flex;border:1px solid rgba(184,150,90,0.45);">
-    <input id="ocp-gate-input" type="password" placeholder="ACCESS CODE" autocomplete="off"
-      style="background:transparent;border:none;outline:none;padding:13px 18px;color:#F0EDE8;font-family:'Space Mono',monospace;font-size:14px;letter-spacing:0.2em;width:200px;text-align:center;">
-    <button id="ocp-gate-btn" style="background:#B8965A;border:none;cursor:pointer;padding:13px 22px;color:#080808;font-family:'Montserrat',sans-serif;font-size:10px;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;">Enter</button>
-  </div>
-</div>
 
 <div class="atmosphere" aria-hidden="true"></div>
 <div class="grain" aria-hidden="true"></div>
@@ -191,24 +181,6 @@
 })();
 </script>
 
-<script>
-(function(){
-  var KEY='ocp_auth_commonground', PWD='1911';
-  if(sessionStorage.getItem(KEY)==='1'){document.getElementById('ocp-gate').style.display='none';return;}
-  document.body.style.overflow='hidden';
-  function attempt(){
-    if(document.getElementById('ocp-gate-input').value===PWD){
-      sessionStorage.setItem(KEY,'1');
-      document.getElementById('ocp-gate').style.display='none';
-      document.body.style.overflow='';
-    } else {
-      document.getElementById('ocp-gate-error').textContent='Invalid access code';
-      document.getElementById('ocp-gate-input').value='';
-    }
-  }
-  document.getElementById('ocp-gate-btn').addEventListener('click',attempt);
-  document.getElementById('ocp-gate-input').addEventListener('keydown',function(e){if(e.key==='Enter')attempt();});
-})();
-</script>
+
 </body>
 </html>
