@@ -29,6 +29,7 @@
       /* RGB channels for composable opacity */
       --ops-bg-rgb:           10, 11, 14;
       --classified-white-rgb: 232, 228, 220;
+      --steel-blue-rgb:       74, 85, 104;
 
       /* Spacing tokens */
       --section-pad:        160px 48px;
@@ -41,6 +42,7 @@
       --text-caption:  13px;
       --text-body-sm:  14px;
       --text-body:     18px;
+      --text-mono-ui:  12px;
     }
 
     /* ─── RESET + BASE ─────────────────────────────────────────── */
@@ -276,7 +278,7 @@
 
     .hero__boot-line {
       font-family: var(--font-mono);
-      font-size: 13px;
+      font-size: var(--text-caption);
       font-weight: 400;
       color: var(--classified-white);
       opacity: 0.7;
@@ -315,7 +317,7 @@
     .hero__tagline {
       font-family: var(--font-mono);
       font-weight: 700;
-      font-size: 14px;
+      font-size: var(--text-body-sm);
       letter-spacing: 0.25em;
       opacity: 0.9;
     }
@@ -323,7 +325,7 @@
     .hero__descriptor {
       font-family: var(--font-body);
       font-weight: 300;
-      font-size: 18px;
+      font-size: var(--text-body);
       line-height: 1.5;
       max-width: 540px;
       margin-top: 32px;
@@ -518,7 +520,7 @@
     .cap-card__title {
       font-family: var(--font-headline);
       font-weight: 700;
-      font-size: 18px;
+      font-size: var(--text-body);
       letter-spacing: 0.02em;
       line-height: 1.2;
       margin-bottom: 16px;
@@ -527,7 +529,7 @@
     .cap-card__body {
       font-family: var(--font-body);
       font-weight: 300;
-      font-size: 14px;
+      font-size: var(--text-body-sm);
       line-height: 1.65;
       opacity: 0.55;
     }
@@ -715,7 +717,7 @@
     .matrix-table tbody tr:hover { background: rgba(255,255,255,0.05); }
 
     .matrix-table td {
-      font-size: 12px;
+      font-size: var(--text-mono-ui);
       font-weight: 400;
       color: var(--classified-white);
       padding: 18px 24px;
@@ -740,7 +742,7 @@
 
     .matrix-status--active     { color: var(--classified-white); border: 1px solid rgba(255,255,255,0.25); }
     .matrix-status--theater    { color: var(--threat-red);        border: 1px solid var(--threat-red); }
-    .matrix-status--classified { color: var(--steel-blue);        border: 1px solid rgba(74,85,104,0.4); }
+    .matrix-status--classified { color: var(--steel-blue);        border: 1px solid rgba(var(--steel-blue-rgb), 0.4); }
 
     /* ─── MARKET — TAM/SAM/SOM ──────────────────────────────────── */
     .market-layout {
@@ -819,7 +821,7 @@
     }
 
     /* ─── MOAT — COMPETITIVE TABLE ───────────────────────────────── */
-    .comp-table-wrap {
+    .comp-table__wrap {
       overflow-x: auto;
       -webkit-overflow-scrolling: touch;
     }
@@ -865,7 +867,7 @@
     .comp-table tbody tr:hover { background: rgba(255,255,255,0.04); }
 
     .comp-table td {
-      font-size: 12px;
+      font-size: var(--text-mono-ui);
       padding: 16px 24px;
       vertical-align: middle;
     }
@@ -894,23 +896,23 @@
       margin-bottom: 40px;
     }
 
-    .pipeline-tile {
+    .pipeline-card {
       background: var(--ops-bg);
       padding: var(--card-pad);
       transition: background 150ms linear, box-shadow 150ms linear;
     }
 
-    .pipeline-tile:hover {
+    .pipeline-card:hover {
       background: rgba(255,255,255,0.05);
       box-shadow: inset 2px 0 0 rgba(var(--classified-white-rgb), 0.12);
     }
 
-    .pipeline-tile .classification-stamp {
+    .pipeline-card .classification-stamp {
       display: block;
       margin-bottom: 24px;
     }
 
-    .pipeline-tile__name {
+    .pipeline-card__name {
       font-family: var(--font-headline);
       font-weight: 700;
       font-size: 20px;
@@ -918,7 +920,7 @@
       margin-bottom: 8px;
     }
 
-    .pipeline-tile__geo {
+    .pipeline-card__geo {
       font-family: var(--font-mono);
       font-size: var(--text-eyebrow);
       letter-spacing: 0.12em;
@@ -927,7 +929,7 @@
       line-height: 1.5;
     }
 
-    .pipeline-tile__value {
+    .pipeline-card__value {
       font-family: var(--font-headline);
       font-weight: 700;
       font-size: 36px;
@@ -935,7 +937,7 @@
       margin-bottom: 10px;
     }
 
-    .pipeline-tile__status {
+    .pipeline-card__status {
       font-family: var(--font-mono);
       font-size: var(--text-label);
       letter-spacing: 0.15em;
@@ -1124,7 +1126,7 @@
     .site-nav__wordmark {
       font-family: var(--font-headline);
       font-weight: 700;
-      font-size: 13px;
+      font-size: var(--text-caption);
       letter-spacing: 0.1em;
       color: var(--classified-white);
     }
@@ -1175,7 +1177,7 @@
 
     .leader-block__title {
       font-family: var(--font-mono);
-      font-size: 12px;
+      font-size: var(--text-mono-ui);
       font-weight: 400;
       letter-spacing: 0.15em;
       color: var(--steel-blue);
@@ -1207,7 +1209,7 @@
       color: var(--steel-blue);
     }
 
-    .leader-block__cred-sep { color: rgba(74,85,104,0.35); font-family: var(--font-mono); }
+    .leader-block__cred-sep { color: rgba(var(--steel-blue-rgb), 0.35); font-family: var(--font-mono); }
 
     .advisor-header { margin-bottom: 24px; }
     .advisor-header .section-eyebrow { margin-bottom: 0; }
@@ -1277,7 +1279,7 @@
       border: 1px solid rgba(255,255,255,0.1);
       color: var(--classified-white);
       font-family: var(--font-mono);
-      font-size: 13px;
+      font-size: var(--text-caption);
       font-weight: 400;
       padding: 14px 16px;
       outline: none;
@@ -1298,7 +1300,7 @@
     .form-submit {
       display: inline-block;
       font-family: var(--font-mono);
-      font-size: 12px;
+      font-size: var(--text-mono-ui);
       font-weight: 700;
       letter-spacing: 0.2em;
       color: var(--classified-white);
@@ -1332,7 +1334,7 @@
     .contact-meta__text {
       font-family: var(--font-body);
       font-weight: 300;
-      font-size: 14px;
+      font-size: var(--text-body-sm);
       line-height: 1.65;
       opacity: 0.6;
       margin-top: 12px;
@@ -1372,7 +1374,7 @@
     .site-footer__tagline {
       font-family: var(--font-mono);
       font-weight: 700;
-      font-size: 13px;
+      font-size: var(--text-caption);
       letter-spacing: 0.25em;
       opacity: 0.55;
     }
@@ -1527,32 +1529,32 @@
       <p class="section-lede reveal reveal--fade">TEMPIST deploys coordinated interceptor swarms that engage, track, and neutralize threat UAVs without human-in-loop latency. Every unit operates on onboard doctrine — no cloud, no connection, no delay.</p>
 
       <div class="cap-grid">
-        <div class="cap-card bracket-frame--passive reveal reveal--fade">
+        <div class="cap-card bracket-frame--passive reveal reveal--fade" role="article">
           <span class="cap-card__num">CAP.01</span>
           <h3 class="cap-card__title">AUTONOMOUS DECISION</h3>
           <p class="cap-card__body">Onboard intercept doctrine. No operator in the loop. No cloud dependency. No latency penalty from external authorization chains.</p>
         </div>
-        <div class="cap-card bracket-frame--passive reveal reveal--fade">
+        <div class="cap-card bracket-frame--passive reveal reveal--fade" role="article">
           <span class="cap-card__num">CAP.02</span>
           <h3 class="cap-card__title">SWARM DEPLOYMENT</h3>
           <p class="cap-card__body">Coordinated multi-unit intercept formations. 847 nodes networked. Real-time mesh synchronization across contested RF environments.</p>
         </div>
-        <div class="cap-card bracket-frame--passive reveal reveal--fade">
+        <div class="cap-card bracket-frame--passive reveal reveal--fade" role="article">
           <span class="cap-card__num">CAP.03</span>
           <h3 class="cap-card__title">SUB-SECOND RESPONSE</h3>
           <p class="cap-card__body">0.3-second intercept sequence from detection to engagement authority. Combat-proven response time in active theater deployments.</p>
         </div>
-        <div class="cap-card bracket-frame--passive reveal reveal--fade">
+        <div class="cap-card bracket-frame--passive reveal reveal--fade" role="article">
           <span class="cap-card__num">CAP.04</span>
           <h3 class="cap-card__title">SOVEREIGN OPERATION</h3>
           <p class="cap-card__body">Air-gapped architecture. Fully operable inside contested electromagnetic environments. Zero external infrastructure dependency.</p>
         </div>
-        <div class="cap-card bracket-frame--passive reveal reveal--fade">
+        <div class="cap-card bracket-frame--passive reveal reveal--fade" role="article">
           <span class="cap-card__num">CAP.05</span>
           <h3 class="cap-card__title">MULTI-VECTOR THREAT</h3>
           <p class="cap-card__body">Fixed-wing, rotary, and hybrid UAV profiles. Simultaneous multi-axis engagement. Threat classification in under 80ms.</p>
         </div>
-        <div class="cap-card bracket-frame--passive reveal reveal--fade">
+        <div class="cap-card bracket-frame--passive reveal reveal--fade" role="article">
           <span class="cap-card__num">CAP.06</span>
           <h3 class="cap-card__title">IN-THEATER SUSTAINMENT</h3>
           <p class="cap-card__body">Forward-deployable. Organic maintenance cycle. No contractor dependency on the line. Sustained operational tempo without logistics overhead.</p>
@@ -1721,7 +1723,7 @@
       <h2 class="section-headline reveal reveal--fade">A lead built in theater. Not in a lab.</h2>
       <p class="section-lede reveal reveal--fade">TEMPIST's competitive advantages are structural. They come from 3,000+ live intercept events, classified sovereign certifications, and doctrine IP developed under operational conditions. These cannot be replicated in a test environment.</p>
 
-      <div class="comp-table-wrap reveal reveal--fade">
+      <div class="comp-table__wrap reveal reveal--fade">
         <table class="comp-table" aria-label="Competitive comparison">
           <thead>
             <tr>
@@ -1796,33 +1798,33 @@
       <p class="section-lede reveal reveal--fade">Three disclosed engagements. One classified. All initiated through sovereign procurement channels — no broker intermediation, no commercial pitch process. Counterpart-initiated.</p>
 
       <div class="pipeline-grid">
-        <div class="pipeline-tile bracket-frame--passive reveal reveal--fade">
+        <div class="pipeline-card bracket-frame--passive reveal reveal--fade" role="article">
           <span class="classification-stamp">RESTRICTED</span>
-          <h3 class="pipeline-tile__name">NATO MEMBER NATION</h3>
-          <p class="pipeline-tile__geo">Eastern European theater<br>Direct sovereign procurement</p>
-          <div class="pipeline-tile__value">$18M</div>
-          <div class="pipeline-tile__status">LOI SIGNED · Q2 2026</div>
+          <h3 class="pipeline-card__name">NATO MEMBER NATION</h3>
+          <p class="pipeline-card__geo">Eastern European theater<br>Direct sovereign procurement</p>
+          <div class="pipeline-card__value">$18M</div>
+          <div class="pipeline-card__status">LOI SIGNED · Q2 2026</div>
         </div>
-        <div class="pipeline-tile bracket-frame--passive reveal reveal--fade">
+        <div class="pipeline-card bracket-frame--passive reveal reveal--fade" role="article">
           <span class="classification-stamp">RESTRICTED</span>
-          <h3 class="pipeline-tile__name">GULF STATE SOVEREIGN</h3>
-          <p class="pipeline-tile__geo">Strategic air defense<br>Multi-platform deployment</p>
-          <div class="pipeline-tile__value">$42M</div>
-          <div class="pipeline-tile__status">NDA EXECUTED · NEGOTIATION ACTIVE</div>
+          <h3 class="pipeline-card__name">GULF STATE SOVEREIGN</h3>
+          <p class="pipeline-card__geo">Strategic air defense<br>Multi-platform deployment</p>
+          <div class="pipeline-card__value">$42M</div>
+          <div class="pipeline-card__status">NDA EXECUTED · NEGOTIATION ACTIVE</div>
         </div>
-        <div class="pipeline-tile bracket-frame--passive reveal reveal--fade">
+        <div class="pipeline-card bracket-frame--passive reveal reveal--fade" role="article">
           <span class="classification-stamp">RESTRICTED</span>
-          <h3 class="pipeline-tile__name">NORTHERN EUROPEAN PARTNER</h3>
-          <p class="pipeline-tile__geo">NATO-adjacent evaluation<br>Sovereign procurement track</p>
-          <div class="pipeline-tile__value">$12M</div>
-          <div class="pipeline-tile__status">PLATFORM EVALUATION · IN PROGRESS</div>
+          <h3 class="pipeline-card__name">NORTHERN EUROPEAN PARTNER</h3>
+          <p class="pipeline-card__geo">NATO-adjacent evaluation<br>Sovereign procurement track</p>
+          <div class="pipeline-card__value">$12M</div>
+          <div class="pipeline-card__status">PLATFORM EVALUATION · IN PROGRESS</div>
         </div>
-        <div class="pipeline-tile bracket-frame--passive reveal reveal--fade">
+        <div class="pipeline-card bracket-frame--passive reveal reveal--fade" role="article">
           <span class="classification-stamp">CONTROLLED</span>
-          <h3 class="pipeline-tile__name">SOVEREIGN STATE</h3>
-          <p class="pipeline-tile__geo">Undisclosed<br>Access restricted</p>
-          <div class="pipeline-tile__value">$— —M</div>
-          <div class="pipeline-tile__status">UNDER NEGOTIATION · ACTIVE</div>
+          <h3 class="pipeline-card__name">SOVEREIGN STATE</h3>
+          <p class="pipeline-card__geo">Undisclosed<br>Access restricted</p>
+          <div class="pipeline-card__value">$— —M</div>
+          <div class="pipeline-card__status">UNDER NEGOTIATION · ACTIVE</div>
         </div>
       </div>
 
@@ -1943,19 +1945,19 @@
         <span class="section-eyebrow">ADVISORY BOARD</span>
       </div>
       <div class="advisor-grid">
-        <div class="advisor-card bracket-frame--passive reveal reveal--fade">
+        <div class="advisor-card bracket-frame--passive reveal reveal--fade" role="article">
           <h3 class="advisor-card__name">Lt. Gen. (Ret.) Richard Harmon</h3>
           <p class="advisor-card__title">Former Deputy SACEUR<br>NATO Allied Command Europe</p>
         </div>
-        <div class="advisor-card bracket-frame--passive reveal reveal--fade">
+        <div class="advisor-card bracket-frame--passive reveal reveal--fade" role="article">
           <h3 class="advisor-card__name">Dr. Sarah Chen</h3>
           <p class="advisor-card__title">Former Technical Director<br>DARPA Tactical Technology Office</p>
         </div>
-        <div class="advisor-card bracket-frame--passive reveal reveal--fade">
+        <div class="advisor-card bracket-frame--passive reveal reveal--fade" role="article">
           <h3 class="advisor-card__name">James Okafor</h3>
           <p class="advisor-card__title">Former Chief Procurement Officer<br>U.S. Department of Defense</p>
         </div>
-        <div class="advisor-card bracket-frame--passive reveal reveal--fade">
+        <div class="advisor-card bracket-frame--passive reveal reveal--fade" role="article">
           <h3 class="advisor-card__name">Col. (Ret.) Viktor Naumov</h3>
           <p class="advisor-card__title">Former Head of Air Defense Systems<br>Polish Armed Forces</p>
         </div>
