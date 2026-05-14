@@ -71,7 +71,21 @@
       font-size: 16px;
       line-height: 1.6;
       overflow-x: hidden;
-      cursor: url('cursor.png') 16 16, crosshair;
+      cursor: none;
+    }
+    a, button, [role="button"], input, label, select, textarea, .site-nav__links a, .form-submit {
+      cursor: none;
+    }
+    #tempist-cursor {
+      position: fixed;
+      top: 0; left: 0;
+      width: 32px; height: 32px;
+      pointer-events: none;
+      z-index: 99999;
+      transform: translate(-50%, -50%);
+      filter: drop-shadow(0 0 4px rgba(0,255,65,0.8)) drop-shadow(0 0 10px rgba(0,255,65,0.4));
+      transition: filter 0.15s ease;
+      will-change: transform;
     }
 
     /* ─── TYPOGRAPHY ───────────────────────────────────────────── */
@@ -1306,7 +1320,7 @@
       background: transparent;
       border: none;
       padding: 18px 40px;
-      cursor: url('cursor.png') 16 16, pointer;
+      cursor: none;
       margin-top: 8px;
       -webkit-appearance: none;
       border-radius: 0;
@@ -2353,6 +2367,22 @@
     requestAnimationFrame(masterLoop);
   });
 
+})();
+</script>
+
+<img id="tempist-cursor" src="cursor.png" alt="" aria-hidden="true">
+<script>
+(function(){
+  var el = document.getElementById('tempist-cursor');
+  var x = -100, y = -100, tx = -100, ty = -100;
+  document.addEventListener('mousemove', function(e){ tx = e.clientX; ty = e.clientY; });
+  document.addEventListener('mouseleave', function(){ tx = -100; ty = -100; });
+  (function loop(){
+    x += (tx - x) * 0.35;
+    y += (ty - y) * 0.35;
+    el.style.transform = 'translate(calc(-50% + ' + x + 'px), calc(-50% + ' + y + 'px))';
+    requestAnimationFrame(loop);
+  })();
 })();
 </script>
 
