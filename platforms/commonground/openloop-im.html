@@ -1,0 +1,2318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script>if(sessionStorage.getItem('cg-access-openloop')!=='1')window.location.replace('openloop-access.html');</script>
+<title>OpenLoop Health, Inc. — Investment Memorandum | Obsidian Capital Partners</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=Montserrat:wght@300;400;500;600;700&family=Space+Mono:wght@400&display=swap" rel="stylesheet">
+<style>
+/* ═══════════════════════════════════════════════════════════════
+   OBSIDIAN CAPITAL PARTNERS — DESIGN SYSTEM
+   OpenLoop Health, Inc. Investment Memorandum
+═══════════════════════════════════════════════════════════════ */
+
+:root {
+  --obsidian-black: #0A0A0A;
+  --parchment: #F5F2EE;
+  --gold: #B8965A;
+  --gold-light: #D4AF78;
+  --forge-steel: #1C2535;
+  --ember: #C4883A;
+  --rule-dark: #2A2A2A;
+  --mid-gray: #6B6B6B;
+  --structural-green: #2D5C3D;
+  --structural-amber: #7A5A1E;
+  --structural-burgundy: #5C2D2D;
+
+  --font-display: 'Cormorant Garamond', Georgia, serif;
+  --font-body: 'Montserrat', -apple-system, sans-serif;
+  --font-mono: 'Space Mono', 'Courier New', monospace;
+
+  --ease: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  --dur-micro: 150ms;
+  --dur-std: 300ms;
+  --dur-reveal: 500ms;
+
+  --max-width: 1280px;
+  --outer-margin: 80px;
+  --section-pad: 96px;
+  --card-pad: 28px;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--obsidian-black);
+  color: var(--parchment);
+  font-family: var(--font-body);
+  font-weight: 300;
+  font-size: 15px;
+  line-height: 1.75;
+  letter-spacing: 0.02em;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+/* ── Progress Bar ── */
+#progress-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 1px;
+  background: var(--gold);
+  z-index: 1100;
+  width: 0%;
+  pointer-events: none;
+  transition: width 80ms linear;
+}
+
+/* ── Watermark ── */
+.watermark {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) rotate(45deg);
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: 96px;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--parchment);
+  opacity: 0.04;
+  pointer-events: none;
+  z-index: 0;
+  white-space: nowrap;
+  user-select: none;
+}
+
+/* ── Navigation ── */
+#nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 900;
+  background: rgba(10, 10, 10, 0.96);
+  border-bottom: 1px solid var(--rule-dark);
+  transition: backdrop-filter var(--dur-std) var(--ease);
+}
+
+#nav.scrolled {
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+.nav-inner {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 var(--outer-margin);
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+}
+
+.nav-logo {
+  flex-shrink: 0;
+  text-decoration: none;
+  display: flex;
+  flex-direction: column;
+  line-height: 1.15;
+}
+
+.nav-logo-primary {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: 16px;
+  color: var(--parchment);
+  letter-spacing: 0.05em;
+}
+
+.nav-logo-divider {
+  font-family: var(--font-display);
+  font-weight: 300;
+  color: rgba(184,150,90,0.5);
+}
+
+.nav-logo-secondary {
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-size: 8px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--mid-gray);
+  margin-top: 2px;
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  overflow-x: auto;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.nav-links::-webkit-scrollbar { display: none; }
+
+.nav-links a {
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  color: var(--mid-gray);
+  text-decoration: none;
+  white-space: nowrap;
+  transition: color var(--dur-micro) var(--ease);
+}
+
+.nav-links a:hover,
+.nav-links a.active { color: var(--gold); }
+
+.nav-hamburger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  cursor: pointer;
+  background: none;
+  border: none;
+  padding: 8px;
+  flex-shrink: 0;
+}
+
+.nav-hamburger span {
+  display: block;
+  width: 22px;
+  height: 1px;
+  background: var(--parchment);
+  transition: transform var(--dur-std) var(--ease), opacity var(--dur-std) var(--ease);
+}
+
+.nav-hamburger.open span:nth-child(1) { transform: translateY(6px) rotate(45deg); }
+.nav-hamburger.open span:nth-child(2) { opacity: 0; }
+.nav-hamburger.open span:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
+
+#nav-mobile {
+  display: none;
+  position: fixed;
+  top: 60px;
+  left: 0;
+  right: 0;
+  background: rgba(10,10,10,0.98);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--rule-dark);
+  padding: 20px 24px;
+  z-index: 899;
+  flex-direction: column;
+  gap: 0;
+}
+
+#nav-mobile.open { display: flex; }
+
+#nav-mobile a {
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-size: 13px;
+  letter-spacing: 0.06em;
+  color: var(--mid-gray);
+  text-decoration: none;
+  padding: 12px 0;
+  border-bottom: 1px solid rgba(42,42,42,0.5);
+  transition: color var(--dur-micro) var(--ease);
+}
+
+#nav-mobile a:last-child { border-bottom: none; }
+#nav-mobile a:hover, #nav-mobile a.active { color: var(--gold); }
+
+/* ── Layout ── */
+.container {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 var(--outer-margin);
+}
+
+/* ── Gold Rules ── */
+.gold-rule {
+  width: 100%;
+  height: 1px;
+  background: linear-gradient(to right, transparent, rgba(184,150,90,0.6) 20%, rgba(184,150,90,0.6) 80%, transparent);
+  margin: 48px 0;
+}
+
+.gold-rule-short {
+  width: 40px;
+  height: 1px;
+  background: var(--gold);
+  margin: 32px auto;
+}
+
+/* ── Typography ── */
+.eyebrow {
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: 10px;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: var(--gold);
+  display: block;
+  margin-bottom: 16px;
+}
+
+.label {
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 10px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--mid-gray);
+  display: block;
+}
+
+.caption-text {
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  line-height: 1.5;
+  color: var(--mid-gray);
+}
+
+h1.section-title {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: 56px;
+  letter-spacing: -0.01em;
+  line-height: 1.1;
+  color: var(--parchment);
+  margin-bottom: 48px;
+}
+
+h2.section-heading {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: 40px;
+  line-height: 1.2;
+  color: var(--parchment);
+  margin-bottom: 28px;
+  margin-top: 56px;
+}
+
+h3.subsection-title {
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 20px;
+  margin-top: 52px;
+}
+
+h3.subsection-title:first-child { margin-top: 0; }
+
+h4.sub-title {
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: 14px;
+  letter-spacing: 0.07em;
+  color: var(--parchment);
+  margin-bottom: 14px;
+  margin-top: 32px;
+  line-height: 1.4;
+}
+
+p.body-large {
+  font-family: var(--font-body);
+  font-weight: 300;
+  font-size: 18px;
+  line-height: 1.8;
+  color: rgba(245,242,238,0.9);
+  max-width: 700px;
+  margin-bottom: 24px;
+}
+
+p.body {
+  font-family: var(--font-body);
+  font-weight: 300;
+  font-size: 15px;
+  letter-spacing: 0.02em;
+  line-height: 1.75;
+  color: rgba(245,242,238,0.85);
+  max-width: 700px;
+  margin-bottom: 16px;
+}
+
+p.body-sm {
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-size: 13px;
+  letter-spacing: 0.01em;
+  line-height: 1.6;
+  color: var(--mid-gray);
+  margin-bottom: 8px;
+}
+
+.pull-quote {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-weight: 400;
+  font-size: 28px;
+  letter-spacing: 0.01em;
+  line-height: 1.45;
+  color: var(--gold);
+  max-width: 840px;
+  padding: 32px 0;
+}
+
+/* ── Section Layout ── */
+section {
+  position: relative;
+  padding: var(--section-pad) 0;
+}
+
+section:not(.hero-section) {
+  border-top: 1px solid var(--rule-dark);
+}
+
+.section-bg-num {
+  position: absolute;
+  top: 48px;
+  left: var(--outer-margin);
+  font-family: var(--font-display);
+  font-weight: 300;
+  font-size: 200px;
+  line-height: 1;
+  color: rgba(184,150,90,0.05);
+  pointer-events: none;
+  user-select: none;
+  z-index: 0;
+  letter-spacing: -0.02em;
+}
+
+.section-eyebrow-num {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-weight: 400;
+  font-size: 80px;
+  line-height: 1;
+  color: rgba(184,150,90,0.4);
+  display: block;
+  margin-bottom: 12px;
+}
+
+.section-content {
+  position: relative;
+  z-index: 1;
+}
+
+/* ── Cards ── */
+.card {
+  border: 1px solid var(--rule-dark);
+  background: #1A1A1A;
+  border-radius: 0;
+  padding: var(--card-pad);
+  transition: border-color var(--dur-std) var(--ease);
+}
+
+.card:hover { border-color: rgba(184,150,90,0.4); }
+
+.card-grid-3 {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  margin: 28px 0;
+}
+
+.card-grid-2 {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+  margin: 28px 0;
+}
+
+.forge-wrap {
+  background: var(--forge-steel);
+  padding: 28px;
+  margin: 24px 0;
+}
+
+.card .card-eyebrow-num {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-weight: 400;
+  font-size: 36px;
+  color: rgba(184,150,90,0.35);
+  display: block;
+  margin-bottom: 10px;
+  line-height: 1;
+}
+
+.card .card-title {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: 24px;
+  color: var(--parchment);
+  margin-bottom: 16px;
+  line-height: 1.2;
+}
+
+.card .card-body {
+  font-family: var(--font-body);
+  font-weight: 300;
+  font-size: 13px;
+  letter-spacing: 0.02em;
+  line-height: 1.7;
+  color: rgba(245,242,238,0.75);
+  margin-bottom: 16px;
+}
+
+.card .card-label {
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--mid-gray);
+  border-top: 1px solid var(--rule-dark);
+  padding-top: 14px;
+  margin-top: 16px;
+}
+
+/* Tier Cards */
+.tier-card {
+  background: var(--forge-steel);
+  border: 1px solid var(--rule-dark);
+  padding: 28px;
+  transition: border-color var(--dur-std) var(--ease);
+}
+
+.tier-card:hover { border-color: rgba(184,150,90,0.4); }
+
+.tier-badge {
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: 10px;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--gold);
+  display: inline-block;
+  border: 1px solid rgba(184,150,90,0.3);
+  padding: 3px 10px;
+  margin-bottom: 16px;
+}
+
+.tier-title {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: 22px;
+  color: var(--parchment);
+  margin-bottom: 14px;
+  line-height: 1.3;
+}
+
+.tier-body {
+  font-family: var(--font-body);
+  font-weight: 300;
+  font-size: 13px;
+  line-height: 1.75;
+  color: rgba(245,242,238,0.75);
+}
+
+/* ── Data Tables ── */
+.table-wrap {
+  background: var(--forge-steel);
+  overflow-x: auto;
+  margin: 20px 0;
+  border: 1px solid var(--rule-dark);
+}
+
+.data-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.data-table th {
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--mid-gray);
+  padding: 13px 18px;
+  border-bottom: 1px solid var(--rule-dark);
+  border-right: 1px solid var(--rule-dark);
+  text-align: left;
+  white-space: nowrap;
+  background: rgba(0,0,0,0.15);
+}
+
+.data-table th:last-child { border-right: none; }
+
+.data-table td {
+  font-family: var(--font-body);
+  font-weight: 300;
+  font-size: 13px;
+  letter-spacing: 0.01em;
+  line-height: 1.65;
+  color: rgba(245,242,238,0.85);
+  padding: 13px 18px;
+  border-bottom: 1px solid rgba(42,42,42,0.5);
+  border-right: 1px solid rgba(42,42,42,0.4);
+  vertical-align: top;
+}
+
+.data-table td:last-child { border-right: none; }
+.data-table td:first-child { font-weight: 500; color: var(--parchment); }
+.data-table tr:last-child td { border-bottom: none; }
+.data-table tr:hover td { background: rgba(184,150,90,0.08); }
+
+.data-table .mono-cell {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: var(--gold-light);
+}
+
+.data-table .total-row td {
+  font-weight: 600;
+  color: var(--parchment);
+  border-top: 1px solid rgba(184,150,90,0.4);
+  background: rgba(184,150,90,0.06);
+}
+
+.data-table .section-header-row td {
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--gold);
+  background: rgba(184,150,90,0.06);
+  padding: 10px 18px;
+  border-bottom: 1px solid rgba(184,150,90,0.2);
+}
+
+.table-caption {
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-size: 11px;
+  letter-spacing: 0.01em;
+  color: var(--mid-gray);
+  padding: 12px 18px;
+  border-top: 1px solid rgba(42,42,42,0.4);
+  font-style: italic;
+  line-height: 1.6;
+  background: rgba(0,0,0,0.1);
+}
+
+/* ── Stat Grid ── */
+.stat-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1px;
+  background: var(--rule-dark);
+  margin: 24px 0;
+}
+
+.stat-item {
+  background: var(--obsidian-black);
+  padding: 28px 24px;
+}
+
+.stat-number {
+  font-family: var(--font-mono);
+  font-size: 26px;
+  color: var(--gold-light);
+  line-height: 1.2;
+  margin-bottom: 8px;
+}
+
+.stat-label {
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--mid-gray);
+  line-height: 1.5;
+}
+
+/* ── Callout / Gate / Note Boxes ── */
+.callout-box {
+  border: 1px solid var(--gold);
+  padding: 24px 28px;
+  margin: 24px 0;
+}
+
+.callout-box p {
+  font-family: var(--font-body);
+  font-weight: 300;
+  font-size: 13px;
+  line-height: 1.75;
+  color: rgba(245,242,238,0.9);
+  margin-bottom: 8px;
+}
+
+.callout-box p:last-child { margin-bottom: 0; }
+
+.gate-box {
+  border: 1px solid rgba(184,150,90,0.5);
+  background: rgba(28,37,53,0.6);
+  padding: 16px 22px;
+  margin: 16px 0;
+}
+
+.gate-label {
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--gold);
+  display: block;
+  margin-bottom: 8px;
+}
+
+.gate-box p {
+  font-family: var(--font-body);
+  font-weight: 300;
+  font-size: 13px;
+  line-height: 1.65;
+  color: rgba(245,242,238,0.85);
+  margin: 0;
+}
+
+.note-box {
+  background: rgba(28,37,53,0.4);
+  border-left: 2px solid var(--gold);
+  padding: 20px 24px;
+  margin: 24px 0;
+}
+
+.note-label {
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--gold);
+  display: block;
+  margin-bottom: 12px;
+}
+
+.note-box p {
+  font-family: var(--font-body);
+  font-weight: 300;
+  font-size: 13px;
+  line-height: 1.7;
+  color: rgba(245,242,238,0.75);
+  margin-bottom: 8px;
+  max-width: none;
+}
+
+.note-box p:last-child { margin-bottom: 0; }
+
+.pullquote-callout {
+  background: var(--forge-steel);
+  border-left: 3px solid var(--gold);
+  padding: 28px 32px;
+  margin: 32px 0;
+}
+
+.pullquote-callout p {
+  font-family: var(--font-body);
+  font-weight: 300;
+  font-size: 14px;
+  line-height: 1.75;
+  color: rgba(245,242,238,0.9);
+  max-width: none;
+  margin: 0;
+}
+
+/* ── Dash List ── */
+.dash-list {
+  list-style: none;
+  padding: 0;
+  margin: 12px 0 20px;
+}
+
+.dash-list li {
+  font-family: var(--font-body);
+  font-weight: 300;
+  font-size: 14px;
+  letter-spacing: 0.01em;
+  line-height: 1.7;
+  color: rgba(245,242,238,0.85);
+  padding: 5px 0 5px 18px;
+  position: relative;
+  max-width: 720px;
+}
+
+.dash-list li::before {
+  content: '–';
+  position: absolute;
+  left: 0;
+  color: rgba(184,150,90,0.6);
+}
+
+/* ── Scenario Cards ── */
+.scenario-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  margin: 24px 0;
+}
+
+.scenario-card {
+  border: 1px solid var(--rule-dark);
+  background: #111111;
+  padding: 28px;
+  transition: border-color var(--dur-std) var(--ease);
+}
+
+.scenario-card:hover { border-color: rgba(184,150,90,0.3); }
+
+.scenario-header {
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--rule-dark);
+  margin-bottom: 20px;
+}
+
+.scenario-tag {
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--gold);
+  display: block;
+  margin-bottom: 6px;
+}
+
+.scenario-amount {
+  font-family: var(--font-mono);
+  font-size: 18px;
+  color: var(--gold-light);
+  display: block;
+  margin-bottom: 6px;
+}
+
+.scenario-name {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: 19px;
+  color: var(--parchment);
+  line-height: 1.25;
+}
+
+.scenario-list {
+  list-style: none;
+  padding: 0;
+}
+
+.scenario-list li {
+  font-family: var(--font-body);
+  font-weight: 300;
+  font-size: 13px;
+  line-height: 1.65;
+  color: rgba(245,242,238,0.72);
+  padding: 7px 0 7px 14px;
+  border-bottom: 1px solid rgba(42,42,42,0.4);
+  position: relative;
+}
+
+.scenario-list li:last-child { border-bottom: none; }
+
+.scenario-list li::before {
+  content: '–';
+  position: absolute;
+  left: 0;
+  color: rgba(184,150,90,0.5);
+}
+
+/* ── Next Steps ── */
+.next-steps-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+  margin: 32px 0;
+}
+
+.next-step {
+  border: 1px solid var(--rule-dark);
+  padding: 24px;
+  display: flex;
+  align-items: flex-start;
+  gap: 20px;
+  transition: border-color var(--dur-std) var(--ease);
+}
+
+.next-step:hover { border-color: rgba(184,150,90,0.4); }
+
+.step-num {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: 52px;
+  color: var(--gold);
+  line-height: 1;
+  opacity: 0.65;
+  flex-shrink: 0;
+}
+
+.step-text {
+  font-family: var(--font-body);
+  font-weight: 300;
+  font-size: 14px;
+  line-height: 1.7;
+  color: rgba(245,242,238,0.85);
+  padding-top: 6px;
+}
+
+/* ── Hero / Cover ── */
+.hero-section {
+  position: relative;
+  min-height: 100dvh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  background: var(--obsidian-black);
+  overflow: hidden;
+  padding: 120px var(--outer-margin) 96px;
+}
+
+.hero-grain {
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.82' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.07'/%3E%3C/svg%3E");
+  background-size: 300px 300px;
+  background-repeat: repeat;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 1;
+  max-width: 860px;
+  width: 100%;
+}
+
+.hero-eyebrow {
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: 10px;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 32px;
+}
+
+.hero-title {
+  font-family: var(--font-display);
+  font-weight: 300;
+  font-size: clamp(60px, 7.5vw, 96px);
+  letter-spacing: 0.04em;
+  line-height: 1.0;
+  color: var(--parchment);
+  margin-bottom: 24px;
+}
+
+.hero-subtitle {
+  font-family: var(--font-body);
+  font-weight: 300;
+  font-size: 18px;
+  line-height: 1.8;
+  color: var(--mid-gray);
+}
+
+.hero-meta {
+  margin: 44px auto 0;
+}
+
+.cover-meta-label {
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: 10px;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 10px;
+  display: block;
+}
+
+.cover-meta-item {
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  line-height: 1.9;
+  color: var(--mid-gray);
+  display: block;
+}
+
+.hero-attribution {
+  margin-top: 56px;
+  padding-top: 28px;
+  border-top: 1px solid var(--rule-dark);
+}
+
+.hero-stamp {
+  position: absolute;
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: 80px;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--parchment);
+  opacity: 0.15;
+  transform: rotate(45deg);
+  pointer-events: none;
+  user-select: none;
+  white-space: nowrap;
+  z-index: 2;
+  line-height: 1.1;
+}
+
+/* ── Reveal Animations ── */
+.reveal {
+  opacity: 0;
+  transform: translateY(12px);
+  transition: opacity var(--dur-reveal) var(--ease),
+              transform var(--dur-reveal) var(--ease);
+}
+
+.reveal.visible { opacity: 1; transform: translateY(0); }
+
+.reveal-d1 { transition-delay: 80ms; }
+.reveal-d2 { transition-delay: 160ms; }
+.reveal-d3 { transition-delay: 240ms; }
+.reveal-d4 { transition-delay: 320ms; }
+
+/* ── Back to Top ── */
+#back-to-top {
+  position: fixed;
+  bottom: 32px;
+  right: 32px;
+  width: 44px;
+  height: 44px;
+  border: 1px solid var(--gold);
+  background: var(--obsidian-black);
+  color: var(--gold);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity var(--dur-std) var(--ease), background var(--dur-std) var(--ease), color var(--dur-std) var(--ease);
+  z-index: 800;
+  font-size: 18px;
+  font-family: var(--font-body);
+  text-decoration: none;
+}
+
+#back-to-top.visible { opacity: 1; pointer-events: all; }
+#back-to-top:hover { background: var(--gold); color: var(--obsidian-black); }
+
+/* ── Footer ── */
+footer {
+  background: var(--obsidian-black);
+  border-top: 1px solid var(--gold);
+  padding: 48px var(--outer-margin) 32px;
+}
+
+.footer-inner {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  gap: 32px;
+  align-items: center;
+  padding-bottom: 28px;
+  border-bottom: 1px solid var(--rule-dark);
+  margin-bottom: 24px;
+}
+
+.footer-wordmark-primary {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: 15px;
+  color: var(--parchment);
+  letter-spacing: 0.05em;
+}
+
+.footer-wordmark-secondary {
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-size: 9px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--mid-gray);
+  display: block;
+  margin-top: 4px;
+}
+
+.footer-center {
+  text-align: center;
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-size: 11px;
+  letter-spacing: 0.05em;
+  color: var(--mid-gray);
+  line-height: 1.8;
+}
+
+.footer-right {
+  text-align: right;
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-size: 10px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--mid-gray);
+  line-height: 1.8;
+}
+
+.footer-copyright {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  text-align: center;
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-size: 11px;
+  color: rgba(107,107,107,0.55);
+  letter-spacing: 0.05em;
+}
+
+/* ── Phase/Timeline Tag ── */
+.tag-optional {
+  display: inline-block;
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--mid-gray);
+  border: 1px solid var(--rule-dark);
+  padding: 4px 10px;
+  margin-bottom: 20px;
+}
+
+/* ── Responsive ── */
+@media (max-width: 1024px) {
+  :root {
+    --outer-margin: 48px;
+    --section-pad: 72px;
+  }
+  .card-grid-3 { grid-template-columns: repeat(2, 1fr); }
+  .scenario-grid { grid-template-columns: repeat(2, 1fr); }
+  .footer-inner { grid-template-columns: 1fr 1fr; }
+  .footer-right { grid-column: 1 / -1; text-align: left; }
+}
+
+@media (max-width: 768px) {
+  :root {
+    --outer-margin: 24px;
+    --section-pad: 56px;
+  }
+  .nav-links { display: none; }
+  .nav-hamburger { display: flex; }
+
+  h1.section-title { font-size: 36px; }
+  h2.section-heading { font-size: 28px; }
+  .hero-title { font-size: clamp(40px, 10vw, 64px); }
+
+  .card-grid-3, .card-grid-2, .scenario-grid, .next-steps-grid, .tier-card-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .stat-grid { grid-template-columns: repeat(2, 1fr); }
+
+  .section-bg-num { font-size: 120px; }
+  .section-eyebrow-num { font-size: 56px; }
+
+  .hero-stamp { font-size: 40px; }
+  .pull-quote { font-size: 22px; }
+
+  .footer-inner { grid-template-columns: 1fr; gap: 20px; }
+  .footer-center, .footer-right { text-align: left; }
+}
+
+/* ── Print ── */
+@media print {
+  #nav, #nav-mobile, #back-to-top, #progress-bar, .watermark, .hero-stamp, .nav-hamburger {
+    display: none !important;
+  }
+  body { background: #fff; color: #000; }
+  .reveal { opacity: 1 !important; transform: none !important; }
+  section { break-inside: avoid; page-break-inside: avoid; }
+  .card, .table-wrap { break-inside: avoid; }
+  * { animation: none !important; transition: none !important; }
+  .gold-rule { background: #ccc; }
+  .section-bg-num, .section-eyebrow-num { display: none; }
+}
+
+/* ── Tier card grid variant ── */
+.tier-card-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+  margin: 28px 0;
+}
+</style>
+</head>
+<body>
+
+<!-- Progress Bar -->
+<div id="progress-bar"></div>
+
+<!-- Full-page Watermark -->
+<div class="watermark" aria-hidden="true">STRICTLY CONFIDENTIAL</div>
+
+<!-- ═══ NAVIGATION ═══ -->
+<nav id="nav" role="navigation" aria-label="Main navigation">
+  <div class="nav-inner">
+    <a href="#cover" class="nav-logo" aria-label="Obsidian Capital Partners — Home">
+      <span class="nav-logo-primary">OBSIDIAN <span class="nav-logo-divider">/</span> CAPITAL PARTNERS</span>
+      <span class="nav-logo-secondary">Investment Memorandum</span>
+    </a>
+    <div class="nav-links" role="list">
+      <a href="#section-00" role="listitem">Executive Summary</a>
+      <a href="#section-01" role="listitem">Transaction Architecture</a>
+      <a href="#section-02" role="listitem">Capital Formation</a>
+      <a href="#section-03" role="listitem">Public Market Preparation</a>
+      <a href="#section-04" role="listitem">Saudi Market Entry</a>
+      <a href="#section-05" role="listitem">Strategic Narrative</a>
+      <a href="#section-06" role="listitem">Sovereign Strategy</a>
+      <a href="#section-07" role="listitem">AI Strategy</a>
+      <a href="#section-09" role="listitem">Financial Architecture</a>
+      <a href="#section-10" role="listitem">Vision 2030</a>
+    </div>
+    <button class="nav-hamburger" id="hamburger" aria-label="Toggle navigation" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- Mobile Nav -->
+<div id="nav-mobile" role="navigation" aria-label="Mobile navigation">
+  <a href="#section-00">Executive Summary</a>
+  <a href="#section-01">Transaction Architecture</a>
+  <a href="#section-02">Capital Formation</a>
+  <a href="#section-03">Public Market Preparation</a>
+  <a href="#section-04">Saudi Market Entry</a>
+  <a href="#section-05">Strategic Narrative</a>
+  <a href="#section-06">Sovereign Strategy</a>
+  <a href="#section-07">AI Strategy</a>
+  <a href="#section-08">Phase 2 Strategic Option</a>
+  <a href="#section-09">Financial Architecture</a>
+  <a href="#section-10">Vision 2030</a>
+  <a href="#section-11">KSA Market Entry Proposal</a>
+</div>
+
+<!-- ═══ COVER / HERO ═══ -->
+<section id="cover" class="hero-section">
+  <div class="hero-grain" aria-hidden="true"></div>
+  <div class="hero-stamp" aria-hidden="true">STRICTLY<br>CONFIDENTIAL</div>
+  <div class="hero-content">
+    <p class="hero-eyebrow">INVESTMENT MEMORANDUM</p>
+    <h1 class="hero-title">OpenLoop<br>Health, Inc.</h1>
+    <p class="hero-subtitle">Global Healthcare Infrastructure Platform</p>
+    <div class="gold-rule-short"></div>
+    <div class="hero-meta">
+      <span class="cover-meta-label">TRANSACTION OBJECTIVES</span>
+      <span class="cover-meta-item">$250M – $1B · Institutional Capital Formation</span>
+      <span class="cover-meta-item">Saudi Arabia Market Entry &amp; Regional GCC Infrastructure</span>
+      <span class="cover-meta-item">Public Market Preparation &amp; Institutional Governance</span>
+    </div>
+    <div class="hero-attribution">
+      <p class="body-sm">Prepared by: Obsidian Capital Partners</p>
+      <p class="body-sm">Marcus Glover &amp; Christopher Jones, Managing Partners</p>
+      <p class="body-sm">In partnership with Dr. Ali A. Ayach &amp; BG. Eng. Abdulkareem Al Johani</p>
+      <p class="body-sm">Date: May 2026</p>
+      <p class="body-sm">Classification: Strictly Confidential</p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ SECTION 00 — EXECUTIVE SUMMARY ═══ -->
+<section id="section-00">
+  <div class="section-bg-num" aria-hidden="true">00</div>
+  <div class="container section-content">
+    <span class="section-eyebrow-num" aria-hidden="true">00</span>
+    <h1 class="section-title reveal">Executive Summary</h1>
+
+    <h3 class="subsection-title reveal">◆ Transaction Overview</h3>
+    <p class="body reveal">OpenLoop increasingly resembles a healthcare infrastructure and enablement platform rather than a traditional telehealth business. With over 20,000 credentialed clinicians across 50 states, 170+ enterprise clients, and a full-stack clinical, technological, and regulatory operating layer, OpenLoop is a scaled enterprise — not a growth-stage startup. This memorandum considers how a company at this stage of maturity selectively pursues international expansion, deepens sovereign strategic alignment, and positions itself for institutional capital and future public-market optionality from a position of operational strength.</p>
+
+    <div class="gold-rule reveal"></div>
+
+    <h3 class="subsection-title reveal">◆ The Opportunity in One Sentence</h3>
+    <p class="pull-quote reveal">"A scaled healthcare infrastructure and enablement enterprise, operating across 170+ enterprise relationships and 50-state clinical operations, is evaluating institutional capital to support continued global platform strengthening, selective international expansion into Saudi Arabia and the GCC, and a deliberate public market preparation program that builds the reporting infrastructure, governance architecture, and institutional credibility a company of this scale merits."</p>
+
+    <div class="gold-rule reveal"></div>
+
+    <h3 class="subsection-title reveal">◆ Three Interconnected Objectives</h3>
+    <div class="forge-wrap">
+      <div class="card-grid-3">
+        <div class="card reveal reveal-d1">
+          <span class="card-eyebrow-num">01</span>
+          <h4 class="card-title">Capital Formation</h4>
+          <p class="card-body">Raise $250M–$1B to strengthen the global Delaware enterprise across platform infrastructure, AI, provider network, enterprise sales, governance, and balance sheet — with a selective, phased Saudi Arabia market entry funded as a strategic allocation within the raise.</p>
+          <span class="card-label">TIMELINE: H2 2026</span>
+        </div>
+        <div class="card reveal reveal-d2">
+          <span class="card-eyebrow-num">02</span>
+          <h4 class="card-title">Saudi Market Entry</h4>
+          <p class="card-body">Establish Riyadh regional HQ, KSA operating subsidiary, hospital JV partnerships, MoH Sandbox engagement, and physician network — positioning OpenLoop as the infrastructure layer behind KSA healthcare modernization.</p>
+          <span class="card-label">TIMELINE: Q3 2026 – Q2 2027</span>
+        </div>
+        <div class="card reveal reveal-d3">
+          <span class="card-eyebrow-num">03</span>
+          <h4 class="card-title">Public Market Preparation</h4>
+          <p class="card-body">Execute a structured public market preparation program: Big 4 audit engagement, SOX readiness, PCAOB-compliant financial reporting, cybersecurity governance uplift, and independent board architecture — positioning OpenLoop for future public-market optionality from a foundation of demonstrated institutional discipline.</p>
+          <span class="card-label">TIMELINE: H1 2028</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="gold-rule reveal"></div>
+
+    <h3 class="subsection-title reveal">◆ Enterprise Snapshot</h3>
+    <div class="stat-grid reveal">
+      <div class="stat-item">
+        <div class="stat-number">20,000+</div>
+        <div class="stat-label">CREDENTIALED CLINICIANS</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number">170+</div>
+        <div class="stat-label">ACTIVE ENTERPRISE CLIENTS</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number">~300K</div>
+        <div class="stat-label">MONTHLY PATIENT VISITS</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number">30+</div>
+        <div class="stat-label">CARE SPECIALTIES</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number">5×</div>
+        <div class="stat-label">YOY GROWTH 2025</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number">~20%</div>
+        <div class="stat-label">KSA TELEHEALTH CAGR</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number">$4.2B</div>
+        <div class="stat-label">KSA TELEHEALTH 2034E</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number">$4B+</div>
+        <div class="stat-label">GCC DIGITAL HEALTH TAM</div>
+      </div>
+    </div>
+
+    <div class="gold-rule reveal"></div>
+
+    <h3 class="subsection-title reveal">◆ Why This Transaction, Why Now</h3>
+    <p class="body reveal">Three factors make the current moment strategically coherent. First, OpenLoop has achieved the operational scale — 300,000 monthly patient encounters, a 50-state credentialed provider network, and 170+ enterprise relationships — at which selective international expansion becomes value-additive rather than a distraction from the core business. Expansion from a position of proven enterprise scale carries meaningfully different risk characteristics than speculative early-stage international forays.</p>
+    <p class="body reveal">Second, Saudi Arabia's regulatory and commercial environment has been restructured in ways favorable to a platform like OpenLoop: the MoH Regulatory Sandbox provides a defined on-ramp, Seha Virtual Hospital validates the specialist consultation model at national scale, and private hospital systems are actively seeking infrastructure partners with demonstrated operational capability.</p>
+    <p class="body reveal">Third, public market preparation — the audit infrastructure, governance architecture, cybersecurity posture, and reporting discipline that make a future listing credible — is best executed in parallel with, not ahead of, strategic international deployments that expand the revenue base, diversify geographic concentration, and create the sovereign alignment credentials that institutional capital values at IPO. A company preparing for public markets while simultaneously proving GCC expansion traction tells a materially stronger story than one doing either in isolation.</p>
+    <p class="body reveal">This strategic framework describes a staged, disciplined approach to capital deployment: the core enterprise first, Saudi Arabia as a strategic alignment platform, and GCC expansion as phased optionality unlocked by demonstrated traction.</p>
+  </div>
+</section>
+
+<!-- ═══ SECTION 01 — TRANSACTION ARCHITECTURE ═══ -->
+<section id="section-01">
+  <div class="section-bg-num" aria-hidden="true">01</div>
+  <div class="container section-content">
+    <span class="section-eyebrow-num" aria-hidden="true">01</span>
+    <h1 class="section-title reveal">Transaction Architecture</h1>
+
+    <h2 class="section-heading reveal">Entity Structure &amp; Capital Architecture</h2>
+
+    <h3 class="subsection-title reveal">◆ Structural Objectives</h3>
+    <p class="body reveal">The transaction architecture is designed to serve four concurrent purposes: (1) support sovereign and institutional capital at the enterprise level without triggering US securities complexities; (2) establish a Saudi operating entity that is structurally compliant with MISA foreign investment requirements and KSA regulatory frameworks; (3) preserve a clean, IPO-ready cap table at the parent level; and (4) create optionality for a regional holding structure that can accommodate GCC geographic replication.</p>
+
+    <h3 class="subsection-title reveal">◆ Parent Entity — Delaware HoldCo</h3>
+    <p class="body reveal">OpenLoop Health, Inc. (Delaware) remains the parent entity and the IPO vehicle. All institutional and sovereign capital raised in the current transaction is deployed at this level unless strategically directed to the KSA operating subsidiary. The Delaware parent provides US legal infrastructure, GAAP reporting, existing investor relationships, and the governance foundation for long-term institutional credibility.</p>
+
+    <h3 class="subsection-title reveal">◆ Recommended Pre-IPO Capital Structure</h3>
+    <div class="table-wrap reveal">
+      <table class="data-table">
+        <thead>
+          <tr><th>INSTRUMENT</th><th>TERMS</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Series [X] Preferred</td><td>Institutional growth round at enterprise level — $250M–$1B sovereign and strategic capital.</td></tr>
+          <tr><td>Existing Investor Stack</td><td>Nava Ventures, UnityPoint Health Ventures, and co-investors preserved with standard anti-dilution and information rights.</td></tr>
+          <tr><td>Management &amp; Incentive Pool</td><td>8–12% fully diluted pre-IPO. Standard vesting schedule.</td></tr>
+          <tr><td>Obsidian Advisory Equity</td><td>Structured as warrants or restricted stock at agreed-upon strike — not diluting the primary institutional round.</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3 class="subsection-title reveal">◆ KSA Operating Subsidiary — Riyadh</h3>
+    <p class="body reveal">A separate Saudi legal entity (limited liability company or joint stock company under MISA licensing) is established as the KSA operating subsidiary. This entity holds the local operating licenses, employs KSA-domiciled staff, and contracts with local hospital JV partners, payer networks, and government agencies.</p>
+    <div class="table-wrap reveal">
+      <table class="data-table">
+        <thead>
+          <tr><th>PARAMETER</th><th>DETAIL</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Legal form</td><td>Riyadh LLC or JSC registered under MISA with digital health and healthcare services activity codes.</td></tr>
+          <tr><td>Foreign ownership</td><td>100% foreign ownership permitted under current MISA investment framework for qualifying healthcare technology companies.</td></tr>
+          <tr><td>Ownership split</td><td>OpenLoop Delaware: 60–70% / Saudi strategic co-investor (PIF-aligned or private hospital group): 20–30% / KSA management pool: 5–10%.</td></tr>
+          <tr><td>Advisory equity</td><td>Obsidian / advisory equity structured at KSA entity level per Commercial Side Letter — governance role nomination and performance-based equity.</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3 class="subsection-title reveal">◆ Regional Holding Structure — ADGM / DIFC SPV (Optional)</h3>
+    <p class="body reveal">For sovereign and institutional investors seeking a neutral, internationally recognized legal jurisdiction, an Abu Dhabi Global Market (ADGM) or Dubai International Financial Centre (DIFC) special purpose vehicle provides a Cayman-equivalent structure with the reputational and relational advantages of a GCC domicile. The regional holding vehicle can also hold minority stakes in future UAE, Qatar, and Kuwait operating subsidiaries as GCC expansion proceeds. Sukuk or Islamic finance structures can be issued from the ADGM/DIFC vehicle to access sharia-compliant capital pools — particularly relevant for PIF-aligned sovereign investors.</p>
+
+    <h3 class="subsection-title reveal">◆ Simplified Ownership Flow — Post-Transaction</h3>
+    <div class="table-wrap reveal">
+      <table class="data-table">
+        <thead>
+          <tr><th>ENTITY</th><th>HOLDER</th><th>% (ILLUSTRATIVE)</th><th>NOTES</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>OpenLoop Delaware (Parent)</td><td>Existing investors + Series [X]</td><td class="mono-cell">100%</td><td>US parent; primary institutional capital vehicle.</td></tr>
+          <tr><td>— Sovereign / Strategic Tranche</td><td>PIF / Mubadala / ADQ / Strategic</td><td class="mono-cell">25–40%</td><td>Series [X] preferred; governance rights per term sheet.</td></tr>
+          <tr><td>— Existing Investor Stack</td><td>Nava Ventures, UnityPoint, et al.</td><td class="mono-cell">~30–40%</td><td>Diluted but preserved; anti-dilution per series terms.</td></tr>
+          <tr><td>— Management &amp; Incentive Pool</td><td>Leadership, employees, advisors</td><td class="mono-cell">8–12%</td><td>Pre-IPO option pool; standard vesting.</td></tr>
+          <tr><td>KSA Operating Subsidiary</td><td>OL Delaware + Saudi co-investor</td><td class="mono-cell">60–70% / 20–30%</td><td>MISA-licensed; local operations, employment, licensing.</td></tr>
+          <tr><td>ADGM/DIFC Regional SPV (Optional)</td><td>GCC institutional / sovereign</td><td class="mono-cell">GCC-domiciled stake</td><td>Neutral jurisdiction; Islamic finance compatible.</td></tr>
+        </tbody>
+      </table>
+      <div class="table-caption">Ownership percentages are illustrative. Final structure determined in term sheet negotiation. Governance rights, board composition, and information rights to be specified per investor class.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ SECTION 02 — CAPITAL FORMATION ═══ -->
+<section id="section-02">
+  <div class="section-bg-num" aria-hidden="true">02</div>
+  <div class="container section-content">
+    <span class="section-eyebrow-num" aria-hidden="true">02</span>
+    <h1 class="section-title reveal">Capital Formation</h1>
+
+    <p class="body reveal">OpenLoop is approaching institutional capital formation from a position of operational scale rather than speculative ambition. The primary investment thesis is the global enterprise — OpenLoop Health, Inc. (Delaware HoldCo) — and the overwhelming majority of capital raised supports the continued strengthening of a platform already operating at meaningful enterprise scale. Saudi Arabia represents a strategically important and sovereignly well-aligned expansion market; it is not the economic engine of the raise, and Saudi-specific deployment is sized accordingly.</p>
+
+    <h3 class="subsection-title reveal">◆ Strategic Alignment Structure</h3>
+    <p class="body reveal">This section addresses the most important structural distinction in this memorandum. Sovereign capital partners are not being asked to fund a US company's regional overhead. They are being offered participation in a scaled global healthcare infrastructure enterprise — one already operating across 170+ enterprise relationships — with a strategic regional alignment mechanism that provides a Saudi-rooted layer of participation as the platform expands into the GCC.</p>
+
+    <div class="tier-card-grid">
+      <div class="tier-card reveal reveal-d1">
+        <div class="tier-badge">TIER 1</div>
+        <div class="tier-title">Delaware HoldCo Preferred Equity</div>
+        <div class="tier-body">Participation in the scaled global OpenLoop enterprise — a healthcare infrastructure platform operating across 170+ enterprise relationships, a 50-state credentialed clinical network, proprietary healthcare workflow infrastructure, payer-integrated revenue cycle operations, and AI-enabled clinical tooling. This is the primary investment thesis — not a pre-revenue growth wager.</div>
+      </div>
+      <div class="tier-card reveal reveal-d2">
+        <div class="tier-badge">TIER 2</div>
+        <div class="tier-title">Saudi Strategic Alignment Rights</div>
+        <div class="tier-body">Preferential participation rights tied to the KSA operating entity — structured as sidecar rights, warrants, strategic allocation pools, performance-based regional participation, or co-investment rights in future KSA expansion structures. This is the regional alignment mechanism — additive to both parties, not corrective for either.</div>
+      </div>
+    </div>
+
+    <h3 class="subsection-title reveal">◆ Capital Scenarios</h3>
+    <div class="scenario-grid">
+      <div class="scenario-card reveal reveal-d1">
+        <div class="scenario-header">
+          <span class="scenario-tag">SCENARIO A</span>
+          <span class="scenario-amount">~$250M</span>
+          <div class="scenario-name">Global Healthcare Infrastructure Growth Platform</div>
+        </div>
+        <ul class="scenario-list">
+          <li>Core enterprise platform scaling (US operations, provider network, enterprise sales, RCM)</li>
+          <li>AI infrastructure (clinical AI, workflow automation, data architecture)</li>
+          <li>Balance sheet, governance &amp; public-market readiness (Big 4 audit, SOX, CISO)</li>
+          <li>Saudi Arabia Phase 1 market entry — lean, staged, milestone-gated</li>
+          <li>Working capital &amp; operating runway (24–36 months)</li>
+        </ul>
+      </div>
+      <div class="scenario-card reveal reveal-d2">
+        <div class="scenario-header">
+          <span class="scenario-tag">SCENARIO B</span>
+          <span class="scenario-amount">~$500M</span>
+          <div class="scenario-name">Sovereign-Aligned Global Healthcare Expansion Platform</div>
+        </div>
+        <ul class="scenario-list">
+          <li>All Scenario A deployments, scaled proportionally (~$350M)</li>
+          <li>UAE and Qatar market entries — lean Phase 1 structures</li>
+          <li>AI infrastructure acceleration — sovereign health data, multilingual clinical AI</li>
+          <li>Strategic acquisitions reserve — clinical AI, specialty pharmacy, GCC digital health</li>
+          <li>Seha and MoH programs partnership development</li>
+        </ul>
+      </div>
+      <div class="scenario-card reveal reveal-d3">
+        <div class="scenario-header">
+          <span class="scenario-tag">SCENARIO C</span>
+          <span class="scenario-amount">$750M–$1B</span>
+          <div class="scenario-name">Global Healthcare Infrastructure Platform</div>
+        </div>
+        <ul class="scenario-list">
+          <li>All Scenario B deployments (~$500M)</li>
+          <li>Full GCC geographic replication (Kuwait, Bahrain, Oman) — lean staged entries</li>
+          <li>Healthcare AI licensing platform for MENA government health systems</li>
+          <li>Strategic acquisition program — 2–3 bolt-on acquisitions</li>
+          <li>Pharmaceutical infrastructure optionality (Scenario C only — not an operational commitment)</li>
+          <li>Balance sheet strengthening and IPO optionality runway</li>
+        </ul>
+      </div>
+    </div>
+
+    <h3 class="subsection-title reveal">◆ Saudi Phase 1 Cost Detail (~$15–25M)</h3>
+    <p class="body reveal">Saudi Phase 1 is intentionally lean. The objective is regulatory positioning, relationship establishment, and commercial piloting — not national-scale infrastructure deployment. All major infrastructure investment follows validated commercial traction.</p>
+    <div class="table-wrap reveal">
+      <table class="data-table">
+        <thead>
+          <tr><th>COST CATEGORY</th><th>ESTIMATED RANGE</th><th>PURPOSE</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>MISA entity setup, legal &amp; regulatory compliance</td><td class="mono-cell">$0.5–1.5M</td><td>Licensing foundation</td></tr>
+          <tr><td>Riyadh office establishment (Year 1–2)</td><td class="mono-cell">$1–2M</td><td>Operational base</td></tr>
+          <tr><td>KSA leadership hires (Country GM, Clinical Ops, Gov Relations)</td><td class="mono-cell">$2–3.5M</td><td>Execution capability</td></tr>
+          <tr><td>Platform localization (Arabic UX, KSA data residency, NPHIES/Sehhaty/Wasfaty integrations)</td><td class="mono-cell">$3–6M</td><td>Regulatory compliance + product</td></tr>
+          <tr><td>MoH Sandbox pilot program costs</td><td class="mono-cell">$1–2M</td><td>Regulatory on-ramp</td></tr>
+          <tr><td>Initial hospital JV &amp; payer partnership development</td><td class="mono-cell">$2–4M</td><td>Commercial beachheads</td></tr>
+          <tr><td>Breach-narrative remediation (Saudi communications counsel)</td><td class="mono-cell">$0.04–0.075M</td><td>Relationship protection</td></tr>
+          <tr><td>Working capital — KSA operations (Year 1–2)</td><td class="mono-cell">$5–6M</td><td>Runway through first revenue</td></tr>
+          <tr class="total-row"><td>TOTAL — Saudi Phase 1</td><td class="mono-cell">~$15–25M</td><td>Staged against milestone gates</td></tr>
+        </tbody>
+      </table>
+      <div class="table-caption">Phase 1 capital is staged against milestone gates. Full deployment is contingent on MoH Sandbox acceptance, JV partner engagement, and early commercial traction. Saudi infrastructure scales with revenue, not ahead of it.</div>
+    </div>
+
+    <h3 class="subsection-title reveal">◆ Scenario Comparison</h3>
+    <div class="table-wrap reveal">
+      <table class="data-table">
+        <thead>
+          <tr><th>PARAMETER</th><th>SCENARIO A · $250M</th><th>SCENARIO B · $500M</th><th>SCENARIO C · $750M–1B</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Primary beneficiary</td><td>Global Delaware enterprise</td><td>Global enterprise + GCC expansion</td><td>Global enterprise + full GCC + AI export</td></tr>
+          <tr><td>Saudi deployment</td><td>~6–10% ($15–25M)</td><td>~6–9% ($30–45M total)</td><td>~6–8% (proportional)</td></tr>
+          <tr><td>Manufacturing</td><td>Not included</td><td>Not included</td><td>Long-term optionality only</td></tr>
+          <tr><td>Acquisitions reserve</td><td>Not included</td><td>$30–50M</td><td>$100–150M</td></tr>
+          <tr><td>Recommended sovereign lead</td><td>PIF / healthcare SWF</td><td>PIF + Mubadala</td><td>PIF + Mubadala + ADQ</td></tr>
+          <tr><td>Public-market optionality</td><td>Preserved and developing</td><td>Meaningfully enhanced</td><td>Strongly positioned</td></tr>
+        </tbody>
+      </table>
+      <div class="table-caption">Saudi deployment is deliberately modest across all scenarios. The capital raise thesis is the scaled global enterprise. Saudi Arabia creates sovereign alignment and GCC expansion optionality; it is not sized to absorb the majority of proceeds.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ SECTION 03 — PUBLIC MARKET PREPARATION ═══ -->
+<section id="section-03">
+  <div class="section-bg-num" aria-hidden="true">03</div>
+  <div class="container section-content">
+    <span class="section-eyebrow-num" aria-hidden="true">03</span>
+    <h1 class="section-title reveal">Public Market Preparation</h1>
+
+    <p class="body reveal">OpenLoop is at the scale where public market preparation is not a future aspiration — it is an active program with a defined roadmap. This section describes the specific steps required to build the audit infrastructure, governance architecture, cybersecurity posture, and reporting discipline that a future public listing demands. The objective is not to constrain the business to a specific IPO timeline; it is to ensure that when the market window opens, OpenLoop is structurally and institutionally ready to move without a 12-month scramble to close basic readiness gaps.</p>
+
+    <h3 class="subsection-title reveal">◆ Governance &amp; Public-Market Readiness Roadmap</h3>
+    <div class="table-wrap reveal">
+      <table class="data-table">
+        <thead>
+          <tr><th>PHASE</th><th>WINDOW</th><th>KEY MILESTONES</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>PREP</td><td>Months 0–6 (H2 2026)</td><td>Series [X] close; Delaware governance restructure; independent director appointments; Big 4 audit engagement; initial SOX gap assessment; investor relations infrastructure engaged.</td></tr>
+          <tr><td>BUILD</td><td>Months 6–12 (H1 2027)</td><td>KSA entity operational; first KSA revenue recognized; PCAOB-compliant audit Year 1; SOX 404 readiness program initiated; long-term governance counsel engaged.</td></tr>
+          <tr><td>SCALE</td><td>Months 12–18 (H2 2027)</td><td>Two-year audited financials prepared; governance transformation materially complete; public-market counsel engaged for ongoing readiness assessment; GCC revenue contribution visible in consolidated financials.</td></tr>
+          <tr><td>EXECUTE</td><td>Months 18–24 (H1 2028)</td><td>Public market readiness substantively complete. Evaluate listing timing, jurisdiction, and structure in consultation with investment bank coverage based on enterprise performance, market conditions, and strategic priorities at the relevant time.</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3 class="subsection-title reveal">◆ Governance Transformation Program</h3>
+    <p class="body reveal">The gap between OpenLoop's current governance posture and public company standards is bridgeable within 12–18 months if initiated at transaction close. The following program is recommended.</p>
+
+    <h4 class="sub-title reveal">Financial Reporting &amp; Audit</h4>
+    <ul class="dash-list reveal">
+      <li>Engage a Big Four audit firm immediately at transaction close for PCAOB-compliant audit of FY2026 and FY2027 financials.</li>
+      <li>Adopt ASC 606 revenue recognition with clear segment reporting: US platform, KSA operations, GCC expansion, pharmaceutical (Phase 2 optional).</li>
+      <li>Implement financial reporting cadence: quarterly management accounts within 30 days of period close.</li>
+      <li>EBITDA reconciliation and non-GAAP disclosure framework established as standard institutional reporting practice.</li>
+    </ul>
+
+    <h4 class="sub-title reveal">SOX Readiness</h4>
+    <ul class="dash-list reveal">
+      <li>SOX 404(b) gap assessment in Months 0–6; remediation roadmap by Month 9.</li>
+      <li>Internal controls over financial reporting (ICFR) documentation program: revenue recognition, expense allocation, equity compensation, intercompany transactions.</li>
+      <li>IT general controls (ITGC) program: access management, change management, backup and recovery — directly relevant given 2026 data breach history.</li>
+      <li>Outsourced internal audit function (Big 4 or Tier 1 advisory) engaged for Months 6–18; transition to in-house by Month 18.</li>
+    </ul>
+
+    <h4 class="sub-title reveal">Cybersecurity Governance</h4>
+    <p class="body reveal">The 2026 data breach is the most material cybersecurity governance item requiring remediation. Any institutional investor or strategic partner will conduct thorough diligence on cybersecurity posture; the objective is to demonstrate proactive governance leadership, not merely reactive compliance.</p>
+    <ul class="dash-list reveal">
+      <li>Appoint Chief Information Security Officer (CISO) or equivalent if not yet in place — public-company grade.</li>
+      <li>Third-party penetration testing and SOC 2 Type II certification by Month 6.</li>
+      <li>Board-level cybersecurity reporting: quarterly briefings to Audit Committee.</li>
+      <li>HIPAA and PDPL (KSA) compliance framework documented and independently audited.</li>
+      <li>Cyber insurance: confirm policy limits are commensurate with public company exposure.</li>
+      <li>Incident response plan updated and tested; disclosure controls and procedures documented.</li>
+      <li>The breach-narrative remediation pack (Saudi communications counsel engagement, $40–75K) is the immediate pre-investment step and directly informs the S-1 risk factor and subsequent public-market disclosure strategy.</li>
+    </ul>
+
+    <h3 class="subsection-title reveal">◆ Public Market Positioning</h3>
+    <p class="body reveal">The S-1 narrative should position OpenLoop in the healthcare infrastructure category, not the telehealth category. The distinction is worth multiple turns on the valuation multiple.</p>
+    <div class="table-wrap reveal">
+      <table class="data-table">
+        <thead>
+          <tr><th>POSITIONING AXIS</th><th>TELEHEALTH FRAMING (AVOID)</th><th>HEALTHCARE INFRASTRUCTURE FRAMING (TARGET)</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Business model</td><td>Per-visit, consumer app, DTC subscription</td><td>Platform licensing, MSA per-consult, enterprise SaaS, physician network infrastructure</td></tr>
+          <tr><td>Revenue quality</td><td>Transaction-based, episodic</td><td>Recurring, subscription, long-duration enterprise contracts</td></tr>
+          <tr><td>Comparable set</td><td>Teladoc, Amwell (1–3x revenue)</td><td>Veeva, Evolent, Phreesia, R1 RCM (8–20x revenue)</td></tr>
+          <tr><td>IPO narrative</td><td>Digital health disruption, consumer access</td><td>Global healthcare operating system, sovereign infrastructure partner</td></tr>
+          <tr><td>Sovereign capital signal</td><td>Not applicable to telehealth framing</td><td>Direct narrative amplifier — PIF or Mubadala anchor validates infrastructure thesis</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ SECTION 04 — SAUDI MARKET ENTRY ═══ -->
+<section id="section-04">
+  <div class="section-bg-num" aria-hidden="true">04</div>
+  <div class="container section-content">
+    <span class="section-eyebrow-num" aria-hidden="true">04</span>
+    <h1 class="section-title reveal">Saudi Market Entry</h1>
+
+    <p class="body reveal">Saudi Arabia is the primary international deployment for OpenLoop. The rationale is structural rather than opportunistic: Vision 2030 has created the regulatory openness, the government capital commitment, and the commercial demand environment that makes KSA the most strategically compelling non-US healthcare market for a platform of OpenLoop's capabilities.</p>
+
+    <h3 class="subsection-title reveal">◆ Regulatory &amp; Legal Entry Architecture</h3>
+    <div class="table-wrap reveal">
+      <table class="data-table">
+        <thead>
+          <tr><th>PATHWAY</th><th>KEY DETAILS</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>MISA Licensing</td><td>Foreign Investment License under digital health and healthcare technology activity codes. 100% foreign ownership available for qualifying companies. Minimum capital: ~SAR 500,000 (c. $133K) for LLC. Timeline: 4–8 weeks with complete documentation.</td></tr>
+          <tr><td>MoH Regulatory Sandbox</td><td>Application to MoH Sandbox (launched August 2024) as controlled-launch vehicle for DTC longevity and metabolic health programs. Provides 6–12 month supervised launch with path to full MoH telehealth platform license. Application drafted Month 1–2; submitted by Month 4.</td></tr>
+          <tr><td>SFDA Pathways</td><td>Telehealth platform registration for DTC clinical programs. Compound pharmacy license (Scenario B+ only). All patient health data stored within KSA per PDPL and SDAIA requirements — sovereign cloud architecture from Day 1.</td></tr>
+          <tr><td>SCFHS Clinician Licensing</td><td>Every clinician treating KSA patients must hold a valid SCFHS license. Cross-border practice from US-licensed physicians not permitted for direct treatment; permitted for second-opinion / specialist consultation to a local treating physician.</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3 class="subsection-title reveal">◆ Commercial Entry — Phased Deployment</h3>
+    <div class="table-wrap reveal">
+      <table class="data-table">
+        <thead>
+          <tr><th>PHASE</th><th>TRACK A: DTC LONGEVITY</th><th>TRACK B: CROSS-BORDER 2ND OPINION</th><th>TRACK C: HOSPITAL JV</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>0–6 months</td>
+            <td>Entity setup, JV partner selection &amp; MoU, platform localization scoping, MoH Sandbox application.</td>
+            <td>US specialist network packaging, KSA medico-legal review, pilot insurer/hospital partner identified.</td>
+            <td>Long-list of 5 hospital groups, structured outreach, first commercial conversations.</td>
+          </tr>
+          <tr>
+            <td>6–12 months</td>
+            <td>Soft launch via MoH Sandbox in Riyadh — first 1,000 paying members on GLP-1 / longevity programs.</td>
+            <td>Pilot with one private hospital and one premium insurer; first 200 paid cases.</td>
+            <td>LOI / contract with anchor hospital partner; programs go-live readiness.</td>
+          </tr>
+          <tr>
+            <td>12–24 months</td>
+            <td>Public launch beyond Sandbox; expand to Jeddah &amp; Eastern Province; 10K+ active members.</td>
+            <td>Network scale to 5 hospital partners and 2 insurers; onboard Seha pilot use cases.</td>
+            <td>Anchor hospital live; second hospital in negotiation; JV economics validated.</td>
+          </tr>
+          <tr>
+            <td>24+ months</td>
+            <td>Regional expansion — UAE, Qatar, Kuwait. Adjacent categories (men's health, fertility).</td>
+            <td>Seha programs partnership signed; second opinion as standard layer for premium insurers.</td>
+            <td>3–5 hospital partnerships live; B2B platform offering institutionalized.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ SECTION 05 — STRATEGIC NARRATIVE ═══ -->
+<section id="section-05">
+  <div class="section-bg-num" aria-hidden="true">05</div>
+  <div class="container section-content">
+    <span class="section-eyebrow-num" aria-hidden="true">05</span>
+    <h1 class="section-title reveal">Strategic Narrative</h1>
+
+    <h2 class="section-heading reveal">Healthcare Infrastructure — Not Telemedicine</h2>
+    <p class="body reveal">Healthcare infrastructure and enablement businesses have historically attracted materially stronger institutional valuation frameworks than transactional telehealth businesses, reflecting revenue quality, embedded workflows, switching costs, and operational leverage. The distinction is not semantic; it corresponds to meaningfully different institutional capital allocation frameworks and long-duration enterprise value creation potential.</p>
+
+    <h3 class="subsection-title reveal">◆ What "Healthcare Infrastructure" Means Precisely</h3>
+    <p class="body reveal">Infrastructure businesses share three characteristics that differentiate them from application-layer software companies: they are embedded in the operations of their customers (high switching cost), they operate at the network layer rather than the application layer (defensible at scale), and they generate recurring economics tied to the volume of activity flowing through the infrastructure rather than seat-based licensing.</p>
+    <p class="body reveal">OpenLoop satisfies all three criteria. Its platform is embedded in the clinical operations of 170+ enterprise clients. Its physician network, credentialing infrastructure, RCM system, and payer enrollment constitute a multi-year, multi-million-dollar switching cost for any client. And its economics — platform license fees, per-consult MSA payments, and payer-connected recurring revenue — are tied to the volume of clinical activity across the network. That is infrastructure economics, not application-layer SaaS.</p>
+
+    <h3 class="subsection-title reveal">◆ GCC Chronic Disease Context — The Structural Demand</h3>
+    <p class="body reveal">The GCC's chronic disease burden is the demand engine that makes OpenLoop's clinical programs immediately commercially relevant. Saudi Arabia carries a 23% adult diabetes prevalence and a 35% adult obesity rate — among the highest globally for an upper-middle-income country. These are not episodic care needs; they are chronic, recurring, longitudinal care relationships that require exactly the kind of subscription-based, provider-managed, technology-enabled infrastructure OpenLoop operates.</p>
+
+    <div class="stat-grid reveal">
+      <div class="stat-item">
+        <div class="stat-number">23%</div>
+        <div class="stat-label">KSA ADULT DIABETES</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number">35%</div>
+        <div class="stat-label">KSA ADULT OBESITY</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number">~40%</div>
+        <div class="stat-label">GCC PHYSICIAN SHORTAGE vs. OECD</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number">$130B+</div>
+        <div class="stat-label">KSA HEALTHCARE SPEND 2030E</div>
+      </div>
+    </div>
+
+    <h3 class="subsection-title reveal">◆ Why OpenLoop's Model Is Structurally Differentiated in KSA</h3>
+    <p class="body reveal">The competitive landscape in KSA telehealth falls into four categories: public infrastructure (Seha, Sehhaty, Mawid — not competitors, potential partners), local digital health apps (Cura, Altibbi, Vezeeta — strong on primary care booking, weak on DTC subscription programs), global enterprise telemedicine (Teladoc, Amwell — enterprise-heavy, not DTC-program-led), and private hospital captive channels. None of these incumbents owns the DTC longevity / GLP-1 / metabolic health category at scale. The category is large, fast-growing, and structurally available to the first operator who enters with the right clinical, technology, and operational depth.</p>
+    <p class="body reveal">OpenLoop's defensible advantage is not its technology platform alone — it is the integration of technology, physician network, clinical protocols, operational know-how, and compounded medication supply chain into a single managed infrastructure. That integration took years to build in the US and cannot be replicated quickly by a local startup or a hospital group acting independently.</p>
+  </div>
+</section>
+
+<!-- ═══ SECTION 06 — SOVEREIGN & INSTITUTIONAL INVESTOR STRATEGY ═══ -->
+<section id="section-06">
+  <div class="section-bg-num" aria-hidden="true">06</div>
+  <div class="container section-content">
+    <span class="section-eyebrow-num" aria-hidden="true">06</span>
+    <h1 class="section-title reveal">Sovereign &amp; Institutional Investor Strategy</h1>
+
+    <p class="body reveal">The investor strategy is segmented by mandate, governance expectation, and strategic alignment. The goal is not to maximize the number of investors — it is to build a high-quality, strategically aligned cap table that provides sovereign and institutional credibility, brings commercial channel value beyond capital, and does not create governance complexity that slows operational execution.</p>
+
+    <h3 class="subsection-title reveal">◆ Tier 1 — Sovereign Wealth Funds</h3>
+    <div class="table-wrap reveal">
+      <table class="data-table">
+        <thead>
+          <tr><th>INVESTOR</th><th>AUM / MANDATE</th><th>TARGET TICKET</th><th>STRUCTURE</th><th>STRATEGIC ALIGNMENT</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Public Investment Fund (PIF)</td><td>$700B+ / Vision 2030</td><td class="mono-cell">$75–150M</td><td>Direct equity + KSA entity stake</td><td>Primary Vision 2030 healthcare vehicle; domestic healthcare modernization mandate.</td></tr>
+          <tr><td>Mubadala Investment Company</td><td>$302B / healthcare infra</td><td class="mono-cell">$50–100M</td><td>ADGM SPV or direct</td><td>Active healthcare infrastructure portfolio; Cleveland Clinic Abu Dhabi; DIFC and ADGM institutional presence.</td></tr>
+          <tr><td>ADQ (Abu Dhabi)</td><td>$157B / strategic sectors</td><td class="mono-cell">$30–75M</td><td>Direct or ADGM SPV</td><td>Healthcare, food security, and infrastructure mandate; UAE operational expansion channel.</td></tr>
+          <tr><td>Qatar Investment Authority</td><td>$445B / diversified</td><td class="mono-cell">$25–50M</td><td>Direct</td><td>Healthcare as growing allocation; Qatar expansion channel; QFZA free zone co-investment alignment.</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3 class="subsection-title reveal">◆ Tier 2 — Healthcare Infrastructure Funds</h3>
+    <div class="table-wrap reveal">
+      <table class="data-table">
+        <thead>
+          <tr><th>INVESTOR TYPE</th><th>EXAMPLES</th><th>TARGET TICKET</th><th>INVESTMENT RATIONALE</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Healthcare growth equity</td><td>General Atlantic, KKR Health, TPG Healthcare</td><td class="mono-cell">$50–100M</td><td>Scaled US healthcare infrastructure enterprise expanding selectively into high-growth sovereign markets.</td></tr>
+          <tr><td>GCC healthcare PE / growth</td><td>Jadwa Investment, Gulf Capital, Sanabil Investments</td><td class="mono-cell">$25–75M</td><td>KSA-domiciled capital with healthcare sector mandate; Sanabil (PIF's VC arm) is natural co-investor alongside PIF direct.</td></tr>
+          <tr><td>Infrastructure / impact investors</td><td>IFC, DFC, Temasek, GIC Healthcare</td><td class="mono-cell">$25–50M</td><td>Healthcare access and infrastructure mission alignment; blended finance and development capital structures available.</td></tr>
+          <tr><td>Strategic corporates</td><td>Aramco, STC Health, Elm, Bupa International</td><td class="mono-cell">$20–50M</td><td>Commercial channel value beyond capital; employer healthcare programs and payer channel access.</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="pullquote-callout reveal">
+      <p>Target cap table composition at close: 40–55% sovereign and GCC strategic, 25–35% institutional healthcare and infrastructure funds, 10–20% strategic corporates and family offices. Concentration in no single investor exceeding 25% pre-IPO.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ SECTION 07 — AI HEALTHCARE STRATEGY ═══ -->
+<section id="section-07">
+  <div class="section-bg-num" aria-hidden="true">07</div>
+  <div class="container section-content">
+    <span class="section-eyebrow-num" aria-hidden="true">07</span>
+    <h1 class="section-title reveal">AI Healthcare Strategy</h1>
+
+    <p class="body reveal">OpenLoop's AI infrastructure is not a feature set — it is the operational intelligence layer that makes the platform scalable without proportional cost expansion. In the KSA and GCC context, AI infrastructure also carries a second strategic function: it positions OpenLoop as a partner to SDAIA, the Saudi Data and AI Authority, and to Vision 2030's AI healthcare ambitions — creating a government relationship channel that no purely clinical operator can access.</p>
+
+    <h3 class="subsection-title reveal">◆ Current AI Capabilities — US Baseline</h3>
+    <div class="forge-wrap">
+      <div class="card-grid-2">
+        <div class="card reveal reveal-d1">
+          <p class="card-body">Workflow automation: scheduling intelligence, administrative load reduction for clinicians, automated prior authorization handling.</p>
+        </div>
+        <div class="card reveal reveal-d2">
+          <p class="card-body">Clinical decision support: AI-assisted triage, care pathway routing, and symptom assessment across 30+ specialties.</p>
+        </div>
+        <div class="card reveal reveal-d3">
+          <p class="card-body">Operational analytics: provider utilization, patient retention, program adherence monitoring, revenue cycle optimization.</p>
+        </div>
+        <div class="card reveal reveal-d4">
+          <p class="card-body">AI-assisted medication management: adherence tracking, dosing optimization, and side-effect monitoring for GLP-1 and longevity programs.</p>
+        </div>
+      </div>
+    </div>
+
+    <h3 class="subsection-title reveal">◆ GCC AI Roadmap</h3>
+
+    <h4 class="sub-title reveal">Sovereign Data Architecture — Priority 1</h4>
+    <ul class="dash-list reveal">
+      <li>KSA-hosted sovereign health data infrastructure: PDPL and SDAIA-compliant from Day 1; no cross-border health data transfer.</li>
+      <li>Integration architecture: NPHIES (national claims exchange), Sehhaty (citizen health app, 30M+ users), Wasfaty (e-prescription), and SCFHS credentialing system.</li>
+      <li>Sovereign health cloud: dedicated KSA data residency via Saudi-licensed hyperscaler zones (AWS Riyadh, Google Cloud KSA, Azure KSA).</li>
+      <li>SDAIA partnership pathway: position OpenLoop's KSA AI health data system as a contribution to the National AI Strategy and SDAIA's health data governance framework.</li>
+    </ul>
+
+    <h4 class="sub-title reveal">Multilingual Clinical AI</h4>
+    <ul class="dash-list reveal">
+      <li>Arabic-first clinical AI: all patient-facing interactions in Modern Standard Arabic and Gulf dialect variants.</li>
+      <li>Multilingual support: English, Urdu, Tagalog, and Hindi for the KSA expat population (approximately 38% of Saudi residents).</li>
+      <li>Culturally adapted clinical protocols: gender-sensitive consultation pathways, Arabic clinical terminology, halal pharmaceutical formulation flagging.</li>
+    </ul>
+
+    <h4 class="sub-title reveal">Predictive Healthcare Intelligence</h4>
+    <ul class="dash-list reveal">
+      <li>Population health analytics: chronic disease surveillance, GLP-1 program outcomes, and metabolic health trends for Seha and MoH partnership programs.</li>
+      <li>Predictive intervention: early identification of at-risk patients across diabetes, cardiovascular disease, obesity, and metabolic syndrome — structurally aligned with Saudi chronic disease burden.</li>
+      <li>Provider performance intelligence: quality metrics, utilization analytics, clinical outcome tracking — IPO-ready reporting infrastructure.</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ═══ SECTION 08 — PHASE 2 STRATEGIC OPTION ═══ -->
+<section id="section-08">
+  <div class="section-bg-num" aria-hidden="true">08</div>
+  <div class="container section-content">
+    <span class="section-eyebrow-num" aria-hidden="true">08</span>
+    <h1 class="section-title reveal">Phase 2 Strategic Option</h1>
+
+    <div class="tag-optional reveal">Pharmaceutical Manufacturing — Optional Future-State Expansion</div>
+
+    <div class="note-box reveal">
+      <p>This section is intentionally conceptual. Pharmaceutical and preventative care infrastructure opportunities are noted here as potential future-state adjacencies — relevant to sovereign investors with Vision 2030 industrialization interests — but they are not operational commitments, near-term capital deployments, or components of Scenarios A or B. OpenLoop's strategic focus remains the core healthcare infrastructure platform.</p>
+    </div>
+
+    <h3 class="subsection-title reveal">◆ Strategic Rationale</h3>
+    <p class="body reveal">OpenLoop's US platform already integrates compounded medication supply chain as part of its GLP-1 and longevity program operations. In a KSA context, longer-term localization of that supply chain — if pursued under Scenario C — would align with Vision 2030's pharmaceutical localization targets and create procurement channel access through NUPCO. This is a directional observation, not an operational roadmap.</p>
+
+    <h4 class="sub-title reveal">Phase 2A: Compound Pharmacy (Year 2–3, Scenario B+)</h4>
+    <ul class="dash-list reveal">
+      <li>SFDA-licensed compound pharmacy in Riyadh covering relevant therapeutic categories aligned with KSA chronic disease demand.</li>
+      <li>Estimated CAPEX: $8–18M (Scenario C only; not funded under Scenarios A or B).</li>
+      <li>MODON industrial zone and SIDF financing available as structural enablers if this pathway is pursued.</li>
+    </ul>
+
+    <h4 class="sub-title reveal">Phase 2B: GMP Manufacturing Expansion (Year 3–5, Scenario C)</h4>
+    <ul class="dash-list reveal">
+      <li>Full GMP manufacturing capability, if validated by Phase 2A traction and sovereign investor interest.</li>
+      <li>NUPCO procurement preference for locally manufactured products provides structural demand-side revenue floor.</li>
+      <li>GCC pharmaceutical export optionality as the platform matures.</li>
+      <li>Estimated CAPEX: additional $25–45M; Scenario C only.</li>
+      <li>Technology transfer options available through international CDMO partnerships.</li>
+    </ul>
+
+    <div class="callout-box reveal">
+      <p>Manufacturing is not included in the financial model, not funded under Scenarios A or B, and not a condition of any capital formation scenario. It is a strategic optionality note for Scenario C sovereign investors with an interest in Vision 2030 healthcare industrialization themes.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ SECTION 09 — FINANCIAL ARCHITECTURE ═══ -->
+<section id="section-09">
+  <div class="section-bg-num" aria-hidden="true">09</div>
+  <div class="container section-content">
+    <span class="section-eyebrow-num" aria-hidden="true">09</span>
+    <h1 class="section-title reveal">Financial Architecture</h1>
+
+    <h2 class="section-heading reveal">OpenLoop KSA Economic Participation — Revenue Stream Architecture</h2>
+    <p class="body reveal">OpenLoop's economic participation in the KSA NewCo is structured through three independent revenue streams, designed to protect cash economics regardless of exit timing and generate contractual recurring revenue from Year 1. The recurring streams carry infrastructure-quality revenue characteristics: platform license fees that scale with NewCo revenue volume, provider MSA fees that scale with consultation activity, and both governed by long-duration contractual arrangements with high switching costs.</p>
+
+    <div class="table-wrap reveal">
+      <table class="data-table">
+        <thead>
+          <tr><th>STREAM</th><th>STRUCTURE</th><th>EARLY PHASE</th><th>GROWTH PHASE</th><th>ILLUSTRATIVE SCALE</th><th>TYPE</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Master Platform License</td><td>8% of NewCo revenue</td><td class="mono-cell">&lt;$1M</td><td class="mono-cell">Low–mid single digits ($M)</td><td class="mono-cell">High single digits–$10M+</td><td>Recurring</td></tr>
+          <tr><td>Provider Network MSA</td><td>$275 per US consult</td><td class="mono-cell">&lt;$1M</td><td class="mono-cell">Low–mid single digits ($M)</td><td class="mono-cell">High single digits–$10M+</td><td>Recurring</td></tr>
+          <tr><td>NewCo Equity (Exit, Y5)</td><td>40% of EV at exit</td><td class="mono-cell">—</td><td class="mono-cell">—</td><td class="mono-cell">Illustrative Exit</td><td>—</td></tr>
+        </tbody>
+      </table>
+      <div class="table-caption">All KSA stream figures are illustrative only and assume successful regulatory, JV, and commercial execution across a multi-year horizon. For internal leadership discussion purposes only.</div>
+    </div>
+
+    <h3 class="subsection-title reveal">◆ KSA Revenue Scenarios — Illustrative Range Analysis</h3>
+    <div class="table-wrap reveal">
+      <table class="data-table">
+        <thead>
+          <tr><th>KSA NEWCO REVENUE ($M)</th><th>Y1</th><th>Y2</th><th>Y3</th><th>Y4</th><th>Y5</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Conservative</td><td class="mono-cell">0.5</td><td class="mono-cell">3.0</td><td class="mono-cell">9.0</td><td class="mono-cell">18.0</td><td class="mono-cell">30.0</td></tr>
+          <tr><td>Illustrative Base</td><td class="mono-cell">~5</td><td class="mono-cell">~20–25</td><td class="mono-cell">~55–65</td><td class="mono-cell">~100–110</td><td class="mono-cell">~155–165</td></tr>
+          <tr><td>Upside (incl. Seha partnership)</td><td class="mono-cell">1.5</td><td class="mono-cell">9.0</td><td class="mono-cell">28.0</td><td class="mono-cell">60.0</td><td class="mono-cell">110.0</td></tr>
+        </tbody>
+      </table>
+      <div class="table-caption">All figures are illustrative scenario outputs, not financial projections. Conservative: delayed approvals and JV formation. Illustrative base: successful phased execution. Upside: includes Seha population-scale programs partnership.</div>
+    </div>
+
+    <h3 class="subsection-title reveal">◆ Public Market Valuation Framework</h3>
+    <p class="body reveal">Institutional valuation for healthcare companies is materially sensitive to business model categorization. Healthcare infrastructure and enablement platforms have historically attracted meaningfully higher valuation multiples than transactional or per-visit consumer health models.</p>
+    <div class="table-wrap reveal">
+      <table class="data-table">
+        <thead>
+          <tr><th>COMPARABLE CATEGORY</th><th>EXAMPLE COMPANIES</th><th>EV/FWD REV</th><th>APPLICATION TO OPENLOOP</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Telehealth app / DTC consumer</td><td>Teladoc, Amwell, LifeMD</td><td class="mono-cell">1–3×</td><td>Minimum floor — incorrect framing</td></tr>
+          <tr><td>Healthcare services infrastructure</td><td>R1 RCM, Evolent, Privia Health</td><td class="mono-cell">3–6×</td><td>Baseline infrastructure framing</td></tr>
+          <tr><td>Healthcare SaaS / platform</td><td>Veeva, Phreesia, Health Catalyst</td><td class="mono-cell">6–12×</td><td>Platform + recurring revenue mix</td></tr>
+          <tr><td>AI-enabled healthcare infrastructure</td><td>Doximity, Inovalon (pre-take-private)</td><td class="mono-cell">10–20×</td><td>Target framing — AI + infrastructure + recurring</td></tr>
+          <tr><td>Sovereign-backed GCC infrastructure</td><td>Aramco, SABIC comps, regional infra peers</td><td class="mono-cell">Premium on base</td><td>Sovereign anchor adds 10–20% valuation premium at IPO</td></tr>
+        </tbody>
+      </table>
+      <div class="table-caption">Any future public-market valuation will depend on demonstrated enterprise performance, revenue mix, governance maturity, and prevailing market conditions at the relevant time.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ SECTION 10 — VISION 2030 ALIGNMENT ═══ -->
+<section id="section-10">
+  <div class="section-bg-num" aria-hidden="true">10</div>
+  <div class="container section-content">
+    <span class="section-eyebrow-num" aria-hidden="true">10</span>
+    <h1 class="section-title reveal">Vision 2030 Alignment</h1>
+
+    <p class="body reveal">Vision 2030 is the defining external variable shaping the OpenLoop KSA market context. It is not merely a policy backdrop — it is an active capital deployment program, a regulatory restructuring mandate, and a public commitment at the highest levels of Saudi leadership. Alignment with Vision 2030 is therefore not a marketing exercise. It is the condition for accessing government relationships, sovereign capital, regulatory fast-tracking, and procurement channels.</p>
+
+    <h3 class="subsection-title reveal">◆ Primary Alignment Pillars</h3>
+    <div class="table-wrap reveal">
+      <table class="data-table">
+        <thead>
+          <tr><th>VISION 2030 PRIORITY</th><th>OPENLOOP PILLAR</th><th>SPECIFIC CONTRIBUTION</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Healthcare modernization</td><td>Digital health</td><td>Full-stack healthcare infrastructure enabling private hospital systems and government health programs to scale digital care delivery without building captive technology.</td></tr>
+          <tr><td>Digital transformation ($1.5B committed)</td><td>AI + digital</td><td>Sovereign-compliant AI health data infrastructure, multilingual clinical AI, population health analytics — SDAIA-aligned from Day 1.</td></tr>
+          <tr><td>Pharmaceutical localization (20% → 40% by 2032)</td><td>Pharma (Phase 2)</td><td>GMP compound pharmacy and manufacturing facility in Riyadh directly contributes to NIDLP localization targets; NUPCO procurement preference access. Scenario C only.</td></tr>
+          <tr><td>Job creation and Saudization</td><td>All pillars</td><td>Direct employment: 150–500 KSA hires over 5 years. Saudization pathway built into workforce plan. University partnerships with KSAU-HS, KFSH&amp;RC, and Alfaisal University for clinical and technical talent pipeline.</td></tr>
+          <tr><td>Women's workforce participation</td><td>All pillars</td><td>Clinical roles, quality assurance, regulatory, and operations structured with deliberate female workforce participation target aligned with Vision 2030 35% goal.</td></tr>
+          <tr><td>Non-oil export diversification</td><td>Pharma + AI</td><td>GCC pharmaceutical export and AI healthcare licensing generate non-oil foreign exchange; positions KSA as GCC healthcare hub.</td></tr>
+          <tr><td>Private sector healthcare growth</td><td>Hospital white-label</td><td>Hospital JV partnerships enable private sector healthcare delivery expansion without government capital — directly aligned with privatization and PPP mandates.</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3 class="subsection-title reveal">◆ Sovereign Engagement Sequencing</h3>
+    <p class="body reveal">Government relationships in KSA operate through specific sequencing. The MoH Sandbox is the regulatory on-ramp; Seha Virtual Hospital is the flagship programs partner; MISA is the investment licensing authority; and PIF is the capital anchor. These relationships reinforce each other, and the sequencing matters.</p>
+    <div class="table-wrap reveal">
+      <table class="data-table">
+        <thead>
+          <tr><th>TIMELINE</th><th>ACTION</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Month 1–2</td><td>MISA license application filed; initial MoH Sandbox application drafted.</td></tr>
+          <tr><td>Month 2–4</td><td>First Seha exploratory meeting via KSA advisory partner access to Seha leadership.</td></tr>
+          <tr><td>Month 3–6</td><td>MoH Sandbox application submitted; SFDA compound pharmacy engagement initiated (Scenario B+ only).</td></tr>
+          <tr><td>Month 4–8</td><td>PIF engagement via Obsidian / advisory partner introduction — positioned as Vision 2030 healthcare infrastructure investment, not venture capital.</td></tr>
+          <tr><td>Month 6–12</td><td>SDAIA engagement on AI health data governance — positions platform as national AI health infrastructure partner.</td></tr>
+          <tr><td>Month 9–18</td><td>Seha programs partnership term sheet; MoH population health analytics pilot.</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ SECTION 11 — KSA MARKET ENTRY ENGAGEMENT PROPOSAL ═══ -->
+<section id="section-11">
+  <div class="section-bg-num" aria-hidden="true">11</div>
+  <div class="container section-content">
+    <span class="section-eyebrow-num" aria-hidden="true">11</span>
+    <span class="eyebrow reveal">OBSIDIAN CAPITAL PARTNERS</span>
+    <h1 class="section-title reveal">KSA Market Entry Engagement Proposal</h1>
+
+    <h3 class="subsection-title reveal">◆ Strategic Context</h3>
+    <p class="body reveal">OpenLoop's hospital telehealth model translates cleanly to the Kingdom of Saudi Arabia. Vision 2030 has created a favorable regulatory and commercial environment through the MoH Sandbox and validation by Seha Virtual Hospital. Private hospital systems are actively seeking partners to extend access without expanding facilities, making this the window for an early-mover position.</p>
+    <p class="body reveal">This proposal bundles the four engagement asks into a single phased, gated mandate. OpenLoop's downside is bounded at every stage; upside compounds as the venture proves itself.</p>
+
+    <h3 class="subsection-title reveal">◆ The Four Asks — Unified Mandate</h3>
+    <div class="card-grid-2">
+      <div class="card reveal reveal-d1">
+        <h4 class="card-title">Letter of Intent</h4>
+        <p class="card-body">Non-binding intent with binding sub-clauses (mutual NDA, 120-day in-Kingdom exclusivity, IP allocation, governance). $0 cash.</p>
+      </div>
+      <div class="card reveal reveal-d2">
+        <h4 class="card-title">Engagement Mandate</h4>
+        <p class="card-body">12–16 week scope for entity setup, JV partner shortlisting and outreach, MoH Sandbox application drafting, regulatory and entity-setup roadmap, pricing, and proposition design.</p>
+      </div>
+      <div class="card reveal reveal-d3">
+        <h4 class="card-title">Relationship-Channel Authority</h4>
+        <p class="card-body">Scoped agency grant for Seha Virtual Hospital, two private hospital JV anchors, and MoH Sandbox program team. Success-fee economics apply.</p>
+      </div>
+      <div class="card reveal reveal-d4">
+        <h4 class="card-title">Breach-Narrative Remediation Pack</h4>
+        <p class="card-body">Saudi communications counsel engaged directly by OpenLoop ($40–75K paid to counsel); Obsidian aligns messaging as part of Phase 0.</p>
+      </div>
+    </div>
+
+    <h3 class="subsection-title reveal">◆ Gated Deliverables &amp; Phasing</h3>
+    <p class="body reveal">All deliverables are enumerated with acceptance definitions. Work outside this list requires a written change order.</p>
+
+    <h4 class="sub-title reveal">Phase 1 — Diagnostic &amp; Validation (Weeks 1–4)</h4>
+    <ul class="dash-list reveal">
+      <li>KSA Healthcare Market Diagnostic: 30-page minimum on payer mix, regulatory landscape, competitive mapping, and Sandbox eligibility assessment. (Due Week 3)</li>
+      <li>JV Partner Shortlist (≤3 candidates): ranked shortlist with rationale and outreach sequencing. (Due Week 4)</li>
+      <li>Regulatory &amp; Entity-Setup Roadmap: MISA licensing, MoH Sandbox pre-qualification, FDI structure options. (Due Week 4)</li>
+      <li>KSA Proposition Design: 3 pricing scenarios minimum, service-tier architecture, and localisation requirements. (Due Week 4)</li>
+      <li>Gate A Review Pack: executive summary and go/no-go recommendation. (Due End Week 4)</li>
+    </ul>
+    <div class="gate-box reveal">
+      <span class="gate-label">Gate A</span>
+      <p>OpenLoop executive sponsor sign-off on Gate A Review Pack. Failure to pass terminates the engagement.</p>
+    </div>
+
+    <h4 class="sub-title reveal">Phase 2 — Structural Setup (Weeks 5–8)</h4>
+    <ul class="dash-list reveal">
+      <li>JV Partner Outreach (≤3 targets): confirmed first meetings or written responses from all three shortlisted targets. (Due Week 7)</li>
+      <li>MoH Sandbox Pre-Application Draft: complete draft submitted to OpenLoop for review. (Due Week 7)</li>
+      <li>Entity Setup Action Plan: responsible parties, costs, and timelines for HoldCo / NewCo formation. (Due Week 6)</li>
+      <li>Seha Virtual Hospital Engagement: first executive-level meeting scheduled or held. (Due Week 8)</li>
+    </ul>
+    <div class="gate-box reveal">
+      <span class="gate-label">Gate B</span>
+      <p>≥1 signed JV term sheet AND Sandbox pre-application submitted and acknowledged.</p>
+    </div>
+
+    <h4 class="sub-title reveal">Phase 3 — Activation Readiness (Weeks 9–14)</h4>
+    <ul class="dash-list reveal">
+      <li>MoH Sandbox Application (filed): complete, filed application with MoH confirmation of receipt. (Due Week 12)</li>
+      <li>Hospital Pilot Agreement (signed): executed agreement with ≥1 hospital partner (minimum 90-day term; KPI schedule attached). (Due Week 13)</li>
+      <li>90-Day Pilot KPI Framework: co-signed KPI schedule defining Gate D thresholds. (Due Week 10)</li>
+      <li>Commercial Playbook v1.0: repeatable go-to-market framework for KSA hospital acquisition. (Due Week 14)</li>
+    </ul>
+
+    <div class="gold-rule reveal"></div>
+
+    <h3 class="subsection-title reveal">◆ Commercial Structure — Structure B</h3>
+
+    <h4 class="sub-title reveal">Cash Engagement Fee — $380K, Phase-Released</h4>
+    <div class="table-wrap reveal">
+      <table class="data-table">
+        <thead>
+          <tr><th>PHASE</th><th>WINDOW</th><th>CASH RELEASE</th><th>TRIGGER</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Phase 0 — Mobilization</td><td>Week 0</td><td class="mono-cell">$0</td><td>LOI execution</td></tr>
+          <tr><td>Phase 1 — Diagnostic &amp; Validation</td><td>Weeks 1–4</td><td class="mono-cell">$160K</td><td>LOI execution; Gate A criteria locked at signing</td></tr>
+          <tr><td>Phase 2 — Structural Setup</td><td>Weeks 5–8</td><td class="mono-cell">$120K</td><td>Gate A passed</td></tr>
+          <tr><td>Phase 3 — Activation Readiness</td><td>Weeks 9–14</td><td class="mono-cell">$100K</td><td>Gate B passed</td></tr>
+          <tr class="total-row"><td>TOTAL</td><td>12–14 weeks</td><td class="mono-cell">$380K</td><td>Phase-gated; no cash at risk beyond current gate</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h4 class="sub-title reveal">Equity Participation — 10% of Saudi NewCo, Back-Loaded Vesting</h4>
+    <div class="table-wrap reveal">
+      <table class="data-table">
+        <thead>
+          <tr><th>VESTING TRIGGER</th><th>% OF NEWCO</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>LOI execution (Phase 0 complete)</td><td class="mono-cell">1.5%</td></tr>
+          <tr><td>Gate A — Phase 1 deliverables accepted</td><td class="mono-cell">1.5%</td></tr>
+          <tr><td>Gate B — JV term sheet signed + Sandbox pre-application accepted</td><td class="mono-cell">3.5%</td></tr>
+          <tr><td>Gate C — Sandbox application filed + pilot agreement signed</td><td class="mono-cell">3.5%</td></tr>
+          <tr class="total-row"><td>TOTAL</td><td class="mono-cell">10.0%</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="body-sm reveal" style="margin-top:12px;">Pro-rata participation rights in next priced round. Standard tag-along and drag-along. Vesting accelerates on change of control if delivered through Gate C. No equity vests on termination for cause.</p>
+
+    <h4 class="sub-title reveal">Milestone Success Fees — Up to $260K, Pay-for-Performance</h4>
+    <div class="table-wrap reveal">
+      <table class="data-table">
+        <thead>
+          <tr><th>GATE</th><th>MILESTONE</th><th>FEE</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Gate B</td><td>≥1 signed JV term sheet + Sandbox pre-application accepted</td><td class="mono-cell">$60K</td></tr>
+          <tr><td>Gate C</td><td>Sandbox application filed + pilot agreement signed</td><td class="mono-cell">$80K</td></tr>
+          <tr><td>Gate D</td><td>90-day pilot KPIs hit at pre-agreed thresholds</td><td class="mono-cell">$120K</td></tr>
+          <tr class="total-row"><td>TOTAL MILESTONE FEES</td><td></td><td class="mono-cell">$260K</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="body-sm reveal" style="margin-top:12px;">Where a private hospital anchor term sheet triggers both the Gate B milestone fee and a channel success fee, fees are intended to stack — each reflecting a distinct deliverable. OpenLoop and Obsidian should confirm this interpretation at LOI.</p>
+
+    <h4 class="sub-title reveal">Relationship-Channel Success Fees — Up to $175K, Outcomes-Based</h4>
+    <div class="table-wrap reveal">
+      <table class="data-table">
+        <thead>
+          <tr><th>CHANNEL</th><th>CONVERSION TRIGGER</th><th>FEE</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Seha Virtual Hospital</td><td>MOU executed or pilot partnership term sheet in negotiation</td><td class="mono-cell">$25K</td></tr>
+          <tr><td>Private hospital anchors (cap 2)</td><td>Signed term sheet</td><td class="mono-cell">$50K each</td></tr>
+          <tr><td>MoH Sandbox program team</td><td>Application accepted for review</td><td class="mono-cell">$50K</td></tr>
+          <tr class="total-row"><td>TOTAL CHANNEL FEES (UPPER BOUND)</td><td></td><td class="mono-cell">$175K</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="body-sm reveal" style="margin-top:12px;">Seha trigger updated from 'first meeting held' to 'MOU executed or pilot term sheet in negotiation' — consistent with outcomes-based framing of this fee schedule.</p>
+
+    <div class="gold-rule reveal"></div>
+
+    <h3 class="subsection-title reveal">◆ Gate A — Phase 1 Maximum Exposure</h3>
+    <p class="body reveal">The table below sets out the full cost picture through Gate A — the first decision point at which OpenLoop can exit the engagement cleanly.</p>
+    <div class="table-wrap reveal">
+      <table class="data-table">
+        <tbody>
+          <tr class="section-header-row"><td colspan="2">OBSIDIAN ADVISORY FEE</td></tr>
+          <tr><td>Phase 1 engagement fee · released on LOI signed</td><td class="mono-cell">$160,000</td></tr>
+          <tr class="section-header-row"><td colspan="2">ADDITIONAL OUT-OF-POCKET COSTS · paid directly by OpenLoop · not part of Obsidian's fee</td></tr>
+          <tr><td>Legal — Saudi communications counsel (breach-narrative remediation)</td><td class="mono-cell">$40K – $75K</td></tr>
+          <tr><td>Legal — KSA corporate counsel (entity structuring, MISA filing, JV framework)</td><td class="mono-cell">$60K – $120K</td></tr>
+          <tr><td>Legal — US cross-border counsel (IP allocation, intercompany agreements)</td><td class="mono-cell">$30K – $60K</td></tr>
+          <tr><td>Commercial registration — MISA FDI license, Commercial Registration, Chamber membership, municipality license, notarization / translation, PRO / registered agent (Year 1)</td><td class="mono-cell">$21K – $56K</td></tr>
+          <tr><td>Office setup — Riyadh serviced office / co-working (6 months); IT and connectivity</td><td class="mono-cell">$23K – $51K</td></tr>
+          <tr><td>Minimum staff — Country Manager / GM; Government Relations officer; office administration</td><td class="mono-cell">$125K – $225K</td></tr>
+          <tr><td>Feasibility study — MISA-required healthcare sector feasibility study (Saudi-recognized consultancy; mandatory for FDI license in healthcare)</td><td class="mono-cell">$25K – $75K</td></tr>
+          <tr><td>Out-of-pocket subtotal</td><td class="mono-cell">~$325K – $665K</td></tr>
+          <tr class="total-row"><td>PHASE 1 TOTAL MAXIMUM EXPOSURE</td><td class="mono-cell">~$485K – $825K</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3 class="subsection-title reveal">◆ Total Advisory Fee Exposure — Obsidian Fees Only</h3>
+    <p class="body reveal">The table below covers Obsidian's advisory fee envelope across all scenarios. For reference: a Big Four or top-tier strategy firm would price the same KSA mandate at $1.5–3M with no equity alignment and no outcomes-based component.</p>
+    <div class="table-wrap reveal">
+      <table class="data-table">
+        <thead>
+          <tr><th>SCENARIO</th><th>OBSIDIAN CASH FEES</th><th>EQUITY</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Worst case — Gate A fails</td><td class="mono-cell">$160K</td><td>1.5% (LOI vest only)</td></tr>
+          <tr><td>Mid case — through Phase 3, modest milestone hits</td><td class="mono-cell">$500–600K</td><td>~5% NewCo</td></tr>
+          <tr><td>Upper bound — all milestones and channels convert</td><td class="mono-cell">$815K</td><td>10% NewCo</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="body-sm reveal" style="margin-top:12px;">Upper bound breakdown: $380K cash engagement fee + $260K milestone fees + $175K channel fees = $815K. Out-of-pocket costs (counsel, registration, office, staff, feasibility study) are separate and shown in the Gate A callout above.</p>
+
+    <div class="gold-rule reveal"></div>
+
+    <h3 class="subsection-title reveal">◆ Governance &amp; Joint Steering Committee</h3>
+    <div class="table-wrap reveal">
+      <table class="data-table">
+        <thead>
+          <tr><th>GROUP</th><th>NAME</th><th>ROLE</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Obsidian Capital Partners</td><td>Marcus Glover</td><td>Engagement Lead / Managing Partner</td></tr>
+          <tr><td>Obsidian Capital Partners</td><td>Christopher Jones</td><td>Managing Partner / Strategy</td></tr>
+          <tr><td>Obsidian Capital Partners</td><td>Jaha Cummings</td><td>Head of Investor Relations</td></tr>
+          <tr><td>Obsidian Capital Partners</td><td>Max Cohen</td><td>Chief Financial Officer</td></tr>
+          <tr><td>Obsidian Capital Partners</td><td>Jeff Turner</td><td>Chief Legal Officer</td></tr>
+          <tr><td>OpenLoop Health</td><td>Jon Lensing</td><td>Co-Founder &amp; CEO</td></tr>
+          <tr><td>OpenLoop Health</td><td>Mike Walton</td><td>President of Enterprise</td></tr>
+          <tr><td>KSA Strategic Advisors</td><td>Shannon Allen</td><td>Co-Founder / Managing Director</td></tr>
+          <tr><td>KSA Strategic Advisors</td><td>Dr. Ali Alessandro Ayach</td><td>Strategy &amp; Health Sector</td></tr>
+          <tr><td>KSA Strategic Advisors</td><td>BG. Eng. Abdulkareem Al Johani</td><td>Strategy &amp; Health Sector</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="gold-rule reveal"></div>
+
+    <h3 class="subsection-title reveal">◆ Immediate Next Steps</h3>
+    <div class="next-steps-grid">
+      <div class="next-step reveal reveal-d1">
+        <span class="step-num">01</span>
+        <p class="step-text">Sign the Letter of Intent.</p>
+      </div>
+      <div class="next-step reveal reveal-d2">
+        <span class="step-num">02</span>
+        <p class="step-text">Release Phase 1 cash ($160K) on LOI execution, with Gate A deliverable criteria pre-agreed and locked at signing.</p>
+      </div>
+      <div class="next-step reveal reveal-d3">
+        <span class="step-num">03</span>
+        <p class="step-text">Authorize relationship-channel scope — Seha Virtual Hospital, two private hospital anchors, MoH Sandbox team.</p>
+      </div>
+      <div class="next-step reveal reveal-d4">
+        <span class="step-num">04</span>
+        <p class="step-text">Engage Saudi communications counsel directly for the breach-narrative remediation pack.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ FOOTER ═══ -->
+<footer>
+  <div class="footer-inner">
+    <div>
+      <div class="footer-wordmark-primary">OBSIDIAN / CAPITAL PARTNERS</div>
+      <span class="footer-wordmark-secondary">Investment Banking &amp; Advisory</span>
+    </div>
+    <div class="footer-center">
+      OpenLoop Health, Inc. × KSA · Confidential · Obsidian Capital Partners
+    </div>
+    <div class="footer-right">
+      Strictly Confidential<br>Not For Distribution<br>Authorized Recipients Only
+    </div>
+  </div>
+  <div class="footer-copyright">© 2026 Obsidian Capital Partners. All rights reserved.</div>
+</footer>
+
+<!-- Back to Top -->
+<a href="#cover" id="back-to-top" aria-label="Back to top">↑</a>
+
+<script>
+(function() {
+  'use strict';
+
+  /* ── Progress Bar ── */
+  var progressBar = document.getElementById('progress-bar');
+  function updateProgress() {
+    var scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+    var docHeight = document.documentElement.scrollHeight - window.innerHeight;
+    var pct = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+    progressBar.style.width = pct + '%';
+  }
+
+  /* ── Back to Top ── */
+  var btt = document.getElementById('back-to-top');
+  function updateBTT() {
+    if ((window.pageYOffset || document.documentElement.scrollTop) > 500) {
+      btt.classList.add('visible');
+    } else {
+      btt.classList.remove('visible');
+    }
+  }
+
+  btt.addEventListener('click', function(e) {
+    e.preventDefault();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+
+  /* ── Nav Scroll State ── */
+  var nav = document.getElementById('nav');
+  function updateNav() {
+    if ((window.pageYOffset || document.documentElement.scrollTop) > 10) {
+      nav.classList.add('scrolled');
+    } else {
+      nav.classList.remove('scrolled');
+    }
+  }
+
+  /* ── Active Nav Links via IntersectionObserver ── */
+  var navLinks = document.querySelectorAll('#nav .nav-links a, #nav-mobile a');
+  var sections = document.querySelectorAll('section[id]');
+
+  var sectionObserver = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      if (entry.isIntersecting) {
+        var id = '#' + entry.target.id;
+        navLinks.forEach(function(link) {
+          if (link.getAttribute('href') === id) {
+            link.classList.add('active');
+          } else {
+            link.classList.remove('active');
+          }
+        });
+      }
+    });
+  }, {
+    rootMargin: '-20% 0px -70% 0px',
+    threshold: 0
+  });
+
+  sections.forEach(function(section) {
+    sectionObserver.observe(section);
+  });
+
+  /* ── Reveal Animations ── */
+  var revealEls = document.querySelectorAll('.reveal');
+
+  var revealObserver = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        revealObserver.unobserve(entry.target);
+      }
+    });
+  }, {
+    rootMargin: '0px 0px -60px 0px',
+    threshold: 0.05
+  });
+
+  revealEls.forEach(function(el) {
+    revealObserver.observe(el);
+  });
+
+  /* ── Hamburger Menu ── */
+  var hamburger = document.getElementById('hamburger');
+  var mobileNav = document.getElementById('nav-mobile');
+
+  hamburger.addEventListener('click', function() {
+    var isOpen = hamburger.classList.toggle('open');
+    hamburger.setAttribute('aria-expanded', isOpen);
+    mobileNav.classList.toggle('open', isOpen);
+  });
+
+  /* Close mobile nav on link click */
+  mobileNav.querySelectorAll('a').forEach(function(link) {
+    link.addEventListener('click', function() {
+      hamburger.classList.remove('open');
+      hamburger.setAttribute('aria-expanded', 'false');
+      mobileNav.classList.remove('open');
+    });
+  });
+
+  /* ── Smooth Scroll ── */
+  document.querySelectorAll('a[href^="#"]').forEach(function(link) {
+    link.addEventListener('click', function(e) {
+      var target = document.querySelector(this.getAttribute('href'));
+      if (target) {
+        e.preventDefault();
+        var offset = 70; // nav height
+        var top = target.getBoundingClientRect().top + window.pageYOffset - offset;
+        window.scrollTo({ top: top, behavior: 'smooth' });
+      }
+    });
+  });
+
+  /* ── Scroll Handler ── */
+  var ticking = false;
+  window.addEventListener('scroll', function() {
+    if (!ticking) {
+      window.requestAnimationFrame(function() {
+        updateProgress();
+        updateBTT();
+        updateNav();
+        ticking = false;
+      });
+      ticking = true;
+    }
+  }, { passive: true });
+
+  /* Initial state */
+  updateProgress();
+  updateBTT();
+  updateNav();
+
+})();
+</script>
+</body>
+</html>
