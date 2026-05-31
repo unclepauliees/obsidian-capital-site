@@ -33,6 +33,16 @@ export function NavIndex() {
       className="fixed top-0 left-0 right-0 z-40 hidden md:flex items-center h-14 nav-glass relative"
       aria-label="Document index"
     >
+      {/* Back to OCP homepage */}
+      <a
+        href="../../"
+        className="shrink-0 flex items-center h-full px-4 lg:px-5 cursor-pointer border-r border-white/[0.07] gap-2 group"
+        title="Obsidian Capital Partners"
+      >
+        <span className="font-mono text-steel text-[10px] tracking-wider group-hover:text-classified transition-colors duration-200">←</span>
+        <span className="font-mono text-steel text-[10px] tracking-wider group-hover:text-classified transition-colors duration-200 whitespace-nowrap">OCP</span>
+      </a>
+
       {/* Wordmark — fixed left, links back to cover */}
       <a
         href="#cover"
