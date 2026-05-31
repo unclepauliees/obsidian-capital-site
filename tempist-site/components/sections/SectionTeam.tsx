@@ -1,6 +1,5 @@
 "use client";
 
-import Image from "next/image";
 import { TEAM } from "@/lib/content";
 import { ClassificationStamp } from "@/components/ui/ClassificationStamp";
 import { CornerBracket } from "@/components/ui/CornerBracket";
@@ -11,12 +10,11 @@ function PortraitFrame({ initials, photo }: { initials: string; photo?: string }
   return (
     <CornerBracket active={false} armLength={14} className="w-32 h-40 shrink-0 overflow-hidden">
       {photo ? (
-        <Image
-          src={photo}
+        // eslint-disable-next-line @next/next/no-img-element
+        <img
+          src={photo.replace(/^\//, "")}
           alt={initials}
-          fill
-          className="object-cover object-top"
-          sizes="128px"
+          className="absolute inset-0 w-full h-full object-cover object-top"
         />
       ) : (
         <div className="flex items-center justify-center w-full h-full">

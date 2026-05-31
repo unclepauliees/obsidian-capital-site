@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import Image from "next/image";
 import { COVER } from "@/lib/content";
 import { ClassificationStamp } from "@/components/ui/ClassificationStamp";
 import { DataReadout } from "@/components/ui/DataReadout";
@@ -63,13 +62,13 @@ export function SectionCover() {
         )}
       >
         {/* Logo mark */}
-        <Image
-          src="/tempist-logo.png"
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src="tempist-logo.png"
           alt="Tempist Systems"
           width={96}
           height={96}
           className="mb-2 opacity-90"
-          priority
         />
 
         {/* Wordmark */}

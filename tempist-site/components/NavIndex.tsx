@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import Image from "next/image";
 import { NAV_ITEMS } from "@/lib/content";
 import { cn } from "@/lib/utils";
 
@@ -43,13 +42,11 @@ export function NavIndex() {
         }}
         className="shrink-0 flex items-center h-full px-8 lg:px-10 cursor-pointer border-r border-white/[0.07]"
       >
-        <Image
-          src="/tempist-logo-horizontal.png"
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src="tempist-logo-horizontal.png"
           alt="Tempist Systems"
-          width={536}
-          height={173}
           className="h-10 w-auto opacity-90"
-          priority
         />
       </a>
 
