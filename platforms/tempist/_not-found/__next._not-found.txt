@@ -1,0 +1,5 @@
+1:"$Sreact.fragment"
+2:I[83877,["/obsidian-capital-site/platforms/tempist/_next/static/chunks/14313hwg82-2-.js","/obsidian-capital-site/platforms/tempist/_next/static/chunks/11c2dj4sp3.2y.js"],"default"]
+3:I[24956,["/obsidian-capital-site/platforms/tempist/_next/static/chunks/14313hwg82-2-.js","/obsidian-capital-site/platforms/tempist/_next/static/chunks/11c2dj4sp3.2y.js"],"default"]
+4:[]
+0:{"rsc":["$","$1","c",{"children":[null,["$","$L2",null,{"parallelRouterKey":"children","template":["$","$L3",null,{}]}]]}],"isPartial":false,"staleTime":300,"varyParams":"$W4","buildId":"if3YaCleejEfmGY3QB1U0"}
