@@ -2,4 +2,4 @@
 2:I[83877,["/obsidian-capital-site/platforms/tempist/_next/static/chunks/131cz6_d66tay.js"],"default"]
 3:I[24956,["/obsidian-capital-site/platforms/tempist/_next/static/chunks/131cz6_d66tay.js"],"default"]
 4:[]
-0:{"rsc":["$","$1","c",{"children":[null,["$","$L2",null,{"parallelRouterKey":"children","template":["$","$L3",null,{}]}]]}],"isPartial":false,"staleTime":300,"varyParams":"$W4","buildId":"Kpjn8yivnNqxzYQgIXTfv"}
+0:{"rsc":["$","$1","c",{"children":[null,["$","$L2",null,{"parallelRouterKey":"children","template":["$","$L3",null,{}]}]]}],"isPartial":false,"staleTime":300,"varyParams":"$W4","buildId":"hIkesewzPyOWaScL_TeY-"}

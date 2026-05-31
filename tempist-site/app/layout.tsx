@@ -30,6 +30,9 @@ export default function RootLayout({
     >
       <head>
         <meta name="robots" content="noindex,nofollow" />
+        {process.env.NODE_ENV === "production" && (
+          <script dangerouslySetInnerHTML={{ __html: `try{if(sessionStorage.getItem('cg-access-tempist')!=='1')window.location.replace('access.html');}catch(e){}` }} />
+        )}
       </head>
       <body className="min-h-full bg-ops text-classified antialiased">
         {children}

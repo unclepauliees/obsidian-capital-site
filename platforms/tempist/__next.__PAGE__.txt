@@ -2,5 +2,5 @@
 2:I[71755,["/obsidian-capital-site/platforms/tempist/_next/static/chunks/131cz6_d66tay.js","/obsidian-capital-site/platforms/tempist/_next/static/chunks/0p4si619y5~v5.js"],"ScrollPage"]
 3:I[18753,["/obsidian-capital-site/platforms/tempist/_next/static/chunks/131cz6_d66tay.js"],"OutletBoundary"]
 4:"$Sreact.suspense"
-0:{"rsc":["$","$1","c",{"children":[["$","$L2",null,{}],[["$","script","script-0",{"src":"/obsidian-capital-site/platforms/tempist/_next/static/chunks/0p4si619y5~v5.js","async":true}]],["$","$L3",null,{"children":["$","$4",null,{"name":"Next.MetadataOutlet","children":"$@5"}]}]]}],"isPartial":false,"staleTime":300,"varyParams":null,"buildId":"Kpjn8yivnNqxzYQgIXTfv"}
+0:{"rsc":["$","$1","c",{"children":[["$","$L2",null,{}],[["$","script","script-0",{"src":"/obsidian-capital-site/platforms/tempist/_next/static/chunks/0p4si619y5~v5.js","async":true}]],["$","$L3",null,{"children":["$","$4",null,{"name":"Next.MetadataOutlet","children":"$@5"}]}]]}],"isPartial":false,"staleTime":300,"varyParams":null,"buildId":"hIkesewzPyOWaScL_TeY-"}
 5:null
