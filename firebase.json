@@ -1,0 +1,23 @@
+{
+  "hosting": {
+    "public": ".",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**",
+      "brand/**",
+      "tempist-site/**",
+      "HOLDING-SITE-NOTES.md",
+      "README.md"
+    ],
+    "cleanUrls": true,
+    "trailingSlash": false,
+    "redirects": [
+      {
+        "source": "/platforms/access{,.html}",
+        "destination": "/platforms/tempist/access",
+        "type": 301
+      }
+    ]
+  }
+}
