@@ -9,7 +9,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Montserrat:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap">
-<link rel="stylesheet" href="../_shared.css">
+<link rel="stylesheet" href="/platforms/_shared.css">
 </head>
 <body>
 
@@ -22,14 +22,14 @@
 
 <header class="platform-nav" id="nav">
   <div class="platform-nav__brand">
-    <a href="../../" class="platform-nav__ocp">
+    <a href="/" class="platform-nav__ocp">
       <span class="platform-nav__ocp-primary">Obsidian</span>
       <span class="platform-nav__ocp-sub">Capital Partners</span>
     </a>
     <span class="platform-nav__divider" aria-hidden="true"></span>
     <span class="platform-nav__platform-name">Commonground · Portfolio</span>
   </div>
-  <a href="index.html" class="platform-nav__back"><span>← Commonground</span></a>
+  <a href="/platforms/commonground/" class="platform-nav__back"><span>← Commonground</span></a>
 </header>
 
 <div class="portfolio-banner">
@@ -171,11 +171,11 @@ const PLATFORM = 'commonground';
 (function checkAccess() {
   let hasAccess = false;
   try { hasAccess = sessionStorage.getItem('cg-access-' + PLATFORM) === '1'; } catch (e) {}
-  if (!hasAccess) window.location.replace('access.html');
+  if (!hasAccess) window.location.replace('/platforms/commonground/access.html');
 })();
 document.getElementById('signout').addEventListener('click', () => {
   try { sessionStorage.removeItem('cg-access-' + PLATFORM); } catch (e) {}
-  window.location.href = 'access.html';
+  window.location.href = '/platforms/commonground/access.html';
 });
 (function() {
   const nav = document.getElementById('nav');
