@@ -9,7 +9,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&family=Montserrat:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap">
-<link rel="stylesheet" href="../_shared.css">
+<link rel="stylesheet" href="/platforms/_shared.css">
 </head>
 <body>
 
@@ -46,7 +46,7 @@
     </form>
     <p class="gate__error" id="gateError" role="alert" aria-live="polite"></p>
 
-    <a href="../../" class="gate__back-link">← Return to Obsidian Capital Partners</a>
+    <a href="/" class="gate__back-link">← Return to Obsidian Capital Partners</a>
   </div>
 </main>
 
@@ -76,7 +76,7 @@ document.getElementById('gateForm').addEventListener('submit', function(e) {
 
   if (isValid) {
     try { sessionStorage.setItem('cg-access-' + TEMP_PLATFORM, '1'); } catch(e) {}
-    window.location.href = 'index.html';
+    window.location.href = '/platforms/tempist/';
   } else {
     input.classList.add('is-error');
     errorEl.textContent = 'Invalid code';
