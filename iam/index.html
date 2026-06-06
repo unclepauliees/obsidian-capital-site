@@ -1,0 +1,936 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>IAM — Intellectual Asset Management</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Playfair+Display:wght@400;700&family=Montserrat:wght@200;300;400&family=DM+Mono&display=swap" rel="stylesheet">
+  <style>
+    /* ─── TOKENS ─────────────────────────────────────────────────── */
+    :root {
+      --black:    #0A0A0A;
+      --white:    #F5F5F0;
+      --obsidian: #1A1A1A;
+      --platinum: #C8C8C0;
+      --gold:     #B8A882;
+      --charcoal: #2D2D2D;
+      --ease:     cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+
+    /* ─── RESET ──────────────────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--black);
+      color: var(--white);
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ─── NAVIGATION ─────────────────────────────────────────────── */
+    #nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+      padding: 22px 48px;
+      border-bottom: 1px solid transparent;
+      transition: background 600ms var(--ease), border-color 600ms var(--ease);
+    }
+    #nav.scrolled {
+      background: rgba(26,26,26,0.96);
+      backdrop-filter: blur(12px);
+      border-bottom-color: rgba(200,200,192,0.14);
+    }
+    .nav-inner {
+      display: flex; align-items: center; justify-content: space-between;
+      max-width: 1440px; margin: 0 auto;
+    }
+    .nav-logo { display: flex; align-items: center; text-decoration: none; }
+    .nav-logo svg, .nav-logo img { height: 28px; width: auto; display: block; }
+    .nav-links { display: flex; gap: 40px; list-style: none; }
+    .nav-links a {
+      font-family: 'Montserrat', sans-serif; font-weight: 300; font-size: 11px;
+      letter-spacing: 0.18em; text-transform: uppercase;
+      color: var(--platinum); text-decoration: none;
+      transition: color 400ms var(--ease);
+    }
+    .nav-links a:hover { color: var(--white); }
+
+    /* ─── HERO ───────────────────────────────────────────────────── */
+    #hero {
+      position: relative; height: 100vh;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      background: var(--black); overflow: hidden;
+    }
+    /* Cosmos background image */
+    #hero::after {
+      content: ''; position: absolute; inset: 0; pointer-events: none; z-index: 0;
+      background: url("assets/mq2d1eoq-cosmos_569947734.jpeg") center center / cover no-repeat;
+      opacity: 0.38;
+    }
+    /* Dark vignette over cosmos — center clear, edges dark */
+    #hero .hero-vignette {
+      position: absolute; inset: 0; pointer-events: none; z-index: 1;
+      background: radial-gradient(ellipse 72% 65% at 50% 50%,
+        transparent 0%,
+        rgba(8,7,6,0.55) 55%,
+        rgba(8,7,6,0.90) 100%);
+    }
+    /* Tiled IAM watermark texture */
+    #hero::before {
+      content: ''; position: absolute; inset: 0; pointer-events: none; z-index: 2;
+      background-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 50' fill='none'><rect x='2' y='2' width='18' height='46' stroke='%23F5F5F0' stroke-width='0.5'/><polygon points='27,48 48,2 69,48' stroke='%23F5F5F0' stroke-width='0.5' fill='none'/><line x1='32' y1='30' x2='64' y2='30' stroke='%23F5F5F0' stroke-width='0.5'/><polyline points='76,48 76,2 96,26 116,2 116,48' stroke='%23F5F5F0' stroke-width='0.5' fill='none'/></svg>");
+      background-repeat: repeat; background-size: 168px; opacity: 0.045;
+    }
+
+    .hero-mark {
+      position: relative; z-index: 3;
+      width: min(600px, 80vw); user-select: none;
+    }
+    .hero-mark img { width: 100%; height: auto; display: block; }
+    .hero-mark { opacity: 0; transition: opacity 800ms var(--ease); }
+
+    .hero-sub {
+      position: relative; z-index: 3; margin-top: 22px;
+      font-family: 'Montserrat', sans-serif; font-weight: 200; font-size: 11.5px;
+      letter-spacing: 0.4em; text-transform: uppercase; color: var(--white);
+      opacity: 0; transition: opacity 800ms var(--ease);
+    }
+    .hero-loc {
+      position: relative; z-index: 3; margin-top: 10px;
+      font-family: 'Montserrat', sans-serif; font-weight: 300; font-size: 10px;
+      letter-spacing: 0.22em; color: var(--platinum);
+      opacity: 0; transition: opacity 800ms var(--ease);
+    }
+    .hero-apex {
+      position: relative; z-index: 3; margin-top: 52px;
+      opacity: 0; transition: opacity 600ms var(--ease);
+    }
+    /* Apex mark animation: platinum → gold pulse → rests gold */
+    @keyframes apexBirth {
+      0%   { stroke: var(--platinum); }
+      35%  { stroke: var(--gold); filter: drop-shadow(0 0 9px rgba(184,168,130,.75)); }
+      100% { stroke: var(--gold); filter: none; }
+    }
+    .apex-birth { animation: apexBirth 2s var(--ease) 1.5s 1 forwards; }
+
+    /* Scroll cue */
+    .scroll-cue {
+      position: absolute; bottom: 38px; left: 50%;
+      transform: translateX(-50%);
+      display: flex; flex-direction: column; align-items: center; gap: 10px;
+      opacity: 0; animation: fadeIn 600ms var(--ease) 2.1s forwards;
+      z-index: 3;
+    }
+    .scroll-cue span {
+      font-family: 'Montserrat'; font-weight: 200; font-size: 9px;
+      letter-spacing: 0.28em; text-transform: uppercase; color: var(--platinum);
+    }
+    .scroll-line {
+      width: 1px; height: 42px; background: var(--platinum);
+      animation: scrollBeat 2.4s ease-in-out 2.4s infinite;
+      transform-origin: top;
+    }
+    @keyframes scrollBeat { 0%,100%{transform:scaleY(1);opacity:.35} 50%{transform:scaleY(.3);opacity:.9} }
+    @keyframes fadeIn { from{opacity:0} to{opacity:1} }
+
+    /* ─── 3D SCROLL CONTAINER ─────────────────────────────────── */
+    #scroll-track { position: relative; height: 700vh; }
+
+    #scroll-sticky {
+      position: sticky; top: 0; height: 100vh;
+      display: flex; align-items: center; justify-content: center;
+      background: var(--black); overflow: hidden;
+    }
+
+    #scroll-card {
+      width: 90vw; max-width: 1360px; height: 84vh;
+      background: var(--obsidian);
+      border: 1px solid rgba(200,200,192,0.07);
+      border-radius: 3px;
+      position: relative; overflow: hidden;
+      transform: perspective(1200px) rotateX(19deg) translateY(58px) scale(0.87);
+      box-shadow:
+        0 68px 140px rgba(0,0,0,0.9),
+        0  0   0 1px rgba(255,255,255,0.025);
+      will-change: transform;
+    }
+
+    /* ─── PANELS ─────────────────────────────────────────────────── */
+    .panel {
+      position: absolute; inset: 0;
+      padding: 52px 68px;
+      opacity: 0; pointer-events: none;
+      transform: translateY(20px);
+      transition: opacity 520ms var(--ease), transform 520ms var(--ease);
+      overflow: hidden;
+    }
+    .panel.active  { opacity: 1; pointer-events: auto; transform: translateY(0); }
+    .panel.leaving { opacity: 0; transform: translateY(-20px); pointer-events: none; }
+
+    /* progress dots */
+    .pdots {
+      position: absolute; bottom: 26px; left: 50%;
+      transform: translateX(-50%);
+      display: flex; gap: 7px; z-index: 10;
+    }
+    .pdot {
+      width: 5px; height: 5px; border-radius: 50%;
+      background: var(--platinum); opacity: 0.22;
+      transition: opacity 400ms var(--ease), background 400ms var(--ease);
+    }
+    .pdot.on { opacity: 1; background: var(--gold); }
+
+    /* section label */
+    .slabel {
+      display: flex; align-items: center; gap: 13px;
+      font-family: 'Montserrat'; font-weight: 200; font-size: 10px;
+      letter-spacing: 0.22em; text-transform: uppercase; color: var(--platinum);
+      margin-bottom: 32px;
+    }
+    .slabel::after {
+      content: ''; flex: 1; height: 1px;
+      background: var(--platinum); opacity: 0.18;
+    }
+
+    /* animated gold rule */
+    .grule {
+      height: 1px; background: var(--gold);
+      transform: scaleX(0); transform-origin: left;
+      transition: transform 680ms var(--ease) 180ms;
+      margin: 26px 0;
+    }
+    .panel.active .grule { transform: scaleX(1); }
+
+    /* animated chart line */
+    .chart-line {
+      stroke-dasharray: 1300;
+      stroke-dashoffset: 1300;
+      transition: stroke-dashoffset 1900ms var(--ease) 350ms;
+    }
+    .panel.active .chart-line { stroke-dashoffset: 0; }
+
+    /* ─── PANEL 0: THE PROBLEM ───────────────────────────────────── */
+    .p-problem-video {
+      position: absolute; inset: 0; z-index: 0;
+    }
+    .p-problem-video video {
+      width: 100%; height: 100%; object-fit: cover; opacity: 0.38;
+    }
+    .p-problem-overlay {
+      position: absolute; inset: 0; z-index: 1;
+      background: linear-gradient(to top, rgba(10,10,10,0.88) 0%, rgba(10,10,10,0.45) 50%, rgba(10,10,10,0.72) 100%);
+    }
+    .p-problem-content { position: relative; z-index: 2; }
+    .p-sc-video {
+      position: absolute; inset: 0; z-index: 0;
+    }
+    .p-sc-video video {
+      width: 100%; height: 100%; object-fit: cover; opacity: 0.38;
+    }
+    .p-sc-overlay {
+      position: absolute; inset: 0; z-index: 1;
+      background: linear-gradient(to top, rgba(10,10,10,0.88) 0%, rgba(10,10,10,0.45) 50%, rgba(10,10,10,0.72) 100%);
+    }
+    .p-sc-content { position: relative; z-index: 2; }
+    .p-problem h2 {
+      font-family: 'Playfair Display'; font-weight: 700;
+      font-size: clamp(26px, 2.8vw, 42px); line-height: 1.12;
+      max-width: 680px;
+    }
+    .p-problem .sub-hed {
+      font-family: 'Cormorant Garamond'; font-weight: 400; font-style: italic;
+      font-size: clamp(18px, 1.9vw, 28px); color: var(--platinum); margin-top: 8px;
+    }
+    .prob-cards { display: grid; grid-template-columns: repeat(3,1fr); gap: 14px; margin-top: 28px; }
+    .pcard {
+      background: var(--charcoal); border-left: 2px solid var(--gold);
+      padding: 22px 20px;
+    }
+    .pcard h3 {
+      font-family: 'Playfair Display'; font-weight: 700; font-size: 15px;
+      color: var(--white); margin-bottom: 9px;
+    }
+    .pcard p { font-family: 'Cormorant Garamond'; font-size: 15.5px; color: var(--platinum); line-height: 1.58; }
+
+    /* ─── PANEL 1: THE THESIS ────────────────────────────────────── */
+    .thesis-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px 40px; margin-top: 36px; }
+    .feat { display: flex; flex-direction: column; gap: 9px; }
+    .feat-n { font-family: 'DM Mono'; font-size: 11px; color: var(--gold); letter-spacing: 0.07em; }
+    .feat-t { font-family: 'Playfair Display'; font-weight: 700; font-size: 16px; color: var(--white); }
+    .feat-d { font-family: 'Cormorant Garamond'; font-size: 16px; color: var(--platinum); line-height: 1.6; }
+
+    /* ─── PANEL 2: ECONOMIC MODEL (split) ───────────────────────── */
+    .econ-split { position: absolute; inset: 0; display: grid; grid-template-columns: 1fr 1fr; }
+    .econ-l { padding: 52px 56px; display: flex; flex-direction: column; justify-content: center; background: var(--obsidian); }
+    .econ-r { padding: 52px 56px; display: flex; flex-direction: column; justify-content: center; background: var(--charcoal); }
+
+    .ctable { width: 100%; border-collapse: collapse; margin-top: 18px; }
+    .ctable th {
+      font-family: 'DM Mono'; font-size: 11px; letter-spacing: 0.07em;
+      text-align: left; padding: 10px 0;
+      border-bottom: 1px solid rgba(200,200,192,0.22);
+      color: var(--platinum);
+    }
+    .ctable th.gold-h { color: var(--gold); }
+    .ctable td { font-family: 'DM Mono'; font-size: 11.5px; padding: 9px 0; border-bottom: 1px solid rgba(200,200,192,0.09); color: var(--white); }
+    .ctable td.trad { color: var(--platinum); }
+    .ctable td.rn {
+      font-family: 'Montserrat'; font-size: 9px; letter-spacing: 0.13em;
+      text-transform: uppercase; color: rgba(200,200,192,0.45);
+      border-bottom-color: transparent; padding-top: 12px; padding-bottom: 2px;
+    }
+
+    /* ─── PANEL 3: SCENARIO ECONOMICS ───────────────────────────── */
+    .sc-cards { display: grid; grid-template-columns: repeat(3,1fr); gap: 14px; margin-top: 28px; }
+    .sccard {
+      background: var(--charcoal);
+      border: 1px solid rgba(200,200,192,0.09);
+      padding: 26px 20px;
+    }
+    .sccard.opt { border-color: rgba(184,168,130,0.28); }
+    .sc-tier { font-family: 'Montserrat'; font-weight: 200; font-size: 9px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--platinum); margin-bottom: 18px; }
+    .sc-tier.g { color: var(--gold); }
+    .sc-num { font-family: 'DM Mono'; font-size: 25px; line-height: 1.1; color: var(--white); margin-bottom: 3px; }
+    .sc-num.g { color: var(--gold); }
+    .sc-sub { font-family: 'Montserrat'; font-weight: 200; font-size: 9px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--platinum); margin-bottom: 12px; }
+    .sc-stats { font-family: 'DM Mono'; font-size: 12px; color: var(--platinum); line-height: 2; }
+    .sc-yoy { font-family: 'DM Mono'; font-size: 17px; color: var(--white); margin-top: 14px; padding-top: 12px; border-top: 1px solid rgba(200,200,192,0.13); }
+    .sc-yoy.g { color: var(--gold); }
+    .sc-yoy em { font-family: 'Montserrat'; font-size: 9px; letter-spacing: 0.1em; color: var(--platinum); font-style: normal; }
+
+    /* ─── PANEL 4: TALENT ECONOMICS ─────────────────────────────── */
+    .tlayers { margin-top: 28px; }
+    .tlayer { display: flex; gap: 18px; padding: 18px 0; border-bottom: 1px solid rgba(200,200,192,0.11); }
+    .tlayer:last-child { border-bottom: none; }
+    .tl-n { font-family: 'DM Mono'; font-size: 11px; color: var(--gold); padding-top: 2px; min-width: 18px; flex-shrink: 0; }
+    .tl-t { font-family: 'Playfair Display'; font-weight: 700; font-size: 15.5px; color: var(--white); margin-bottom: 5px; }
+    .tl-b { font-family: 'Cormorant Garamond'; font-size: 15.5px; color: var(--platinum); line-height: 1.6; }
+    .eq { margin-top: 28px; padding: 22px 28px; border-left: 2px solid var(--gold); font-family: 'Cormorant Garamond'; font-style: italic; font-size: 21px; line-height: 1.5; color: var(--white); }
+
+    /* ─── PANEL 5: AI MEDIA (full-bleed) ────────────────────────── */
+    .panel-media { padding: 0 !important; }
+    .media-frame {
+      position: absolute; inset: 0;
+      background: radial-gradient(ellipse at 33% 68%, #2a1f14 0%, #1a1210 28%, #0e0d0c 55%, #0a0a0a 100%);
+    }
+    .media-frame video { width: 100%; height: 100%; object-fit: cover; opacity: 0.55; }
+    .media-frame img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0.55; }
+    .media-vignette {
+      position: absolute; inset: 0;
+      background: linear-gradient(to top, rgba(10,10,10,.88) 0%, rgba(10,10,10,.18) 55%, rgba(10,10,10,.45) 100%);
+    }
+    .media-copy { position: absolute; bottom: 0; left: 0; right: 0; padding: 52px 68px; z-index: 1; }
+
+    /* ─── PANEL 6: CATEGORIES ────────────────────────────────────── */
+    .cat-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 14px; margin-top: 28px; }
+    .catcard { position: relative; height: 388px; overflow: hidden; }
+    .cat-bg {
+      position: absolute; inset: 0;
+      background-size: cover; background-position: center;
+      transition: transform 700ms var(--ease);
+    }
+    .catcard:hover .cat-bg { transform: scale(1.04); }
+    .cat-vignette {
+      position: absolute; inset: 0;
+      background: linear-gradient(to top, rgba(10,10,10,.96) 0%, rgba(10,10,10,.38) 52%, rgba(10,10,10,.08) 100%);
+    }
+    .cat-copy { position: absolute; bottom: 0; left: 0; right: 0; padding: 26px 22px; }
+    .cat-lbl { font-family: 'Montserrat'; font-weight: 200; font-size: 9px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--platinum); margin-bottom: 6px; }
+    .cat-title { font-family: 'Playfair Display'; font-weight: 700; font-size: 19px; color: var(--white); margin-bottom: 12px; line-height: 1.22; }
+    .cat-ltv { display: inline; font-family: 'DM Mono'; font-size: 11px; color: var(--gold); border: 1px solid rgba(184,168,130,.45); padding: 3px 8px; }
+
+    /* ─── CLOSING ─────────────────────────────────────────────────── */
+    #closing {
+      height: 100vh; display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      text-align: center; padding: 80px 48px;
+      background: var(--black); position: relative; overflow: hidden;
+    }
+    .cl-quote {
+      font-family: 'Cormorant Garamond'; font-weight: 300; font-style: italic;
+      font-size: clamp(20px, 2.4vw, 36px); color: var(--platinum);
+      max-width: 660px; line-height: 1.45;
+      opacity: 0; transform: translateY(20px);
+      transition: opacity 700ms var(--ease), transform 700ms var(--ease);
+    }
+    .cl-rule {
+      width: 0; height: 1px; background: var(--gold); margin: 30px auto;
+      transition: width 800ms var(--ease) 220ms;
+    }
+    .cl-answer {
+      font-family: 'Cormorant Garamond'; font-weight: 400;
+      font-size: clamp(26px, 3.4vw, 50px); color: var(--white); line-height: 1.1;
+      opacity: 0; transform: translateY(20px);
+      transition: opacity 700ms var(--ease) 400ms, transform 700ms var(--ease) 400ms;
+    }
+    .cl-apex {
+      margin-top: 48px;
+      opacity: 0; transition: opacity 600ms var(--ease) 700ms;
+    }
+    .cl-footer {
+      position: absolute; bottom: 34px; z-index: 3;
+      font-family: 'Montserrat'; font-weight: 200; font-size: 9px;
+      letter-spacing: 0.28em; text-transform: uppercase;
+      color: rgba(200,200,192,0.42);
+    }
+    #closing.vis .cl-quote  { opacity: 1; transform: translateY(0); }
+    #closing.vis .cl-rule   { width: 96px; }
+    #closing.vis .cl-answer { opacity: 1; transform: translateY(0); }
+    #closing.vis .cl-apex   { opacity: 1; }
+
+    /* ─── MOBILE (≤768px) ───────────────────────────────────────── */
+    @media (max-width: 768px) {
+      /* Nav */
+      #nav { padding: 13px 18px; }
+      #nav img { height: 36px !important; }
+      .nav-links { gap: 18px; }
+      .nav-links a { font-size: 10px; letter-spacing: 0.13em; }
+
+      /* Hero */
+      .hero-mark { width: 82vw; }
+      .hero-loc { font-size: 8.5px; letter-spacing: 0.13em; max-width: 82vw; text-align: center; }
+
+      /* ── Scroll card: full-width, keep sticky 3D mechanism active ── */
+      #scroll-card {
+        width: 100vw; max-width: 100%; height: 92vh;
+        border-radius: 0; border-left: none; border-right: none;
+      }
+
+      /* ── Panels: keep absolute positioning, reduce padding ── */
+      .panel { padding: 36px 16px 40px; }
+
+      /* ── Panel 0 – headings + prob-cards: 1 col ── */
+      .p-problem h2 { font-size: clamp(18px, 5vw, 28px); }
+      .p-problem .sub-hed { font-size: clamp(14px, 3.5vw, 20px); }
+      .prob-cards { grid-template-columns: 1fr; gap: 8px; margin-top: 14px; }
+      .pcard { padding: 14px 12px; }
+      .pcard h3 { font-size: 13px; margin-bottom: 5px; }
+      .pcard p { font-size: 13px; }
+
+      /* ── Panel 1 – thesis grid: 1 col ── */
+      .thesis-grid { grid-template-columns: 1fr; gap: 10px; margin-top: 14px; }
+      .feat-t { font-size: 14px; }
+      .feat-d { font-size: 14px; }
+
+      /* ── Panel 2 – make content wrapper fill panel; econ-split goes column ── */
+      .panel[data-idx="2"] > div[style*="z-index:2"] {
+        position: absolute !important; inset: 0 !important; overflow: hidden;
+      }
+      .econ-split {
+        position: static !important; inset: auto !important;
+        display: flex !important; flex-direction: column !important;
+        height: 100% !important; grid-template-columns: none !important;
+      }
+      .econ-l { flex: 1; padding: 32px 16px 14px !important; background: transparent !important; justify-content: flex-start !important; }
+      .econ-r { flex: 1; padding: 14px 16px 28px !important; background: transparent !important; justify-content: flex-start !important;
+                border-top: 1px solid rgba(200,200,192,0.14); }
+      .ctable th, .ctable td { padding: 5px 3px; font-size: 9.5px; }
+
+      /* ── Panel 3 – scenario cards: 1 col ── */
+      .sc-cards { grid-template-columns: 1fr; gap: 8px; margin-top: 14px; }
+      .sccard { padding: 14px 12px; }
+      .sc-num { font-size: 20px; }
+
+      /* ── Panel 4 – talent rows: compact ── */
+      .tlayer { padding: 10px 0; gap: 12px; }
+      .tl-t { font-size: 13px; margin-bottom: 3px; }
+      .tl-b { font-size: 13px; line-height: 1.45; }
+      .eq { padding: 12px 14px; font-size: 15px; margin-top: 14px; }
+
+      /* ── Panel 5 – media-copy: bottom-anchored with mobile padding ── */
+      .media-copy { padding: 0 16px 40px !important; }
+
+      /* ── Panel 6 – remove inherited double-padding; catcards: 1 col ── */
+      .panel[data-idx="6"] > div[style*="justify-content"] { padding: 0 !important; }
+      .cat-grid { grid-template-columns: 1fr; gap: 8px; margin-top: 14px; }
+      .catcard  { height: 138px; }
+
+      /* ── Section labels + gold rule ── */
+      .slabel { font-size: 9px; margin-bottom: 14px; }
+      .grule { margin: 12px 0; }
+
+      /* ── Progress dots ── */
+      .pdots { bottom: 12px; }
+
+      /* ── Closing ── */
+      #closing { padding: 80px 24px 100px; min-height: 100svh; height: auto; }
+      .cl-quote  { font-size: clamp(16px, 4.5vw, 24px); }
+      .cl-answer { font-size: clamp(22px, 6vw, 38px); }
+      .cl-footer { font-size: 8px; letter-spacing: 0.14em; }
+    }
+
+  </style>
+</head>
+<body>
+
+<!-- ════════════════════════════════════════
+     NAVIGATION
+════════════════════════════════════════ -->
+<nav id="nav" aria-label="Primary">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo" aria-label="IAM — Home">
+      <img src="assets/mq1i0ens-IAM_Logo.png" alt="IAM">
+    </a>
+    <ul class="nav-links">
+      <li><a href="model.html">Model</a></li>
+      <li><a href="brand.html">Brand</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- ════════════════════════════════════════
+     HERO
+════════════════════════════════════════ -->
+<section id="hero">
+  <div class="hero-vignette"></div>
+  <div class="hero-mark" role="img" aria-label="IAM — Intellectual Asset Management">
+    <img src="assets/mq1i0ens-IAM_Logo.png" alt="IAM — Intellectual Asset Management">
+  </div>
+  <p class="hero-loc" id="h-loc">Los Angeles · New York · Managed by Obsidian Capital Partners</p>
+  <div class="hero-apex" id="h-apex" aria-hidden="true">
+    <!-- Apex Mark: negative-space triangle from the A letterform -->
+    <svg width="28" height="25" viewBox="0 0 28 25" fill="none">
+      <polygon class="apex-birth" points="14,2 1,24 27,24" stroke="#C8C8C0" stroke-width="1.6" fill="none"/>
+    </svg>
+  </div>
+  <div class="scroll-cue" aria-hidden="true">
+    <div class="scroll-line"></div>
+    <span>Scroll</span>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════
+     3D SCROLL EXPERIENCE
+════════════════════════════════════════ -->
+<div id="scroll-track">
+  <div id="scroll-sticky">
+    <div id="scroll-card">
+
+      <!-- ── PANEL 0: THE PROBLEM ── -->
+      <div class="panel p-problem active" data-idx="0">
+        <div class="p-problem-video">
+          <video autoplay muted loop playsinline>
+            <source src="assets/mq2dalww-cosmos_925399864.mp4" type="video/mp4">
+          </video>
+        </div>
+        <div class="p-problem-overlay"></div>
+        <div class="p-problem-content">
+          <div class="slabel">
+            <svg width="11" height="10" viewBox="0 0 11 10" fill="none" aria-hidden="true"><polygon points="5.5,1 1,9 10,9" stroke="#C8C8C0" stroke-width="1.2" fill="none"/></svg>
+            The Problem
+          </div>
+          <h2>Talent is treated as a vendor.</h2>
+          <p class="sub-hed">IAM treats talent as a founder.</p>
+          <div class="grule" style="max-width:220px"></div>
+          <div class="prob-cards">
+            <div class="pcard">
+              <h3>Transactional by Design</h3>
+              <p>Managers negotiate fees, talent performs, the relationship ends when the campaign ends. There is no residual ownership.</p>
+            </div>
+            <div class="pcard">
+              <h3>No Durable Ownership</h3>
+              <p>Brands capture the equity. Managers collect commission. Nobody asks what the talent owns at the close of year three.</p>
+            </div>
+            <div class="pcard">
+              <h3>Value Flows One Way</h3>
+              <p>The existing model was built to extract value from attention. It was not built to build long-horizon equity for talent.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── PANEL 1: THE THESIS ── -->
+      <div class="panel" data-idx="1">
+        <!-- cosmos background image -->
+        <div style="position:absolute;inset:0;z-index:0;overflow:hidden;">
+          <img src="assets/mq2eagvt-cosmos_290833595.jpeg" alt="" aria-hidden="true"
+               style="width:100%;height:100%;object-fit:cover;object-position:center;opacity:0.38;display:block;">
+        </div>
+        <!-- gradient overlay for legibility -->
+        <div style="position:absolute;inset:0;z-index:1;background:linear-gradient(to top, rgba(8,7,6,0.82) 0%, rgba(8,7,6,0.30) 60%, rgba(8,7,6,0.18) 100%);pointer-events:none;"></div>
+        <!-- panel content -->
+        <div style="position:relative;z-index:2;">
+        <div class="slabel">
+          <svg width="11" height="10" viewBox="0 0 11 10" fill="none" aria-hidden="true"><polygon points="5.5,1 1,9 10,9" stroke="#C8C8C0" stroke-width="1.2" fill="none"/></svg>
+          The Thesis
+        </div>
+        <h2 style="font-family:'Playfair Display';font-weight:700;font-size:clamp(22px,2.5vw,38px);line-height:1.12;max-width:640px">
+          We do not pitch talent. We select talent.
+        </h2>
+        <div class="thesis-grid">
+          <div class="feat">
+            <span class="feat-n">01</span>
+            <span class="feat-t">Recurring Revenue</span>
+            <p class="feat-d">Subscription-native businesses generate predictable monthly income — not one-time campaign fees. The model compounds over time without dilution.</p>
+          </div>
+          <div class="feat">
+            <span class="feat-n">02</span>
+            <span class="feat-t">Self-Funding Growth</span>
+            <p class="feat-d">Revenue at launch covers the cost of the next milestone. No external capital required to grow — the business pays for itself from month one.</p>
+          </div>
+          <div class="feat">
+            <span class="feat-n">03</span>
+            <span class="feat-t">Audience-Native Products</span>
+            <p class="feat-d">Products built for the audience that already trusts the talent — not built to acquire strangers through paid channels at increasing cost.</p>
+          </div>
+          <div class="feat">
+            <span class="feat-n">04</span>
+            <span class="feat-t">Infrastructure Ready</span>
+            <p class="feat-d">IAM arrives with the operating structure already in place. We model before we approach. We close with a term sheet, not a concept deck.</p>
+          </div>
+        </div>
+        </div><!-- /panel content -->
+      </div>
+
+      <!-- ── PANEL 2: ECONOMIC MODEL ── -->
+      <div class="panel" data-idx="2">
+        <!-- cosmos background image -->
+        <div style="position:absolute;inset:0;z-index:0;overflow:hidden;">
+          <img src="assets/mq2fgsy2-cosmos_1317458534.jpeg" alt="" aria-hidden="true"
+               style="width:100%;height:100%;object-fit:cover;object-position:center;opacity:0.38;display:block;">
+        </div>
+        <!-- gradient overlay -->
+        <div style="position:absolute;inset:0;z-index:1;background:linear-gradient(to bottom,rgba(8,7,6,0.55) 0%,rgba(8,7,6,0.82) 100%);pointer-events:none;"></div>
+        <!-- content -->
+        <div style="position:relative;z-index:2;">
+        <div class="econ-split">
+          <div class="econ-l">
+            <div class="slabel">
+              <svg width="11" height="10" viewBox="0 0 11 10" fill="none" aria-hidden="true"><polygon points="5.5,1 1,9 10,9" stroke="#C8C8C0" stroke-width="1.2" fill="none"/></svg>
+              Economic Model
+            </div>
+            <h2 style="font-family:'Cormorant Garamond';font-weight:300;font-size:clamp(24px,2.8vw,40px);line-height:1.08;margin-bottom:22px">
+              Why Subscription<br>Beats Endorsement
+            </h2>
+            <p style="font-family:'Cormorant Garamond';font-size:17px;color:var(--platinum);line-height:1.7;max-width:340px">
+              The model is not complicated. The discipline is in the selection. A subscriber who pays $20/month for 24 months is worth more than a brand deal that pays once.
+            </p>
+            <div style="margin-top:36px;display:flex;align-items:center;gap:13px">
+              <svg width="13" height="11" viewBox="0 0 13 11" fill="none" aria-hidden="true"><polygon points="6.5,1 1,10 12,10" stroke="#B8A882" stroke-width="1.3" fill="none"/></svg>
+              <span style="font-family:'Montserrat';font-weight:200;font-size:10px;letter-spacing:0.22em;text-transform:uppercase;color:var(--gold)">Structure over Campaign</span>
+            </div>
+          </div>
+          <div class="econ-r">
+            <div class="slabel" style="margin-bottom:14px">
+              <svg width="11" height="10" viewBox="0 0 11 10" fill="none" aria-hidden="true"><polygon points="5.5,1 1,9 10,9" stroke="#C8C8C0" stroke-width="1.2" fill="none"/></svg>
+              Model Comparison
+            </div>
+            <table class="ctable">
+              <thead>
+                <tr>
+                  <th>Metric</th>
+                  <th>Traditional</th>
+                  <th class="gold-h">IAM</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr><td class="rn" colspan="3">Revenue structure</td></tr>
+                <tr><td style="color:rgba(200,200,192,0.4)">—</td><td class="trad">One-time</td><td>Monthly recurring</td></tr>
+                <tr><td class="rn" colspan="3">Duration</td></tr>
+                <tr><td style="color:rgba(200,200,192,0.4)">—</td><td class="trad">Campaign cycle</td><td>Ongoing + compounding</td></tr>
+                <tr><td class="rn" colspan="3">Talent upside</td></tr>
+                <tr><td style="color:rgba(200,200,192,0.4)">—</td><td class="trad">Fee only</td><td>Equity + rev share</td></tr>
+                <tr><td class="rn" colspan="3">Compounding</td></tr>
+                <tr><td style="color:rgba(200,200,192,0.4)">—</td><td class="trad">None</td><td>Subscriber retention</td></tr>
+                <tr><td class="rn" colspan="3">Exit</td></tr>
+                <tr><td style="color:rgba(200,200,192,0.4)">—</td><td class="trad">Not applicable</td><td>Participation event</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        </div><!-- /content -->
+      </div>
+
+      <!-- ── PANEL 3: SCENARIO ECONOMICS ── -->
+      <div class="panel" data-idx="3">
+        <div class="p-sc-video">
+          <video autoplay muted loop playsinline>
+            <source src="assets/mq2fz4ry-cosmos_1855194312.mp4" type="video/mp4">
+          </video>
+        </div>
+        <div class="p-sc-overlay"></div>
+        <div class="p-sc-content">
+        <div class="slabel">
+          <svg width="11" height="10" viewBox="0 0 11 10" fill="none" aria-hidden="true"><polygon points="5.5,1 1,9 10,9" stroke="#C8C8C0" stroke-width="1.2" fill="none"/></svg>
+          Scenario Economics
+        </div>
+        <h2 style="font-family:'Playfair Display';font-weight:400;font-size:clamp(17px,1.7vw,24px);max-width:580px">
+          Three scenarios. One structural logic: organic launch → paid acceleration → compounding retention.
+        </h2>
+        <div class="sc-cards">
+          <div class="sccard">
+            <div class="sc-tier">Conservative</div>
+            <div class="sc-num">~4,000</div>
+            <div class="sc-sub">Active Subscribers · Month 24</div>
+            <div class="sc-stats">~$370K / mo<br>~$6M · 2 yr</div>
+            <div class="sc-yoy">~55% <em>YoY</em></div>
+          </div>
+          <div class="sccard">
+            <div class="sc-tier">Moderate</div>
+            <div class="sc-num">~35,000</div>
+            <div class="sc-sub">Active Subscribers · Month 24</div>
+            <div class="sc-stats">~$3M / mo<br>~$35M · 2 yr</div>
+            <div class="sc-yoy">~115% <em>YoY</em></div>
+          </div>
+          <div class="sccard opt">
+            <div class="sc-tier g">Optimistic</div>
+            <div class="sc-num g">~215,000</div>
+            <div class="sc-sub">Active Subscribers · Month 24</div>
+            <div class="sc-stats">~$18M / mo<br>~$155M · 2 yr</div>
+            <div class="sc-yoy g">~200%+ <em>YoY</em></div>
+          </div>
+        </div>
+        <div style="margin-top:22px">
+          <svg width="100%" height="56" viewBox="0 0 900 56" preserveAspectRatio="none">
+            <polyline class="chart-line" points="0,52 90,47 200,41 320,33 440,25 560,18 670,12 780,7 900,3" fill="none" stroke="#B8A882" stroke-width="1.6"/>
+          </svg>
+          <p style="font-family:'Cormorant Garamond';font-style:italic;font-size:14.5px;color:var(--platinum);line-height:1.55;margin-top:7px">All three scenarios compound from the same organic launch foundation. The growth driver changes; the structure does not.</p>
+        </div>
+        </div><!-- /p-sc-content -->
+      </div>
+
+      <!-- ── PANEL 4: TALENT ECONOMICS ── -->
+      <div class="panel" data-idx="4">
+        <!-- cosmos background image -->
+        <div style="position:absolute;inset:0;z-index:0;overflow:hidden;">
+          <img src="assets/mq2g8rrh-cosmos_1268047113.jpeg" alt="" aria-hidden="true"
+               style="width:100%;height:100%;object-fit:cover;object-position:center;opacity:0.38;display:block;">
+        </div>
+        <!-- gradient overlay for legibility -->
+        <div style="position:absolute;inset:0;z-index:1;background:linear-gradient(to top, rgba(8,7,6,0.82) 0%, rgba(8,7,6,0.30) 60%, rgba(8,7,6,0.18) 100%);pointer-events:none;"></div>
+        <!-- panel content -->
+        <div style="position:relative;z-index:2;">
+        <div class="slabel">
+          <svg width="11" height="10" viewBox="0 0 11 10" fill="none" aria-hidden="true"><polygon points="5.5,1 1,9 10,9" stroke="#C8C8C0" stroke-width="1.2" fill="none"/></svg>
+          Talent Economics
+        </div>
+        <h2 style="font-family:'Playfair Display';font-weight:700;font-size:clamp(20px,2.2vw,32px);line-height:1.14;max-width:640px">
+          Three compensation layers, structured from day one.
+        </h2>
+        <div class="tlayers">
+          <div class="tlayer">
+            <span class="tl-n">1 ·</span>
+            <div>
+              <div class="tl-t">Upfront Signing Payment</div>
+              <div class="tl-b">Talent is compensated at execution — before the business generates its first dollar of revenue. Skin in the game begins at the term sheet, not the first check.</div>
+            </div>
+          </div>
+          <div class="tlayer">
+            <span class="tl-n">2 ·</span>
+            <div>
+              <div class="tl-t">Personal Milestone Bonuses</div>
+              <div class="tl-b">Revenue thresholds trigger structured milestone payments. Growth is shared directly with the person who made it possible — on a schedule written into the operating agreement from day one.</div>
+            </div>
+          </div>
+          <div class="tlayer">
+            <span class="tl-n">3 ·</span>
+            <div>
+              <div class="tl-t">Equity in the Operating LLC</div>
+              <div class="tl-b">Talent is a founder. The operating entity is structured for exit participation. Talent owns a piece of what they built — it is in the agreement, not in the pitch.</div>
+            </div>
+          </div>
+        </div>
+        <div class="eq">
+          "We pay talent to start. We pay talent as it grows. We pay talent when it exits."
+        </div>
+        </div><!-- end content wrapper -->
+      </div>
+
+      <!-- ── PANEL 5: AI MEDIA (full-bleed cinematic) ── -->
+      <div class="panel panel-media" data-idx="5">
+        <div class="media-frame" id="media-frame">
+          <img src="assets/mq2ghx9t-cosmos_790798503.gif" alt="" aria-hidden="true">
+        </div>
+        <div class="media-vignette"></div>
+        <div class="media-copy">
+          <div class="slabel" style="color:rgba(200,200,192,0.6)">
+            <svg width="11" height="10" viewBox="0 0 11 10" fill="none" aria-hidden="true"><polygon points="5.5,1 1,9 10,9" stroke="rgba(200,200,192,0.6)" stroke-width="1.2" fill="none"/></svg>
+            Investment Categories
+          </div>
+          <h2 style="font-family:'Playfair Display';font-weight:700;font-size:clamp(20px,2.5vw,34px);line-height:1.2;margin-bottom:13px">
+            Three categories.<br>One structural thesis.
+          </h2>
+          <p style="font-family:'Cormorant Garamond';font-size:17px;color:rgba(200,200,192,0.85);max-width:500px;line-height:1.68">
+            IAM selects talent operating at the intersection of high-LTV subscription markets and deep audience trust. We build where retention competes with addiction.
+          </p>
+        </div>
+      </div>
+
+      <!-- ── PANEL 6: CATEGORIES ── -->
+      <div class="panel" data-idx="6">
+        <img src="assets/mq2gnhjf-cosmos_1161911626.gif" alt="" aria-hidden="true" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0.45;z-index:0;pointer-events:none">
+        <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(8,7,6,0.95) 0%,rgba(8,7,6,0.4) 60%,transparent 100%);z-index:1;pointer-events:none"></div>
+        <div style="position:relative;z-index:2;width:100%;height:100%;display:flex;flex-direction:column;justify-content:center;padding:inherit">
+        <div class="slabel">
+          <svg width="11" height="10" viewBox="0 0 11 10" fill="none" aria-hidden="true"><polygon points="5.5,1 1,9 10,9" stroke="#C8C8C0" stroke-width="1.2" fill="none"/></svg>
+          Portfolio Categories
+        </div>
+        <div class="cat-grid">
+          <!-- Cat 1: Wellness -->
+          <div class="catcard">
+            <div class="cat-bg" id="cat-wellness" style="background:#080706;overflow:hidden">
+              <img src="assets/mq2gt5lw-cosmos_1964281477.jpeg" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0.45;pointer-events:none">
+            </div>
+            <div class="cat-vignette"></div>
+            <div class="cat-copy">
+              <div class="cat-lbl">Category 01</div>
+              <div class="cat-title">Consumer Health<br>&amp; Wellness</div>
+              <span class="cat-ltv">LTV $480–$720</span>
+            </div>
+          </div>
+          <!-- Cat 2: Longevity -->
+          <div class="catcard">
+            <div class="cat-bg" id="cat-longevity" style="background:#080706;overflow:hidden">
+              <video autoplay muted loop playsinline style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0.45;pointer-events:none">
+                <source src="assets/mq2gx8l7-cosmos_302520204.mp4" type="video/mp4">
+              </video>
+            </div>
+            <div class="cat-vignette"></div>
+            <div class="cat-copy">
+              <div class="cat-lbl">Category 02</div>
+              <div class="cat-title">Longevity &amp;<br>Human Optimization</div>
+              <span class="cat-ltv">LTV $600–$960</span>
+            </div>
+          </div>
+          <!-- Cat 3: Nutrition -->
+          <div class="catcard">
+            <div class="cat-bg" id="cat-nutrition" style="background:#080706;overflow:hidden;">
+              <img src="assets/mq2h21am-cosmos_713397290.jpeg" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0.45;">
+            </div>
+            <div class="cat-vignette"></div>
+            <div class="cat-copy">
+              <div class="cat-lbl">Category 03</div>
+              <div class="cat-title">Personalized<br>Nutrition</div>
+              <span class="cat-ltv">LTV $360–$540</span>
+            </div>
+          </div>
+        </div>
+        </div><!-- end content wrapper -->
+      </div>
+
+      <!-- Progress dots -->
+      <div class="pdots" aria-hidden="true">
+        <div class="pdot on"></div>
+        <div class="pdot"></div>
+        <div class="pdot"></div>
+        <div class="pdot"></div>
+        <div class="pdot"></div>
+        <div class="pdot"></div>
+        <div class="pdot"></div>
+      </div>
+
+    </div><!-- /scroll-card -->
+  </div><!-- /scroll-sticky -->
+</div><!-- /scroll-track -->
+
+<!-- ════════════════════════════════════════
+     CLOSING
+════════════════════════════════════════ -->
+<section id="closing">
+  <img src="assets/mq2h528t-cosmos_569947734.jpeg" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0.38;z-index:0;" alt="">
+  <div style="position:absolute;inset:0;background:linear-gradient(to bottom, rgba(8,7,6,0.45) 0%, rgba(8,7,6,0.82) 100%);z-index:1;"></div>
+  <div style="position:relative;z-index:2;display:flex;flex-direction:column;align-items:center;">
+    <p class="cl-quote">"The most valuable thing talent owns is not their talent. It is the trust their audience places in them."</p>
+    <div class="cl-rule"></div>
+    <p class="cl-answer">IAM structures what that trust is worth.</p>
+    <div class="cl-apex" aria-hidden="true">
+      <!-- Apex Mark — third and final appearance -->
+      <svg width="34" height="30" viewBox="0 0 34 30" fill="none">
+        <polygon points="17,2 1,29 33,29" stroke="#B8A882" stroke-width="1.6" fill="none"/>
+      </svg>
+    </div>
+  </div>
+  <footer class="cl-footer">
+    Los Angeles · New York · Managed by Obsidian Capital Partners
+  </footer>
+</section>
+
+<script>
+(function () {
+  'use strict';
+
+  /* ── Elements ──────────────────────────────────────────────── */
+  var nav       = document.getElementById('nav');
+  var heroMark  = document.querySelector('.hero-mark');
+  var hLoc      = document.getElementById('h-loc');
+  var hApex     = document.getElementById('h-apex');
+  var track     = document.getElementById('scroll-track');
+  var card      = document.getElementById('scroll-card');
+  var panels    = document.querySelectorAll('.panel[data-idx]');
+  var dots      = document.querySelectorAll('.pdot');
+  var closing   = document.getElementById('closing');
+  var N         = panels.length;
+  var UNFOLD    = 0.14; /* first 14% of track = 3D tilt unfold */
+  var curIdx    = 0;
+  var unfolded  = false;
+
+  /* ── Hero entrance ─────────────────────────────────────────── */
+  setTimeout(function () { heroMark.style.opacity = '1'; }, 200);
+  setTimeout(function () { hLoc.style.opacity = '1'; }, 640);
+  setTimeout(function () { hApex.style.opacity = '1'; }, 900);
+
+  /* ── Panel switcher ────────────────────────────────────────── */
+  function goPanel(idx) {
+    if (idx === curIdx) return;
+    panels[curIdx].classList.remove('active');
+    panels[curIdx].classList.add('leaving');
+    var prev = curIdx;
+    setTimeout(function () { panels[prev].classList.remove('leaving'); }, 530);
+    curIdx = idx;
+    panels[curIdx].classList.add('active');
+    dots.forEach(function (d, i) { d.classList.toggle('on', i === idx); });
+  }
+
+  /* ── Scroll tick (RAF-throttled) ───────────────────────────── */
+  function tick() {
+    nav.classList.toggle('scrolled', window.scrollY > 70);
+    var rect = track.getBoundingClientRect();
+    var span = track.offsetHeight - window.innerHeight;
+    if (span <= 0) return;
+    var prog = Math.max(0, Math.min(1, -rect.top / span));
+
+    if (prog < UNFOLD) {
+      var pct  = prog / UNFOLD;
+      var rotX = 19 * (1 - pct);
+      var ty   = 58 * (1 - pct);
+      var sc   = 0.87 + 0.13 * pct;
+      card.style.transform =
+        'perspective(1200px) rotateX(' + rotX + 'deg) translateY(' + ty + 'px) scale(' + sc + ')';
+      unfolded = false;
+    } else {
+      if (!unfolded) {
+        card.style.transform = 'perspective(1200px) rotateX(0deg) translateY(0px) scale(1)';
+        unfolded = true;
+      }
+      var pp  = (prog - UNFOLD) / (1 - UNFOLD);
+      var idx = Math.min(N - 1, Math.floor(pp * N));
+      goPanel(idx);
+    }
+  }
+
+  /* ── Closing IntersectionObserver ──────────────────────────── */
+  var obs = new IntersectionObserver(function (entries) {
+    if (entries[0].isIntersecting) {
+      closing.classList.add('vis');
+      obs.disconnect();
+    }
+  }, { threshold: 0.28 });
+  obs.observe(closing);
+
+  /* ── Scroll listener ───────────────────────────────────────── */
+  var pending = false;
+  window.addEventListener('scroll', function () {
+    if (pending) return;
+    pending = true;
+    requestAnimationFrame(function () { tick(); pending = false; });
+  }, { passive: true });
+
+  /* ── Init ──────────────────────────────────────────────────── */
+  tick();
+}());
+</script>
+</body>
+</html>

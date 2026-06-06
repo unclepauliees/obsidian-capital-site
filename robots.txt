@@ -1,7 +1,7 @@
 User-agent: *
 Allow: /
-Disallow: /platforms/hydronex/access.html
-Disallow: /platforms/hydronex/portfolio.html
+Disallow: /iam/gate.html
+Disallow: /_archive/
 Disallow: /platforms/tempist/access.html
 Disallow: /platforms/tempist/portfolio.html
 Disallow: /platforms/commonground/access.html
