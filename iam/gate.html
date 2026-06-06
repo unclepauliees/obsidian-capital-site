@@ -44,7 +44,7 @@
     </form>
     <p class="gate__error" id="gateError" role="alert" aria-live="polite"></p>
 
-    <a href="/" class="gate__back-link">← Return to Obsidian Capital Partners</a>
+    <a href="../" class="gate__back-link">← Return to Obsidian Capital Partners</a>
   </div>
 </main>
 
@@ -69,7 +69,7 @@ document.getElementById('gateForm').addEventListener('submit', function(e) {
 
   if (isValid) {
     try { sessionStorage.setItem('cg-access-' + TEMP_PLATFORM, '1'); } catch(e) {}
-    window.location.href = '/iam/index.html';
+    window.location.href = 'index.html';
   } else {
     input.classList.add('is-error');
     errorEl.textContent = 'Invalid code';
