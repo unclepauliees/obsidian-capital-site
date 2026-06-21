@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en" data-platform="iam">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Access · Intellectual Asset Management · Obsidian Capital Partners</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&family=Montserrat:wght@300;400;500;600;700&family=DM+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="../_shared.css">
+
+<style>
+  [data-platform="iam"] .gate__mark-svg { color: #B8A882; }
+  [data-platform="iam"] .gate__submit { background: #B8A882; color: #0A0A0A; }
+  [data-platform="iam"] .gate__submit:hover { background: #cfc09a; }
+</style>
+</head>
+<body>
+
+<div class="atmosphere" aria-hidden="true"></div>
+<div class="grain" aria-hidden="true"></div>
+
+<main class="gate" role="main">
+  <div class="gate__panel">
+
+    <!-- IAM Apex Mark — thin triangular SVG, 1px stroke, IAM gold -->
+    <svg class="gate__mark gate__mark-svg" viewBox="0 0 56 56" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" width="56" height="56">
+      <polygon points="28,4 52,50 4,50" fill="none" stroke="#B8A882" stroke-width="1"/>
+      <polygon points="28,14 44,44 12,44" fill="none" stroke="#B8A882" stroke-width="0.5" opacity="0.5"/>
+    </svg>
+
+    <p class="gate__ocp-lineage" style="font-family:var(--font-mono);font-size:var(--text-label);letter-spacing:var(--tr-label);text-transform:uppercase;color:var(--color-mid-gray);margin-bottom:var(--s-2);">Managed by Obsidian Capital Partners</p>
+    <p class="gate__lineage">Intellectual Asset Management · Confidential</p>
+    <h1 class="gate__title">Access by introduction.</h1>
+    <p class="gate__sub">Enter the access code issued to you. Codes are bound to a single party and expire by policy.</p>
+
+    <form class="gate__form" id="gateForm" autocomplete="off" novalidate>
+      <input
+        type="password"
+        id="gateInput"
+        class="gate__input"
+        placeholder="ACCESS CODE"
+        aria-label="Access code"
+        autocomplete="off"
+        autocapitalize="characters"
+        spellcheck="false"
+        required
+      >
+      <button type="submit" class="gate__submit">
+        Authenticate
+      </button>
+    </form>
+    <p class="gate__error" id="gateError" role="alert" aria-live="polite"></p>
+
+    <a href="../../" class="gate__back-link">← Return to Obsidian Capital Partners</a>
+  </div>
+</main>
+
+<script>
+const TEMP_PLATFORM = 'iam';
+
+document.getElementById('gateForm').addEventListener('submit', function(e) {
+  e.preventDefault();
+  var input = document.getElementById('gateInput');
+  var errorEl = document.getElementById('gateError');
+  var code = input.value.trim().toUpperCase();
+
+  if (!code) {
+    input.classList.add('is-error');
+    errorEl.textContent = 'Code required';
+    errorEl.classList.add('is-visible');
+    return;
+  }
+
+  var isValid = code === 'OPENLOOP';
+
+  if (isValid) {
+    try { sessionStorage.setItem('cg-access-' + TEMP_PLATFORM, '1'); } catch(e) {}
+    window.location.href = 'index.html';
+  } else {
+    input.classList.add('is-error');
+    errorEl.textContent = 'Invalid code';
+    errorEl.classList.add('is-visible');
+    setTimeout(function() { input.classList.remove('is-error'); }, 400);
+  }
+});
+
+document.getElementById('gateInput').addEventListener('input', function() {
+  document.getElementById('gateError').classList.remove('is-visible');
+});
+</script>
+
+</body>
+</html>
