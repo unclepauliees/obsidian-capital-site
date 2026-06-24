@@ -779,6 +779,27 @@ body { overflow-x: hidden; }
   .cover-footer { bottom: 28px; }
   .cover-footer .t-label { white-space: normal; }
 }
+
+/* ─── Economics: compact hero-stat on mobile ─── */
+@media (max-width: 760px) {
+  .econ-split { gap: 24px; }
+  .hero-stat {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    padding: 24px 0 0;
+    text-align: left;
+    border-top: 1px solid rgba(200,200,192,0.12);
+  }
+  .hero-numeral {
+    font-size: clamp(2.8rem, 14vw, 4.5rem);
+    flex-shrink: 0;
+    justify-content: flex-start;
+    line-height: 1;
+  }
+  .hero-gold-bar { display: none; }
+  .hero-caption { text-align: left; font-size: 0.68rem; line-height: 1.8; }
+}
 </style>
 </head>
 <body>
@@ -1294,7 +1315,7 @@ body { overflow-x: hidden; }
         <div class="hero-numeral">5<span class="hero-pct">%</span></div>
         <div class="hero-gold-bar"></div>
         <div class="hero-caption">
-          Administration Interest<br>&nbsp;·&nbsp; 5% of Distributable Profits<br>&nbsp;·&nbsp; Perpetual
+          Administration Interest<br>5% of Distributable Profits<br>Perpetual
         </div>
       </div>
     </div>
