@@ -725,6 +725,59 @@ body {
     padding-bottom: 56px;
   }
 }
+
+/* ═══════════════════════════════════════════════
+   MOBILE — OVERFLOW FIX + COMPREHENSIVE RESPONSIVE
+═══════════════════════════════════════════════ */
+
+/* Prevent ANY element from causing horizontal scroll */
+body { overflow-x: hidden; }
+
+/* ─── 760 px and below ─── */
+@media (max-width: 760px) {
+  .t-label { letter-spacing: 0.10em; }
+  .t-display-xl { font-size: clamp(1.9rem, 8.5vw, 2.8rem); }
+  .t-display-l  { font-size: clamp(1.4rem, 6vw,   2.0rem); }
+  .cover-body { padding-top: 88px; }
+  .econ-fees { max-width: 100%; }
+  .fee-row   { flex-wrap: wrap; gap: 6px; }
+  .hero-stat { padding: 0 16px; }
+  .role-list li { gap: 12px; }
+}
+
+/* ─── 480 px and below ─── */
+@media (max-width: 480px) {
+  .t-label { letter-spacing: 0.07em; font-size: 0.57rem; }
+  .t-display-xl { font-size: clamp(1.55rem, 9.5vw, 2.0rem); }
+  .t-display-l  { font-size: clamp(1.15rem, 6.5vw, 1.6rem); }
+  .t-h1         { font-size: clamp(1.1rem,  5vw,   1.45rem); }
+  .t-h2         { font-size: clamp(0.95rem, 4.5vw, 1.25rem); }
+  .t-body       { font-size: 0.95rem; line-height: 1.65; }
+  .sec-rule { margin-bottom: 24px; gap: 10px; }
+  .ph-col   { padding: 20px 16px; gap: 10px; }
+  .ph-num   { font-size: 1.8rem; }
+  .ph-title { font-size: 0.55rem; }
+  .tl-item  { gap: 12px; padding: 14px 0; }
+  .tl-node  { width: 30px; height: 30px; font-size: 0.55rem; }
+  .tl-title { font-size: 0.95rem; }
+  .tl-sub   { font-size: 0.55rem; }
+  .scope-list li { font-size: 0.93rem; gap: 8px; }
+  .scope-head    { font-size: 0.55rem; }
+  .role-list li  { font-size: 0.97rem; gap: 10px; padding: 8px 0; }
+  .disc-item     { padding: 18px 14px; }
+  .disc-name     { font-size: 0.9rem; }
+  .fee-label     { font-size: 0.9rem; }
+  .fee-val       { font-size: 0.8rem; }
+  .hero-numeral  { font-size: clamp(3.8rem, 20vw, 6rem); }
+  .hero-caption  { font-size: 0.62rem; }
+  .closing-q     { font-size: clamp(1.2rem, 7.5vw, 1.7rem) !important; }
+  .hairline { margin: 22px 0; }
+  .hairline-gold { margin: 18px auto; }
+  .toc-item { padding: 8px 0; }
+  .toc-label { font-size: 0.9rem; }
+  .cover-footer { bottom: 28px; }
+  .cover-footer .t-label { white-space: normal; }
+}
 </style>
 </head>
 <body>
